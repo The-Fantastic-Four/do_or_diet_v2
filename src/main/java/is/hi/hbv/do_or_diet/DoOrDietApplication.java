@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
+import is.hi.hbv.do_or_diet.repository.RecipeRepository;
+
 @SpringBootApplication
 public class DoOrDietApplication extends SpringBootServletInitializer {
 	
@@ -14,6 +16,7 @@ public class DoOrDietApplication extends SpringBootServletInitializer {
     }
     
 	public static void main(String[] args) {
+		RecipeRepository.resetRecipes();
 		SpringApplication.run(DoOrDietApplication.class, args);
 	}
 }
