@@ -5,12 +5,14 @@ import java.util.ArrayList;
 
 public class MealPlan {
 	private long id;
+	private String name;
 	private ArrayList<MealPlanItem> items;
 	private ArrayList<Date> dates;
 	private User createdBy;
 
-	public MealPlan(long id, ArrayList<MealPlanItem> items, ArrayList<Date> dates) {
+	public MealPlan(long id, String name, ArrayList<MealPlanItem> items, ArrayList<Date> dates) {
 		this.id = id;
+		this.name = name;
 		this.items = items;
 		this.dates = dates;
 	}
@@ -72,6 +74,20 @@ public class MealPlan {
 	 */
 	public void setCreatedBy(User createdBy) {
 		this.createdBy = createdBy;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

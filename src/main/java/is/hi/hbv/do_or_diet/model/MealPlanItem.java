@@ -3,13 +3,18 @@ package is.hi.hbv.do_or_diet.model;
 import java.util.Date;
 
 public class MealPlanItem {
-	private long id;
+	private static long id;
 	private Recipe recipe;
 	private Date date;
 	private MealType mealType;
-
-	public MealPlanItem(long id, Recipe recipe, Date date, MealType mealType) {
-		this.id = id;
+	
+	static
+	{
+		id = 0;
+	}
+	
+	public MealPlanItem(Recipe recipe, Date date, MealType mealType) {
+		id++;
 		this.recipe = recipe;
 		this.date = date;
 		this.mealType = mealType;
@@ -20,14 +25,6 @@ public class MealPlanItem {
 	 */
 	public long getId() {
 		return id;
-	}
-
-	/**
-	 * @param id
-	 *            is the variable to set id
-	 */
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	/**
