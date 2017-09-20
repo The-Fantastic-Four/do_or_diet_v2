@@ -1,3 +1,9 @@
+/**
+ * MealPlanController enables the user to interact with meal plans
+ * @author Eiður Örn Gunnarsson eog26@hi.is
+ * @author Viktor Alex Brynjarsson vab18@hi.is
+ */
+
 package is.hi.hbv.do_or_diet.controller;
 
 import java.text.DateFormat;
@@ -26,11 +32,16 @@ import is.hi.hbv.do_or_diet.repository.RecipeRepository;
 @Controller
 @RequestMapping("/mealplan")
 public class MealPlanController {
+
+	// Instance of the meal plan repository, used to get and create meal plans
 	@Autowired
 	MealPlanRepository mPlanRep;
+	
+	// Instance of the recipe repository, used to get and create recipes
 	@Autowired
 	RecipeRepository recipeRep;
 	
+	// Index page for the meal plans, shows a list of meal plans
 	@RequestMapping("")
 	public String indexPage(Model model)
 	{
@@ -38,6 +49,7 @@ public class MealPlanController {
 		return "mealplan/index";
 	}
 	
+	// Creates a new meal plan, redirects to the index page upon creation
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String newMealPlan(@RequestParam(value = "mName", required = true) String mName, String fromDate, String toDate, ModelMap model)
 	{	
@@ -62,6 +74,7 @@ public class MealPlanController {
 		return "mealplan/index"; 
 	}
 	
+	// Shows a specific meal plan, allows the user to edit it
 	@RequestMapping("/{mealPlanId}")
 	public String showMealPlan(@PathVariable(value="mealPlanId") int mealPlanId, ModelMap model)
 	{
@@ -70,6 +83,7 @@ public class MealPlanController {
 		return "mealplan/show";
 	}
 	
+	// Updates a specific meal plan with new information
 	@RequestMapping(value = "/{mealPlanId}/edit", method = RequestMethod.POST)
 	public ModelAndView editDateMeal(@PathVariable(value="mealPlanId") int mealPlanId, @RequestParam(value = "recipeId", required = true) int recipeId, Date dateForRecipe, ModelMap model) 
 	{
@@ -97,18 +111,21 @@ public class MealPlanController {
 		return new ModelAndView("redirect:/mealplan/" + mealPlanId);
 	}
 	
+	// Add a list of meal plans to the model which can be displayed on the page
 	private void addMealPlanListToModel(Model model) 
 	{
 		ArrayList<MealPlan> mealPlanList = mPlanRep.getMealPlans();
 		model.addAttribute("mealPlanList", mealPlanList);
 	}
 	
+	// Converts a date from a string to Date
 	private Date convertToDate(String d) throws ParseException 
 	{
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy"); 
 		return df.parse(d);
 	}
 	
+	// Creates a list of the days between two days, from and to dates are included
 	private ArrayList<Date> generateDatesBetween(Date from, Date to){
 		Calendar cal = Calendar.getInstance();
 		ArrayList<Date> d = new ArrayList<Date>();

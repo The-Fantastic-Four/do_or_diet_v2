@@ -1,5 +1,7 @@
-<!--Upphafssíða verkefnisins 
-	Ragnheiður Ásta Karlsdóttir rak4@hi.is-->
+<!--
+	Shows a list of meal plans and allows the user to add a new meal plan 
+	@author Eiður Örn Gunnarsson eog26@hi.is
+-->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="is">

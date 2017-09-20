@@ -1,5 +1,7 @@
-<!--Upphafssíða verkefnisins 
-	Viktor Alex Brynjarsson vab18@hi.is-->
+<!--
+	Index page for the site 
+	@author Viktor Alex Brynjarsson vab18@hi.is
+-->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="is">
@@ -12,10 +14,10 @@
 	</head>
 	
 	<body>
-		<h1>Matarplön</h1>
+		<h1>Do or Diet</h1>
 
 		<ul>
-			<li><a href="/mealplan/">Matarplön</a></li>
-			<li><a href="/recipe/">Uppskriftir</a></li>
+			<li><a href="/mealplan">Matarplön</a></li>
+			<li><a href="/recipe">Uppskriftir</a></li>
 		</ul>
 </html>

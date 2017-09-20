@@ -1,3 +1,8 @@
+/**
+ * RecipieController enables the user to interact with recipies
+ * @author Fannar Þeyr Guðmundsson fthg2@hi.is
+ * @author Ragnheiður Ásta Karlsdóttir rak4@hi.is
+ */
 package is.hi.hbv.do_or_diet.controller;
 
 import java.util.ArrayList;
@@ -14,8 +19,11 @@ import is.hi.hbv.do_or_diet.repository.RecipeRepository;
 @RequestMapping("/recipe")
 public class RecipeController 
 {
+	// Instance of the recipe repository, used to get and create recipes
 	@Autowired
 	RecipeRepository recipes;
+	
+	// Index page for the recipes, shows a list of recipes
 	@RequestMapping("")
 	public String index(Model model)
 	{

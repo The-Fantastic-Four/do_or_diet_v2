@@ -1,3 +1,7 @@
+/**
+ * MealPlanRepository keeps a list of meal plans
+ * @author Eiður Örn Gunnarsson eog26@hi.is
+ */
 package is.hi.hbv.do_or_diet.repository;
 
 import java.util.ArrayList;
@@ -11,7 +15,15 @@ import is.hi.hbv.do_or_diet.model.MealPlanItem;
 
 @Repository
 public class MealPlanRepository {
+	
+	/**
+	 * The current maximum id for meal plans
+	 */
 	private static long id;
+	
+	/**
+	 * List of meal plans
+	 */
 	private static ArrayList<MealPlan> mealPlans;
 
 	static
@@ -24,12 +36,19 @@ public class MealPlanRepository {
 		return mealPlans;
 	}
 
+	/**
+	 * Add a meal plan to the repository
+	 * @param m the meal plan to be added
+	 */
 	public void addMealPlan(MealPlan m) 
 	{
 		m.setId(id++);
 		mealPlans.add(m);
 	}
 	
+	/**
+	 * Reset the meal plan list and add a few default meal plans
+	 */
 	public static void resetMealPlans()
 	{
 		MealPlan m = new MealPlan(

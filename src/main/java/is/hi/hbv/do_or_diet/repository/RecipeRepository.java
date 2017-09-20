@@ -1,3 +1,8 @@
+/**
+ * RecipeRepository keeps a list of recipies
+ * @author Ragnheiður Ásta Karlsdóttir rak4@hi.is
+ * @author Viktor Alex Brynjarsson vab18@hi.is
+ */
 package is.hi.hbv.do_or_diet.repository;
 
 import java.util.ArrayList;
@@ -10,6 +15,9 @@ import is.hi.hbv.do_or_diet.model.Recipe;
 @Repository
 public class RecipeRepository 
 {
+	/**
+	 * List of recipes
+	 */
 	private static ArrayList<Recipe> recipes;
 
 	public ArrayList<Recipe> getRecipes() 
@@ -17,11 +25,18 @@ public class RecipeRepository
 		return recipes;
 	}
 
+	/**
+	 * Add a new recipe to the repository
+	 * @param r the recipe to be added
+	 */
 	public void addRecipes(Recipe r) 
 	{
 		RecipeRepository.recipes.add(r);
 	}
 	
+	/**
+	 * Reset the recipe list and add a few default recipes
+	 */
 	public static void resetRecipes()
 	{
 		Recipe r1 = new Recipe(0, "Tikka masala", null, null, 2, null);
