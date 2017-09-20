@@ -18,5 +18,11 @@
 		<c:forEach items="${recipeList}" var="recipe">
 			<c:out value="${recipe.name}"/><br>
 		</c:forEach>
+		<br>
+		<form action="http://localhost:8080/recipe/recipeAdd">
+    	<input type="submit" value="Bæta við uppskrift">
+		</form>	
+		<br>
+		 
 	</body>
 </html>
