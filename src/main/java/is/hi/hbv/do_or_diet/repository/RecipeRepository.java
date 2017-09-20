@@ -7,6 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import is.hi.hbv.do_or_diet.model.Recipe;
 
+/*
+ * Er að prófa að bæta við röngu kommenti.
+ */
 @Repository
 public class RecipeRepository 
 {
