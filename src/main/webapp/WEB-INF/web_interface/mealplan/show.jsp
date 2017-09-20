@@ -30,7 +30,7 @@
 		<hr>
 		<h3>Already defined dates</h3>
 		<c:forEach items="${mealPlan.items}" var="meals">
-					<c:out value="${mealPlan.name} | ${meals.date} | ${meals.date.toString()} | ${meals.mealType}"/><br>
+					<c:out value="${mealPlan.name} | ${meals.recipe.getName()} | ${meals.date.toString()} | ${meals.mealType}"/><br>
 		</c:forEach>
 		
 	</body>

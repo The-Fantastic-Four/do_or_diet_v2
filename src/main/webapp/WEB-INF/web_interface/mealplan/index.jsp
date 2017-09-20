@@ -14,7 +14,7 @@
 	<body>
 		<h1>Matarplön</h1>
 		<c:forEach items="${mealPlanList}" var="mPlan">
-			<a href="/mealplan/${mPlan.id}/edit"><c:out value="${mPlan.id} - ${mPlan.name}"/></a><br>
+			<a href="/mealplan/${mPlan.id}"><c:out value="${mPlan.id} - ${mPlan.name}"/></a><br>
 		</c:forEach>
 		
 		<hr>
@@ -26,19 +26,6 @@
 		    Tímabil: 
 		    <br>
 		    Frá:<input name="fromDate" type="text" placeholder="DD/MM/YYYY" /> Til:<input name="toDate" type="text" placeholder="DD/MM/YYYY" />
-		    <input type="submit" value="í lagi"/> 
-		</form>
-		
-		<hr>
-		
-		<h3>Breyta matarplani</h3>
-		<form method="POST" action="/mealplan/edit/">
-		    Hvaða matarplani á að breyta?
-		    <select name="mId">
-			  <c:forEach items="${mealPlanList}" var="mPlan">
-					<option value="${mPlan.id}">${mPlan.name}</option>
-			  </c:forEach>
-			</select>
 		    <input type="submit" value="í lagi"/> 
 		</form>
 	</body>

@@ -73,8 +73,27 @@ public class MealPlanController {
 	@RequestMapping(value = "/{mealPlanId}/edit", method = RequestMethod.POST)
 	public ModelAndView editDateMeal(@PathVariable(value="mealPlanId") int mealPlanId, @RequestParam(value = "recipeId", required = true) int recipeId, Date dateForRecipe, ModelMap model) 
 	{
+		long existingMealId = 0;
+		boolean mealExists = false;
 		MealPlanItem meal = new MealPlanItem(recipeRep.getRecipes().get(recipeId),dateForRecipe,MealType.DINNER);
-		mPlanRep.getMealPlans().get(mealPlanId).getItems().add(meal);
+		ArrayList<MealPlanItem> mealPlanItemList = mPlanRep.getMealPlans().get(mealPlanId).getItems();
+		for(MealPlanItem mealItem : mealPlanItemList) {
+			if(mealItem.getDate().equals(dateForRecipe)) {
+				existingMealId = mealItem.getId();
+				mealExists = true;
+			}
+		}
+		
+		if(!mealExists) mealPlanItemList.add(meal);
+		else {
+			/* 
+			 * THIS REQUIRES FIXING FOR A LATER RELEASE THAT THIS USE CASE IS ACTUALLY
+			 * APART OF.
+			 */
+			/*MealPlanItem oldMeal = mealPlanItemList.get((int)existingMealId);
+			oldMeal.setRecipe(meal.getRecipe());
+			oldMeal.setMealType(meal.getMealType());*/
+		}
 		return new ModelAndView("redirect:/mealplan/" + mealPlanId);
 	}
 	
@@ -96,7 +115,6 @@ public class MealPlanController {
 		cal.setTime(from);
 		while (cal.getTime().before(to)) {
 		    d.add(cal.getTime());
-		    System.out.println(cal.getTime());
 		    cal.add(Calendar.DATE, 1);
 		}
 		d.add(cal.getTime());
