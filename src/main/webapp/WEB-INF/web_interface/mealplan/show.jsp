@@ -1,6 +1,8 @@
-<!--Show and edit mealplan
-	Eiður Örn Gunnarsson eog26@hi.is
-	Viktor Alex Brynjarsson vab18@hi.is-->
+<!--
+	Show and edit a specific mealplan
+	@author Eiður Örn Gunnarsson eog26@hi.is
+	@author Viktor Alex Brynjarsson vab18@hi.is
+-->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="is">
@@ -30,7 +32,7 @@
 		<hr>
 		<h3>Already defined dates</h3>
 		<c:forEach items="${mealPlan.items}" var="meals">
-					<c:out value="${mealPlan.name} | ${meals.date} | ${meals.date.toString()} | ${meals.mealType}"/><br>
+					<c:out value="${mealPlan.name} | ${meals.recipe.getName()} | ${meals.date.toString()} | ${meals.mealType}"/><br>
 		</c:forEach>
 		
 	</body>

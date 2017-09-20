@@ -1,11 +1,31 @@
+/**
+ * MealPlanItem describes the recipe, date, and type of meal for an item on a meal plan
+ * @author Eiður Örn Gunnarsson eog26@hi.is
+ */
 package is.hi.hbv.do_or_diet.model;
 
 import java.util.Date;
 
 public class MealPlanItem {
+	
+	/**
+	 * Unique identifier for the meal plan item
+	 */
 	private static long id;
+	
+	/**
+	 * The recipe chosen for this meal plan item
+	 */
 	private Recipe recipe;
+	
+	/**
+	 * The date on which this meal is planned
+	 */
 	private Date date;
+	
+	/**
+	 * The type of meal (breakfast, lunch, or dinner)
+	 */
 	private MealType mealType;
 	
 	static
@@ -13,6 +33,12 @@ public class MealPlanItem {
 		id = 0;
 	}
 	
+	/**
+	 * Creates a new meal plan item
+	 * @param recipe the recipe for this meal
+	 * @param date the date which this meal is planned
+	 * @param mealType the type of meal (breakfast, lunch, or dinner)
+	 */
 	public MealPlanItem(Recipe recipe, Date date, MealType mealType) {
 		id++;
 		this.recipe = recipe;
@@ -20,54 +46,30 @@ public class MealPlanItem {
 		this.mealType = mealType;
 	}
 
-	/**
-	 * @return the id
-	 */
 	public long getId() {
 		return id;
 	}
 
-	/**
-	 * @return the recipe
-	 */
 	public Recipe getRecipe() {
 		return recipe;
 	}
 
-	/**
-	 * @param recipe
-	 *            is the variable to set recipe
-	 */
 	public void setRecipe(Recipe recipe) {
 		this.recipe = recipe;
 	}
 
-	/**
-	 * @return the date
-	 */
 	public Date getDate() {
 		return date;
 	}
 
-	/**
-	 * @param date
-	 *            is the variable to set date
-	 */
 	public void setDate(Date date) {
 		this.date = date;
 	}
 
-	/**
-	 * @return the mealType
-	 */
 	public MealType getMealType() {
 		return mealType;
 	}
 
-	/**
-	 * @param mealType
-	 *            is the variable to set mealType
-	 */
 	public void setMealType(MealType mealType) {
 		this.mealType = mealType;
 	}

@@ -1,5 +1,7 @@
-<!--Upphafssíða verkefnisins 
-	Ragnheiður Ásta Karlsdóttir rak4@hi.is-->
+<!--
+	Shows a list of meal plans and allows the user to add a new meal plan 
+	@author Eiður Örn Gunnarsson eog26@hi.is
+-->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="is">
@@ -14,7 +16,7 @@
 	<body>
 		<h1>Matarplön</h1>
 		<c:forEach items="${mealPlanList}" var="mPlan">
-			<a href="/mealplan/${mPlan.id}/edit"><c:out value="${mPlan.id} - ${mPlan.name}"/></a><br>
+			<a href="/mealplan/${mPlan.id}"><c:out value="${mPlan.id} - ${mPlan.name}"/></a><br>
 		</c:forEach>
 		
 		<hr>
@@ -26,19 +28,6 @@
 		    Tímabil: 
 		    <br>
 		    Frá:<input name="fromDate" type="text" placeholder="DD/MM/YYYY" /> Til:<input name="toDate" type="text" placeholder="DD/MM/YYYY" />
-		    <input type="submit" value="í lagi"/> 
-		</form>
-		
-		<hr>
-		
-		<h3>Breyta matarplani</h3>
-		<form method="POST" action="/mealplan/edit/">
-		    Hvaða matarplani á að breyta?
-		    <select name="mId">
-			  <c:forEach items="${mealPlanList}" var="mPlan">
-					<option value="${mPlan.id}">${mPlan.name}</option>
-			  </c:forEach>
-			</select>
 		    <input type="submit" value="í lagi"/> 
 		</form>
 	</body>

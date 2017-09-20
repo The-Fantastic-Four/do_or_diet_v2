@@ -1,3 +1,8 @@
+/**
+ * Class which contains the main function
+ * @author Eiður Örn Gunnarsson eog26@hi.is
+ *
+*/
 package is.hi.hbv.do_or_diet;
 
 import org.springframework.boot.SpringApplication;
@@ -11,11 +16,13 @@ import is.hi.hbv.do_or_diet.repository.RecipeRepository;
 @SpringBootApplication
 public class DoOrDietApplication extends SpringBootServletInitializer {
 	
+	// This function was added for spring-boot-devtools to enable automatic rebuild
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder applicationBuilder){
         return applicationBuilder.sources(DoOrDietApplication.class);
     }
     
+    // Main function, creates default recipes and meal plans
 	public static void main(String[] args) {
 		RecipeRepository.resetRecipes();
 		MealPlanRepository.resetMealPlans();

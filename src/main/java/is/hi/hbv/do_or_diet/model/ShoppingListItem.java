@@ -1,12 +1,44 @@
+/**
+ * ShoppingListItem describes a specific item on shopping list
+ * @author Eiður Örn Gunnarsson eog26@hi.is
+ */
 package is.hi.hbv.do_or_diet.model;
 
 public class ShoppingListItem {
+	
+	/**
+	 * Unique identifier for this item on the shopping list
+	 */
 	private long id;
+	
+	/**
+	 * The name of the item on the shopping list
+	 */
 	private String itemName;
+	
+	/**
+	 * The amount needed of this shopping list item (used in conjuction with measurement)
+	 */
 	private int amount;
+	
+	/**
+	 * The measurement used for this shopping list item (used in conjuction with amount)
+	 */
 	private String measurement;
+	
+	/**
+	 * Whether this item has been checked
+	 */
 	private boolean checked;
 
+	/**
+	 * Create a new shopping list item
+	 * @param id unique identifier for this item on the shopping list
+	 * @param itemName the name of the item
+	 * @param amount the amount needed
+	 * @param measurement the measurement used
+	 * @param checked whether this item is checked or not
+	 */
 	public ShoppingListItem(long id, String itemName, int amount, String measurement, boolean checked) {
 		this.id = id;
 		this.itemName = itemName;
@@ -15,77 +47,42 @@ public class ShoppingListItem {
 		this.checked = checked;
 	}
 
-	/**
-	 * @return the id
-	 */
 	public long getId() {
 		return id;
 	}
 
-	/**
-	 * @param id
-	 *            is the variable to set id
-	 */
 	public void setId(long id) {
 		this.id = id;
 	}
 
-	/**
-	 * @return the itemName
-	 */
 	public String getItemName() {
 		return itemName;
 	}
 
-	/**
-	 * @param itemName
-	 *            is the variable to set itemName
-	 */
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
 
-	/**
-	 * @return the amount
-	 */
 	public int getAmount() {
 		return amount;
 	}
 
-	/**
-	 * @param amount
-	 *            is the variable to set amount
-	 */
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 
-	/**
-	 * @return the measurement
-	 */
 	public String getMeasurement() {
 		return measurement;
 	}
 
-	/**
-	 * @param measurement
-	 *            is the variable to set measurement
-	 */
 	public void setMeasurement(String measurement) {
 		this.measurement = measurement;
 	}
 
-	/**
-	 * @return the checked
-	 */
 	public boolean isChecked() {
 		return checked;
 	}
 
-	/**
-	 * @param checked
-	 *            is the variable to set checked
-	 */
 	public void setChecked(boolean checked) {
 		this.checked = checked;
 	}
