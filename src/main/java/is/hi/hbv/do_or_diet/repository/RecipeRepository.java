@@ -12,6 +12,9 @@ import org.springframework.stereotype.Repository;
 
 import is.hi.hbv.do_or_diet.model.Recipe;
 
+/*
+ * Erum að reyna að búa til conflict.
+ */
 @Repository
 public class RecipeRepository 
 {
