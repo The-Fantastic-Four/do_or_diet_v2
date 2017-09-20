@@ -12,6 +12,11 @@ import org.springframework.stereotype.Repository;
 
 import is.hi.hbv.do_or_diet.model.Recipe;
 
+/**
+ * Prufu komment til að framkalla merge villu
+ * @author viktoralex
+ *
+ */
 @Repository
 public class RecipeRepository 
 {
