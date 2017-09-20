@@ -36,7 +36,7 @@ public class MealPlanRepository {
 				id++,
 				"First Meal Plan ever.",
 				new ArrayList<MealPlanItem>(), 
-				new ArrayList<Date>()
+				new ArrayList<Date>(Arrays.asList(new Date(2017, 9, 9), new Date(2017, 9, 10)))
 		);
 		
 		mealPlans = new ArrayList<MealPlan>(Arrays.asList(m));

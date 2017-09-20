@@ -14,7 +14,7 @@
 	<body>
 		<h1>Matarplön</h1>
 		<c:forEach items="${mealPlanList}" var="mPlan">
-			<c:out value="${mPlan.id} - ${mPlan.name}"/><br>
+			<a href="/mealplan/${mPlan.id}/edit"><c:out value="${mPlan.id} - ${mPlan.name}"/></a><br>
 		</c:forEach>
 		
 		<hr>

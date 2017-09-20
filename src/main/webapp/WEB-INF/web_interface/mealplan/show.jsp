@@ -1,5 +1,6 @@
-<!--Upphafssíða verkefnisins 
-	Ragnheiður Ásta Karlsdóttir rak4@hi.is-->
+<!--Show and edit mealplan
+	Eiður Örn Gunnarsson eog26@hi.is
+	Viktor Alex Brynjarsson vab18@hi.is-->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="is">
@@ -13,7 +14,7 @@
 	
 	<body>
 		<h3>Breyta matarplani</h3>
-		<form method="POST" action="">
+		<form method="POST" action="/mealplan/${mealPlan.id}/edit">
 			<select name="recipeId">
 			  <c:forEach items="${recipeList}" var="recipe">
 					<option value="${recipe.id}">${recipe.name}</option>
@@ -24,13 +25,12 @@
 					<option value="${mDate.toString()}">${mDate.toString()}</option>
 			  </c:forEach>
 			</select>
-			<input type="hidden" name="mId"/>
 		    <input type="submit" value="í lagi"/> 
 		</form>
 		<hr>
 		<h3>Already defined dates</h3>
 		<c:forEach items="${mealPlan.items}" var="meals">
-					<c:out value="${mealPlan.name} | ${meals.date} | ${meals.date.toString} | ${meals.mealType}"/><br>
+					<c:out value="${mealPlan.name} | ${meals.date} | ${meals.date.toString()} | ${meals.mealType}"/><br>
 		</c:forEach>
 		
 	</body>

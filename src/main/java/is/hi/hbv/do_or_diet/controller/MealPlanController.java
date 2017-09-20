@@ -11,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import is.hi.hbv.do_or_diet.model.MealPlan;
 import is.hi.hbv.do_or_diet.model.MealPlanItem;
@@ -60,20 +62,20 @@ public class MealPlanController {
 		return "mealplan/index"; 
 	}
 	
-	@RequestMapping("/edit")
-	public String editPage(@RequestParam(value = "mId", required = true) int mId, ModelMap model)
+	@RequestMapping("/{mealPlanId}")
+	public String showMealPlan(@PathVariable(value="mealPlanId") int mealPlanId, ModelMap model)
 	{
-		model.addAttribute("mealPlan", mPlanRep.getMealPlans().get(mId));
+		model.addAttribute("mealPlan", mPlanRep.getMealPlans().get(mealPlanId));
 		model.addAttribute("recipeList", recipeRep.getRecipes());
-		return "mealplan/edit/index";
+		return "mealplan/show";
 	}
 	
-	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public String editDateMeal(@RequestParam(value = "recipeId", required = true) int recipeId, Date date, int mId, ModelMap model) 
+	@RequestMapping(value = "/{mealPlanId}/edit", method = RequestMethod.POST)
+	public ModelAndView editDateMeal(@PathVariable(value="mealPlanId") int mealPlanId, @RequestParam(value = "recipeId", required = true) int recipeId, Date dateForRecipe, ModelMap model) 
 	{
-		MealPlanItem meal = new MealPlanItem(recipeRep.getRecipes().get(recipeId),date,MealType.DINNER);
-		mPlanRep.getMealPlans().get(mId).getItems().add(meal);
-		return "mealplan/edit/index";
+		MealPlanItem meal = new MealPlanItem(recipeRep.getRecipes().get(recipeId),dateForRecipe,MealType.DINNER);
+		mPlanRep.getMealPlans().get(mealPlanId).getItems().add(meal);
+		return new ModelAndView("redirect:/mealplan/" + mealPlanId);
 	}
 	
 	private void addMealPlanListToModel(Model model) 
