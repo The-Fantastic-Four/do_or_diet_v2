@@ -41,7 +41,11 @@ public class MealPlanController {
 	@Autowired
 	RecipeRepository recipeRep;
 	
-	// Index page for the meal plans, shows a list of meal plans
+	/**
+	 * Index page for the meal plans, shows a list of meal plans
+	 * @param model the model that contains all the necessary information
+	 * @return
+	 */
 	@RequestMapping("")
 	public String indexPage(Model model)
 	{
@@ -49,7 +53,14 @@ public class MealPlanController {
 		return "mealplan/index";
 	}
 	
-	// Creates a new meal plan, redirects to the index page upon creation
+	/**
+	 *  Creates a new meal plan, redirects to the index page upon creation
+	 * @param mName the meal plan name
+	 * @param fromDate is the date which the meal plan begins on
+	 * @param toDate is the date which the meal plan ends on
+	 * @param model the model that contains all the necessary information
+	 * @return
+	 */
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String newMealPlan(@RequestParam(value = "mName", required = true) String mName, String fromDate, String toDate, ModelMap model)
 	{	
@@ -74,7 +85,12 @@ public class MealPlanController {
 		return "mealplan/index"; 
 	}
 	
-	// Shows a specific meal plan, allows the user to edit it
+	/**
+	 *  Shows a specific meal plan, allows the user to edit it
+	 * @param mealPlanId unique identifier for the meal plan that is being viewed
+	 * @param model the model that contains all the necessary information
+	 * @return
+	 */
 	@RequestMapping("/{mealPlanId}")
 	public String showMealPlan(@PathVariable(value="mealPlanId") int mealPlanId, ModelMap model)
 	{
@@ -83,7 +99,14 @@ public class MealPlanController {
 		return "mealplan/show";
 	}
 	
-	// Updates a specific meal plan with new information
+	/**
+	 * Updates a specific meal plan with new information
+	 * @param mealPlanId unique identifier for the meal plan to be edited
+	 * @param recipeId unique identifier for the recipe to be added to the meal plan
+	 * @param dateForRecipe the date for which the meal is planned to be had
+	 * @param model the model that contains all the necessary information
+	 * @return
+	 */
 	@RequestMapping(value = "/{mealPlanId}/edit", method = RequestMethod.POST)
 	public ModelAndView editDateMeal(@PathVariable(value="mealPlanId") int mealPlanId, @RequestParam(value = "recipeId", required = true) int recipeId, Date dateForRecipe, ModelMap model) 
 	{
@@ -101,31 +124,41 @@ public class MealPlanController {
 		if(!mealExists) mealPlanItemList.add(meal);
 		else {
 			/* 
-			 * THIS REQUIRES FIXING FOR A LATER RELEASE THAT THIS USE CASE IS ACTUALLY
-			 * APART OF.
+			 * THIS IS A CLAUSE THAT HANDLES CONFLICTNG DATES. LATER RELEASE THAT THIS USE CASE IS 
+			 * ACTUALLY APART OF (UDPATE MEALPLANITEMS).
 			 */
-			/*MealPlanItem oldMeal = mealPlanItemList.get((int)existingMealId);
-			oldMeal.setRecipe(meal.getRecipe());
-			oldMeal.setMealType(meal.getMealType());*/
 		}
 		return new ModelAndView("redirect:/mealplan/" + mealPlanId);
 	}
 	
-	// Add a list of meal plans to the model which can be displayed on the page
+	/**
+	 * Add a list of meal plans to the model which can be displayed on the page
+	 * @param model the model which the list of meal plans is to be added to.
+	 */
 	private void addMealPlanListToModel(Model model) 
 	{
 		ArrayList<MealPlan> mealPlanList = mPlanRep.getMealPlans();
 		model.addAttribute("mealPlanList", mealPlanList);
 	}
 	
-	// Converts a date from a string to Date
+	/**
+	 * Converts a date from a string to Date
+	 * @param d is the String that is to be converted to a Date object.
+	 * @return d on date format
+	 * @throws ParseException
+	 */
 	private Date convertToDate(String d) throws ParseException 
 	{
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy"); 
 		return df.parse(d);
 	}
 	
-	// Creates a list of the days between two days, from and to dates are included
+	/**
+	 * Creates a list of the days between two days, from and to dates are included
+	 * @param from is the date that you start counting from
+	 * @param to is final date of the date count
+	 * @return list that contains all the dates between and including the from and to dates
+	 */
 	private ArrayList<Date> generateDatesBetween(Date from, Date to){
 		Calendar cal = Calendar.getInstance();
 		ArrayList<Date> d = new ArrayList<Date>();
