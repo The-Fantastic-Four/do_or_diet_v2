@@ -12,6 +12,10 @@ public class Ingredient {
 		this.quantity = quantity;
 		this.measurement = measurement;
 	}
+	
+	public Ingredient() {
+		
+	}
 
 	/**
 	 * @return the id

@@ -56,6 +56,10 @@ public class Recipe {
 		this.servings = servings;
 		this.ingredients = ingredients;
 	}
+	
+	public Recipe() {
+		this.id = 234;	
+	}
 
 	public long getId() {
 		return id;

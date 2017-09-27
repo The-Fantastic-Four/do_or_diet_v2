@@ -20,7 +20,7 @@ public class RecipeRepository
 	 */
 	private static ArrayList<Recipe> recipes;
 
-	public ArrayList<Recipe> getRecipes() 
+	public static ArrayList<Recipe> getRecipes() 
 	{
 		return recipes;
 	}
@@ -29,9 +29,10 @@ public class RecipeRepository
 	 * Add a new recipe to the repository
 	 * @param r the recipe to be added
 	 */
-	public void addRecipes(Recipe r) 
+	public static void addRecipes(Recipe r) 
 	{
-		RecipeRepository.recipes.add(r);
+		
+		recipes.add(r);
 	}
 	
 	/**

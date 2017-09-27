@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,7 +36,7 @@ public class RecipeController
 	@RequestMapping("")
 	public String index(Model model)
 	{
-		ArrayList<Recipe> recipeList = recipes.getRecipes();
+		ArrayList<Recipe> recipeList = RecipeRepository.getRecipes();
 		model.addAttribute("recipeList", recipeList);
 		return "recipe/index";
 	}
@@ -45,12 +46,17 @@ public class RecipeController
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public String recipeRoute() 
-	{
+	public String recipeRoute(@RequestBody Recipe recipe, Model model) 
+	{	
+		System.out.println(recipe.getName());
+		System.out.println(recipe);
+		RecipeRepository.addRecipes(recipe);
 		System.out.println("HALLO FRA CONTROLER : ");
 			/*Recipe recipe = new Recipe();
 			recipe.setName(Request.);
 			*/
+		ArrayList<Recipe> recipeList = RecipeRepository.getRecipes();
+		model.addAttribute("recipeList", recipeList);
 		return "recipe/index";
 	}
 }
