@@ -1,29 +1,25 @@
 package is.hi.hbv.do_or_diet.model;
 
 public class IngredientQuantity {
-
-	private static long id;
-	
+	private long id;
 	private int quantity; 
-	
 	private String measurement;
-	
 	private IngredientType ingredient;
-	
-	static {id =0;}
 
-	public IngredientQuantity(int quantity, String measurement, IngredientType ingredient) {
-		id++;
+	public IngredientQuantity(long id, int quantity, String measurement, IngredientType ingredient) {
+		this.id = id;
 		this.quantity = quantity;
 		this.measurement = measurement;
 		this.ingredient = ingredient;
 	}
 
-
-	public static long getId() {
+	public long getId() {
 		return id;
 	}
 
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public int getQuantity() {
 		return quantity;

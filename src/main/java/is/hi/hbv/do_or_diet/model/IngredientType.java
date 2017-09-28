@@ -1,23 +1,21 @@
 package is.hi.hbv.do_or_diet.model;
 
 public class IngredientType {
-	
-	private static long id;
-	
+	private long id;
 	private String name;
 	
-	static {id=0;}
-
-	
-	public IngredientType(String name) {
-		id++;
+	public IngredientType(long id, String name) {
+		this.id = id;
 		this.name = name;
 	}
 
-	public static long getId() {
+	public long getId() {
 		return id;
 	}
 
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
