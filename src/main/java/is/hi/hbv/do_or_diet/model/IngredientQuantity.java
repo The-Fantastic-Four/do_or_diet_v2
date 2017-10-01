@@ -1,16 +1,45 @@
 package is.hi.hbv.do_or_diet.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name="ingredient_quantity")
 public class IngredientQuantity {
+
+	@Id
+	@GeneratedValue(generator="increment")
+	@GenericGenerator(name="increment", strategy="increment")
 	private long id;
+	
 	private int quantity; 
 	private String measurement;
+	
+	@ManyToOne
+	@JoinColumn(name="ingredient_type_id")
 	private IngredientType ingredient;
+	
+	@ManyToOne
+	@JoinColumn(name="recipe_id")
+	private Recipe recipe;
+	
+	public IngredientQuantity()
+	{
+		
+	}
 
-	public IngredientQuantity(long id, int quantity, String measurement, IngredientType ingredient) {
+	public IngredientQuantity(long id, int quantity, String measurement, IngredientType ingredient, Recipe recipe) {
 		this.id = id;
 		this.quantity = quantity;
 		this.measurement = measurement;
 		this.ingredient = ingredient;
+		this.recipe = recipe;
 	}
 
 	public long getId() {
@@ -45,5 +74,12 @@ public class IngredientQuantity {
 		this.ingredient = ingredient;
 	}
 	
+	public Recipe getRecipe() {
+		return recipe;
+	}
+
+	public void setRecipe(Recipe recipe) {
+		this.recipe = recipe;
+	}
 	
 }

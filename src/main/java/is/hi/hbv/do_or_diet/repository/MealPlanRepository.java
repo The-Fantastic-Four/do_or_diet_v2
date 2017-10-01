@@ -4,66 +4,17 @@
  */
 package is.hi.hbv.do_or_diet.repository;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
+import java.util.List;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import is.hi.hbv.do_or_diet.model.MealPlan;
-import is.hi.hbv.do_or_diet.model.MealPlanItem;
 
-@Repository
-public class MealPlanRepository {
-	
-	/**
-	 * The current maximum id for meal plans
-	 */
-	private static long id;
-	
-	/**
-	 * List of meal plans
-	 */
-	private static ArrayList<MealPlan> mealPlans;
+public interface MealPlanRepository extends JpaRepository<MealPlan, Long> {
 
-	static
-	{
-		id = 0;
-	}
-	
-	public ArrayList<MealPlan> getMealPlans() 
-	{
-		return mealPlans;
-	}
-
-	/**
-	 * Add a meal plan to the repository
-	 * @param m the meal plan to be added
-	 */
-	public void addMealPlan(MealPlan m) 
-	{
-		m.setId(id++);
-		mealPlans.add(m);
-	}
-	
-	/**
-	 * Reset the meal plan list and add a few default meal plans
-	 */
-	public static void resetMealPlans()
-	{
-		MealPlan m = new MealPlan(
-				id++,
-				"First Meal Plan ever.",
-				new ArrayList<MealPlanItem>(), 
-				new ArrayList<Date>(Arrays.asList(new Date(2017, 9, 9), new Date(2017, 9, 10)))
-		);
-		
-		mealPlans = new ArrayList<MealPlan>(Arrays.asList(m));
-	}
-	
-	public static long getId()
-	{
-		return id;
-	}
-	
+    List<MealPlan> findAll();
+    
+    MealPlan findOne(Long id);
+    
+    MealPlan save(MealPlan recipe);
 }

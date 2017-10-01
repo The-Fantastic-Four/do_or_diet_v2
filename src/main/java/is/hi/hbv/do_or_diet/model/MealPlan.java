@@ -5,13 +5,29 @@
 package is.hi.hbv.do_or_diet.model;
 
 import java.util.Date;
-import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name="meal_plan")
 public class MealPlan {
 	
 	/**
 	 * Unique identifier for the meal plan
 	 */
+	@Id
+	@GeneratedValue(generator="increment")
+	@GenericGenerator(name="increment", strategy="increment")
 	private long id;
 	
 	/**
@@ -22,17 +38,26 @@ public class MealPlan {
 	/**
 	 * List of meals on this plan
 	 */
-	private ArrayList<MealPlanItem> items;
+	@OneToMany(mappedBy="recipe")
+	private List<MealPlanItem> items;
 	
 	/**
 	 * The dates included in this meal plan
 	 */
-	private ArrayList<Date> dates;
+	@ElementCollection
+	private List<Date> dates;
 	
 	/**
 	 * The user that created this meal plan
 	 */
+	@ManyToOne
+	@JoinColumn(name="created_by_user_id")
 	private User createdBy;
+	
+	public MealPlan()
+	{
+		
+	}
 
 	/**
 	 * Creates a new meal plan
@@ -41,7 +66,7 @@ public class MealPlan {
 	 * @param items list of items on the meal plan
 	 * @param dates list of dates on which the meal plan
 	 */
-	public MealPlan(long id, String name, ArrayList<MealPlanItem> items, ArrayList<Date> dates) {
+	public MealPlan(long id, String name, List<MealPlanItem> items, List<Date> dates) {
 		this.id = id;
 		this.name = name;
 		this.items = items;
@@ -56,19 +81,19 @@ public class MealPlan {
 		this.id = id;
 	}
 
-	public ArrayList<MealPlanItem> getItems() {
+	public List<MealPlanItem> getItems() {
 		return items;
 	}
 
-	public void setItems(ArrayList<MealPlanItem> items) {
+	public void setItems(List<MealPlanItem> items) {
 		this.items = items;
 	}
 
-	public ArrayList<Date> getDates() {
+	public List<Date> getDates() {
 		return dates;
 	}
 
-	public void setDates(ArrayList<Date> dates) {
+	public void setDates(List<Date> dates) {
 		this.dates = dates;
 	}
 

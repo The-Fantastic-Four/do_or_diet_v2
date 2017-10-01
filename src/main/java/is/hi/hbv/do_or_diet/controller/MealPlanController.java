@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -78,8 +79,8 @@ public class MealPlanController {
 				new ArrayList<MealPlanItem>(), 
 				dates
 		);
-		mPlanRep.addMealPlan(m);
-		ArrayList<MealPlan> mealPlanList = mPlanRep.getMealPlans();
+		mPlanRep.save(m);
+		List<MealPlan> mealPlanList = mPlanRep.findAll();
 		model.addAttribute("mealPlanList", mealPlanList);
 		
 		return "mealplan/index"; 
@@ -92,10 +93,10 @@ public class MealPlanController {
 	 * @return
 	 */
 	@RequestMapping("/{mealPlanId}")
-	public String showMealPlan(@PathVariable(value="mealPlanId") int mealPlanId, ModelMap model)
+	public String showMealPlan(@PathVariable(value="mealPlanId") long mealPlanId, ModelMap model)
 	{
-		model.addAttribute("mealPlan", mPlanRep.getMealPlans().get(mealPlanId));
-		model.addAttribute("recipeList", recipeRep.getRecipes());
+		model.addAttribute("mealPlan", mPlanRep.findOne(mealPlanId));
+		model.addAttribute("recipeList", recipeRep.findAll());
 		return "mealplan/show";
 	}
 	
@@ -108,12 +109,12 @@ public class MealPlanController {
 	 * @return
 	 */
 	@RequestMapping(value = "/{mealPlanId}/edit", method = RequestMethod.POST)
-	public ModelAndView editDateMeal(@PathVariable(value="mealPlanId") int mealPlanId, @RequestParam(value = "recipeId", required = true) int recipeId, Date dateForRecipe, ModelMap model) 
+	public ModelAndView editDateMeal(@PathVariable(value="mealPlanId") long mealPlanId, @RequestParam(value = "recipeId", required = true) long recipeId, Date dateForRecipe, ModelMap model) 
 	{
 		long existingMealId = 0;
 		boolean mealExists = false;
-		MealPlanItem meal = new MealPlanItem(recipeRep.getRecipes().get(recipeId),dateForRecipe,MealType.DINNER);
-		ArrayList<MealPlanItem> mealPlanItemList = mPlanRep.getMealPlans().get(mealPlanId).getItems();
+		MealPlanItem meal = new MealPlanItem(recipeRep.findOne(recipeId),dateForRecipe,MealType.DINNER);
+		List<MealPlanItem> mealPlanItemList = mPlanRep.findOne(mealPlanId).getItems();
 		for(MealPlanItem mealItem : mealPlanItemList) {
 			if(mealItem.getDate().equals(dateForRecipe)) {
 				existingMealId = mealItem.getId();
@@ -137,7 +138,7 @@ public class MealPlanController {
 	 */
 	private void addMealPlanListToModel(Model model) 
 	{
-		ArrayList<MealPlan> mealPlanList = mPlanRep.getMealPlans();
+		List<MealPlan> mealPlanList = mPlanRep.findAll();
 		model.addAttribute("mealPlanList", mealPlanList);
 	}
 	

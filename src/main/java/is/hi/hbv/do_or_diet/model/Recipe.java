@@ -4,13 +4,27 @@
  */
 package is.hi.hbv.do_or_diet.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name="recipe")
 public class Recipe {
 	
 	/**
 	 * Unique identifier for the recipe
 	 */
+	@Id
+	@GeneratedValue(generator="increment")
+	@GenericGenerator(name="increment", strategy="increment")
 	private long id;
 	
 	/**
@@ -21,7 +35,8 @@ public class Recipe {
 	/**
 	 * The categories this recipe belongs to
 	 */
-	private ArrayList<String> categories;
+	@ElementCollection
+	private List<String> categories;
 	
 	/**
 	 * Cooking instructions for this recipe
@@ -36,7 +51,12 @@ public class Recipe {
 	/**
 	 * List of ingredients needed to cook this recipe
 	 */
-	private ArrayList<Ingredient> ingredients;
+	@OneToMany(mappedBy="recipe")
+	private List<IngredientQuantity> ingredients;
+	
+	public Recipe() {
+
+	}
 	
 	/**
 	 * Creates a new recipe
@@ -47,18 +67,14 @@ public class Recipe {
 	 * @param servings how many servings this recipe makes
 	 * @param ingredients list of ingredients needed to cook this recipe
 	 */
-	public Recipe(long id, String name, ArrayList<String> categories, String directions, int servings,
-			ArrayList<Ingredient> ingredients) {
+	public Recipe(long id, String name, List<String> categories, String directions, int servings,
+			List<IngredientQuantity> ingredients) {
 		this.id = id;
 		this.name = name;
 		this.categories = categories;
 		this.directions = directions;
 		this.servings = servings;
 		this.ingredients = ingredients;
-	}
-	
-	public Recipe() {
-		this.id = 234;	
 	}
 
 	public long getId() {
@@ -77,11 +93,11 @@ public class Recipe {
 		this.name = name;
 	}
 
-	public ArrayList<String> getCategories() {
+	public List<String> getCategories() {
 		return categories;
 	}
 
-	public void setCategories(ArrayList<String> categories) {
+	public void setCategories(List<String> categories) {
 		this.categories = categories;
 	}
 
@@ -101,11 +117,11 @@ public class Recipe {
 		this.servings = servings;
 	}
 
-	public ArrayList<Ingredient> getIngredients() {
+	public List<IngredientQuantity> getIngredients() {
 		return ingredients;
 	}
 
-	public void setIngredients(ArrayList<Ingredient> ingredients) {
+	public void setIngredients(List<IngredientQuantity> ingredients) {
 		this.ingredients = ingredients;
 	}
 }

@@ -1,12 +1,34 @@
 package is.hi.hbv.do_or_diet.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name="ingredient_type")
 public class IngredientType {
+	@Id
+	@GeneratedValue(generator="increment")
+	@GenericGenerator(name="increment", strategy="increment")
 	private long id;
+	
 	private String name;
+	
+	public IngredientType() {
+		
+	}
 	
 	public IngredientType(long id, String name) {
 		this.id = id;
 		this.name = name;
+	}
+	
+	public String toString()
+	{
+		return "[IngredientType name=" + this.name + "]";
 	}
 
 	public long getId() {

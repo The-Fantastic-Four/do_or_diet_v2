@@ -24,8 +24,8 @@ public class DoOrDietApplication extends SpringBootServletInitializer {
     
     // Main function, creates default recipes and meal plans
 	public static void main(String[] args) {
-		RecipeRepository.resetRecipes();
-		MealPlanRepository.resetMealPlans();
+		//RecipeRepository.resetRecipes();
+		//MealPlanRepository.resetMealPlans();
 		SpringApplication.run(DoOrDietApplication.class, args);
 	}
 }

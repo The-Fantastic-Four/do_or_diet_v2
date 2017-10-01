@@ -5,17 +5,34 @@
 package is.hi.hbv.do_or_diet.model;
 
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name="meal_plan_item")
 public class MealPlanItem {
 	
 	/**
 	 * Unique identifier for the meal plan item
 	 */
-	private static long id;
+	@Id
+	@GeneratedValue(generator="increment")
+	@GenericGenerator(name="increment", strategy="increment")
+	private long id;
 	
 	/**
 	 * The recipe chosen for this meal plan item
 	 */
+	@ManyToOne
+	@JoinColumn(name="recipe_id")
 	private Recipe recipe;
 	
 	/**
@@ -26,11 +43,12 @@ public class MealPlanItem {
 	/**
 	 * The type of meal (breakfast, lunch, or dinner)
 	 */
+	@Enumerated(EnumType.STRING)
 	private MealType mealType;
 	
-	static
+	public MealPlanItem()
 	{
-		id = 0;
+		
 	}
 	
 	/**
@@ -40,7 +58,6 @@ public class MealPlanItem {
 	 * @param mealType the type of meal (breakfast, lunch, or dinner)
 	 */
 	public MealPlanItem(Recipe recipe, Date date, MealType mealType) {
-		id++;
 		this.recipe = recipe;
 		this.date = date;
 		this.mealType = mealType;
