@@ -20,7 +20,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter 
+{
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -46,6 +47,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.passwordEncoder(bCryptPasswordEncoder);
 	}
 
+	// Controls access to pages depending on login status and permissions
 	@Override
 	protected void configure(HttpSecurity http) throws Exception 
 	{
