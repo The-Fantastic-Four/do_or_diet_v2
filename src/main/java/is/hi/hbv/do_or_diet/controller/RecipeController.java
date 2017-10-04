@@ -65,13 +65,9 @@ public class RecipeController
 	{	
 		IngredientQuantity t = ingredientQuantities.save(ingredientQuantity);
 		ingredientTypes.save(ingredientType);
-		
-		System.out.println(String.valueOf(t.getId()));
 		return t.getId();
 	}
 		
-	
-	
 	public void getRecipes(Model model)
 	{
 		List<Recipe> recipeList = recipes.findAll();
