@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -27,6 +28,8 @@ import org.springframework.web.servlet.ModelAndView;
 import is.hi.hbv.do_or_diet.model.MealPlan;
 import is.hi.hbv.do_or_diet.model.MealPlanItem;
 import is.hi.hbv.do_or_diet.model.MealType;
+import is.hi.hbv.do_or_diet.model.Recipe;
+import is.hi.hbv.do_or_diet.repository.MealPlanItemRepository;
 import is.hi.hbv.do_or_diet.repository.MealPlanRepository;
 import is.hi.hbv.do_or_diet.repository.RecipeRepository;
 
@@ -41,6 +44,9 @@ public class MealPlanController {
 	// Instance of the recipe repository, used to get and create recipes
 	@Autowired
 	RecipeRepository recipeRep;
+	
+	@Autowired
+	MealPlanItemRepository mealPlanItemRepository;
 	
 	/**
 	 * Index page for the meal plans, shows a list of meal plans
@@ -109,26 +115,32 @@ public class MealPlanController {
 	 * @return
 	 */
 	@RequestMapping(value = "/{mealPlanId}/edit", method = RequestMethod.POST)
-	public ModelAndView editDateMeal(@PathVariable(value="mealPlanId") long mealPlanId, @RequestParam(value = "recipeId", required = true) long recipeId, Date dateForRecipe, ModelMap model) 
+	public ModelAndView editDateMeal(@PathVariable(value="mealPlanId") long mealPlanId, @RequestParam(value = "recipeId", required = true) long recipeId, @RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") Date dateForRecipe, ModelMap model) 
 	{
-		long existingMealId = 0;
+		MealPlan mealPlan = mPlanRep.findOne(mealPlanId);
+		Recipe newRecipe = recipeRep.findOne(recipeId);
+		
 		boolean mealExists = false;
-		MealPlanItem meal = new MealPlanItem(recipeRep.findOne(recipeId),dateForRecipe,MealType.DINNER);
-		List<MealPlanItem> mealPlanItemList = mPlanRep.findOne(mealPlanId).getItems();
-		for(MealPlanItem mealItem : mealPlanItemList) {
-			if(mealItem.getDate().equals(dateForRecipe)) {
-				existingMealId = mealItem.getId();
+		for (MealPlanItem mealItem : mealPlan.getItems())
+		{
+			if (mealItem.getDate() == dateForRecipe)
+			{
+				mealItem.setRecipe(newRecipe);
+				mealPlanItemRepository.save(mealItem);
 				mealExists = true;
 			}
 		}
 		
-		if(!mealExists) mealPlanItemList.add(meal);
-		else {
-			/* 
-			 * THIS IS A CLAUSE THAT HANDLES CONFLICTNG DATES. LATER RELEASE THAT THIS USE CASE IS 
-			 * ACTUALLY APART OF (UDPATE MEALPLANITEMS).
-			 */
+		if (!mealExists)
+		{
+			MealPlanItem newItem = new MealPlanItem();
+			newItem.setDate(dateForRecipe);
+			newItem.setRecipe(newRecipe);
+			newItem.setMealType(MealType.DINNER);
+			newItem.setMealPlan(mealPlan);
+			mealPlanItemRepository.save(newItem);
 		}
+
 		return new ModelAndView("redirect:/mealplan/" + mealPlanId);
 	}
 	

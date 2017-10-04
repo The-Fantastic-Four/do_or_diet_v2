@@ -8,7 +8,7 @@
 <html lang="is">
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 	<head>
 		<meta charset="utf-8">	
 	    <title>Matarplön - Breytingar</title>
@@ -24,7 +24,9 @@
 			</select>
 		    <select name="dateForRecipe">
 			  <c:forEach items="${mealPlan.dates}" var="mDate">
-					<option value="${mDate.toString()}">${mDate.toString()}</option>
+		  		<fmt:formatDate value="${mDate}" var="dateValue" pattern="yyyy-MM-dd" />
+		  		<fmt:formatDate value="${mDate}" var="dateString" pattern="dd.MM.yyyy" />
+				<option value="${dateValue}">${dateString}</option>
 			  </c:forEach>
 			</select>
 		    <input type="submit" value="í lagi"/> 

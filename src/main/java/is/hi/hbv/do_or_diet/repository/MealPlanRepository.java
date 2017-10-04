@@ -16,5 +16,5 @@ public interface MealPlanRepository extends JpaRepository<MealPlan, Long> {
     
     MealPlan findOne(Long id);
     
-    MealPlan save(MealPlan recipe);
+    MealPlan save(MealPlan mealPlan);
 }

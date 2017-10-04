@@ -38,7 +38,7 @@ public class MealPlan {
 	/**
 	 * List of meals on this plan
 	 */
-	@OneToMany(mappedBy="recipe")
+	@OneToMany(mappedBy="mealPlan")
 	private List<MealPlanItem> items;
 	
 	/**

@@ -46,6 +46,13 @@ public class MealPlanItem {
 	@Enumerated(EnumType.STRING)
 	private MealType mealType;
 	
+	/**
+	 * The meal plan that this item is on
+	 */
+	@ManyToOne
+	@JoinColumn(name="meal_plan_id")
+	private MealPlan mealPlan;
+
 	public MealPlanItem()
 	{
 		
@@ -89,5 +96,19 @@ public class MealPlanItem {
 
 	public void setMealType(MealType mealType) {
 		this.mealType = mealType;
+	}
+	
+	/**
+	 * @return the mealPlan
+	 */
+	public MealPlan getMealPlan() {
+		return mealPlan;
+	}
+
+	/**
+	 * @param mealPlan the mealPlan to set
+	 */
+	public void setMealPlan(MealPlan mealPlan) {
+		this.mealPlan = mealPlan;
 	}
 }
