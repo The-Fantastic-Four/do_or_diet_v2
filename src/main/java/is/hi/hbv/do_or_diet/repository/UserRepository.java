@@ -1,0 +1,10 @@
+package is.hi.hbv.do_or_diet.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import is.hi.hbv.do_or_diet.model.User;
+
+public interface UserRepository extends JpaRepository<User, Long> 
+{
+	User findByEmail(String email);
+}
