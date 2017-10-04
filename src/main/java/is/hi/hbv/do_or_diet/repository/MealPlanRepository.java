@@ -10,11 +10,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import is.hi.hbv.do_or_diet.model.MealPlan;
 
-public interface MealPlanRepository extends JpaRepository<MealPlan, Long> {
+public interface MealPlanRepository extends JpaRepository<MealPlan, Long> 
+{
 
     List<MealPlan> findAll();
     
     MealPlan findOne(Long id);
     
-    MealPlan save(MealPlan recipe);
+    // Suppressed as teacher had same warning and had not fixed it
+    @SuppressWarnings("unchecked")
+	MealPlan save(MealPlan recipe);
 }

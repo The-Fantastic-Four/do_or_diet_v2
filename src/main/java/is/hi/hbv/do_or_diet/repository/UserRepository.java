@@ -1,4 +1,8 @@
-package is.hi.hbv.do_or_diet.repository;
+/**
+ * UserRepository keeps a list of users
+ * @author Ragnheiður Ásta Karlsdóttir rak4@hi.is
+ * @author Viktor Alex Brynjarsson vab18@hi.is
+ */package is.hi.hbv.do_or_diet.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -17,7 +17,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="recipe")
-public class Recipe {
+public class Recipe 
+{
 	
 	/**
 	 * Unique identifier for the recipe
@@ -54,7 +55,8 @@ public class Recipe {
 	@OneToMany(mappedBy="recipe")
 	private List<IngredientQuantity> ingredients;
 	
-	public Recipe() {
+	public Recipe() 
+	{
 
 	}
 	
@@ -68,7 +70,8 @@ public class Recipe {
 	 * @param ingredients list of ingredients needed to cook this recipe
 	 */
 	public Recipe(long id, String name, List<String> categories, String directions, int servings,
-			List<IngredientQuantity> ingredients) {
+			List<IngredientQuantity> ingredients) 
+	{
 		this.id = id;
 		this.name = name;
 		this.categories = categories;
@@ -81,47 +84,58 @@ public class Recipe {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(long id) 
+	{
 		this.id = id;
 	}
 
-	public String getName() {
+	public String getName() 
+	{
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name) 
+	{
 		this.name = name;
 	}
 
-	public List<String> getCategories() {
+	public List<String> getCategories() 
+	{
 		return categories;
 	}
 
-	public void setCategories(List<String> categories) {
+	public void setCategories(List<String> categories) 
+	{
 		this.categories = categories;
 	}
 
-	public String getDirections() {
+	public String getDirections() 
+	{
 		return directions;
 	}
 
-	public void setDirections(String directions) {
+	public void setDirections(String directions) 
+	{
 		this.directions = directions;
 	}
 
-	public int getServings() {
+	public int getServings() 
+	{
 		return servings;
 	}
 
-	public void setServings(int servings) {
+	public void setServings(int servings) 
+	{
 		this.servings = servings;
 	}
 
-	public List<IngredientQuantity> getIngredients() {
+	public List<IngredientQuantity> getIngredients() 
+	{
 		return ingredients;
 	}
 
-	public void setIngredients(List<IngredientQuantity> ingredients) {
+	public void setIngredients(List<IngredientQuantity> ingredients) 
+	{
 		this.ingredients = ingredients;
 	}
 }

@@ -1,3 +1,8 @@
+/**
+ * WebMvcConfig encodes user passwords
+ * @author Ragnheiður Ásta Karlsdóttir rak4@hi.is
+ * @author Viktor Alex Brynjarsson vab18@hi.is
+ */
 package is.hi.hbv.do_or_diet.configuration;
 
 import org.springframework.context.annotation.Bean;

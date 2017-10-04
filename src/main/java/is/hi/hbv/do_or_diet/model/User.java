@@ -1,6 +1,8 @@
 /**
  * User describes a user in the system
  * @author Eiður Örn Gunnarsson eog26@hi.is
+ * @author Ragnheiður Ásta Karlsdóttir rak4@hi.is
+ * @author Viktor Alex Brynjarsson vab18@hi.is
  */
 package is.hi.hbv.do_or_diet.model;
 
@@ -21,7 +23,8 @@ import org.springframework.data.annotation.Transient;
 
 @Entity
 @Table(name="\"user\"")
-public class User {
+public class User 
+{
 	
 	/**
 	 * Unique identifier for this user
@@ -73,92 +76,95 @@ public class User {
 	/**
 	 * @return the password
 	 */
-	public String getPassword() {
+	public String getPassword() 
+	{
 		return password;
 	}
 
 	/**
 	 * @param password the password to set
 	 */
-	public void setPassword(String password) {
+	public void setPassword(String password) 
+	{
 		this.password = password;
 	}
 
 	/**
 	 * @return the email
 	 */
-	public String getEmail() {
+	public String getEmail() 
+	{
 		return email;
 	}
 
 	/**
 	 * @param email the email to set
 	 */
-	public void setEmail(String email) {
+	public void setEmail(String email) 
+	{
 		this.email = email;
 	}
 
 	/**
 	 * @return the active
 	 */
-	public int getActive() {
+	public int getActive() 
+	{
 		return active;
 	}
 
 	/**
 	 * @param active the active to set
 	 */
-	public void setActive(int active) {
+	public void setActive(int active) 
+	{
 		this.active = active;
 	}
 
-	/**
-	 * Create a new user
-	 * @param id unique identifier for this user
-	 * @param username the username of this user
-	 * @param favoriteRecipies list of the users favourite recipes
-	 */
-	/*public User(long id, String userName, List<Recipe> favoriteRecipies) {
-		this.id = id;
-		this.userName = userName;
-		this.favoriteRecipies = favoriteRecipies;
-	}*/
-
-	public long getId() {
+	public long getId() 
+	{
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(long id) 
+	{
 		this.id = id;
 	}
 
-	public String getUsername() {
+	public String getUsername() 
+	{
 		return username;
 	}
 
-	public void setUsername(String username) {
+	public void setUsername(String username) 
+	{
 		this.username = username;
 	}
 
 	/**
 	 * @return the roles
 	 */
-	public Set<Role> getRoles() {
+	public Set<Role> getRoles() 
+	{
 		return roles;
 	}
 
 	/**
 	 * @param roles the roles to set
 	 */
-	public void setRoles(Set<Role> roles) {
+	public void setRoles(Set<Role> roles) 
+	{
 		this.roles = roles;
 	}
-	/*public List<Recipe> getFavoriteRecipies() {
+	
+	// To be applied later on in the process:
+	/*public List<Recipe> getFavoriteRecipies() 
+	 * {
 		return favoriteRecipies;
 	}
 
-	public void setFavoriteRecipies(List<Recipe> favoriteRecipies) {
+	public void setFavoriteRecipies(List<Recipe> favoriteRecipies) 
+	{
 		this.favoriteRecipies = favoriteRecipies;
 	}*/
-
 }

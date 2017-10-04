@@ -3,7 +3,6 @@
  * @author Eiður Örn Gunnarsson eog26@hi.is
  * @author Viktor Alex Brynjarsson vab18@hi.is
  */
-
 package is.hi.hbv.do_or_diet.controller;
 
 import java.text.DateFormat;
@@ -67,9 +66,12 @@ public class MealPlanController {
 	{	
 		
 		ArrayList<Date> dates = new ArrayList<Date>();
-		try {
+		try 
+		{
 			dates = generateDatesBetween(convertToDate(fromDate),convertToDate(toDate));
-		} catch (ParseException e) {
+		} 
+		catch (ParseException e) 
+		{
 			e.printStackTrace();
 		}
 		

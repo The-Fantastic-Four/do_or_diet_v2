@@ -18,7 +18,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="meal_plan_item")
-public class MealPlanItem {
+public class MealPlanItem 
+{
 	
 	/**
 	 * Unique identifier for the meal plan item
@@ -57,37 +58,45 @@ public class MealPlanItem {
 	 * @param date the date which this meal is planned
 	 * @param mealType the type of meal (breakfast, lunch, or dinner)
 	 */
-	public MealPlanItem(Recipe recipe, Date date, MealType mealType) {
+	public MealPlanItem(Recipe recipe, Date date, MealType mealType) 
+	{
 		this.recipe = recipe;
 		this.date = date;
 		this.mealType = mealType;
 	}
 
-	public long getId() {
+	public long getId() 
+	{
 		return id;
 	}
 
-	public Recipe getRecipe() {
+	public Recipe getRecipe() 
+	{
 		return recipe;
 	}
 
-	public void setRecipe(Recipe recipe) {
+	public void setRecipe(Recipe recipe) 
+	{
 		this.recipe = recipe;
 	}
 
-	public Date getDate() {
+	public Date getDate() 
+	{
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(Date date) 
+	{
 		this.date = date;
 	}
 
-	public MealType getMealType() {
+	public MealType getMealType() 
+	{
 		return mealType;
 	}
 
-	public void setMealType(MealType mealType) {
+	public void setMealType(MealType mealType) 
+	{
 		this.mealType = mealType;
 	}
 }
