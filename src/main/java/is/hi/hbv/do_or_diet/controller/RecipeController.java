@@ -46,28 +46,38 @@ public class RecipeController
 		getRecipes(model);
 		return "recipe/index";
 	}
+	
+	// Redirects user to recipe Add page
 	@RequestMapping(value = "/recipeAdd")
 	public String recipeAdd() {		
 		return "recipe/recipeAdd";
 	}
-	
+	// receives recipe from UI and saves into repository and then into database. 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String recipeRoute(@RequestBody Recipe recipe, Model model) 
 	{	
-		
 		recipes.save(recipe);
-		
 		return "recipe/index";
 	}
 	
+	// receives ingredient name from UI and is saved with Id into database 
 	@RequestMapping(value = "/ingredientType", method = RequestMethod.POST)
-	public long addIngredientType(@RequestBody IngredientQuantity ingredientQuantity, IngredientType ingredientType, Model model) 
+	public long addIngredientType(@RequestBody IngredientType ingredientType, Model model) 
 	{	
-		IngredientQuantity t = ingredientQuantities.save(ingredientQuantity);
-		ingredientTypes.save(ingredientType);
+		IngredientType t = ingredientTypes.save(ingredientType);
+		return t.getId();
+	}
+	
+	// receives ingredientQuantity from UI and sends into database
+	@RequestMapping(value = "/ingredientQuantity", method = RequestMethod.POST)
+	public long addIngredientQuantity(@RequestBody IngredientQuantity ingredientQuantity, Model model) 
+	{	
+
+		IngredientQuantity t = ingredientQuantities.save(ingredientQuantity);		
 		return t.getId();
 	}
 		
+	// gets recipes from recipeRepository and adds to model 
 	public void getRecipes(Model model)
 	{
 		List<Recipe> recipeList = recipes.findAll();

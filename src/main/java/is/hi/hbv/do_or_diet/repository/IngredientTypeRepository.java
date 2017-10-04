@@ -13,8 +13,6 @@ import is.hi.hbv.do_or_diet.model.IngredientType;
 
 public interface IngredientTypeRepository extends JpaRepository<IngredientType, Long>  
 {
-
-
 	    List<IngredientType> findAll();
 	    
 	    IngredientType findOne(Long id);

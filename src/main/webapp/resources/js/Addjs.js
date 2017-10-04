@@ -33,11 +33,17 @@
          		}	
      			var ingredi = new ingredientQuantity(document.getElementById('name'+i).value,document.getElementById('quantity'+i).value, document.getElementById('measurement'+i).value);
       			var xmlhttp = new XMLHttpRequest();    
-     			var ingredientType= {name}
+     			var ingredientType = {name : "th"};
      			ingredientType.name = document.getElementById('name'+i).value;
      			xmlhttp.open("POST", "/recipe/ingredientType");
      			xmlhttp.setRequestHeader("Content-Type", "application/json");
-     		   	xmlhttp.send(JSON.stringify(ingredi, ingredientType));
+     		   	xmlhttp.send(JSON.stringify(ingredientType));
+     		   	
+     		   	xmlhttp.open("POST", "/recipe/ingredientQuantity");
+    			xmlhttp.setRequestHeader("Content-Type", "application/json");
+    		   	xmlhttp.send(JSON.stringify(ingredi));
+     		   	
+     		   	
       		}
      	}
      	
