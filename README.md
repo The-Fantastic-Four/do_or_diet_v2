@@ -1,5 +1,5 @@
 Do or Diet
-----
+=====
 
 Create and maintain meal plans.
 
