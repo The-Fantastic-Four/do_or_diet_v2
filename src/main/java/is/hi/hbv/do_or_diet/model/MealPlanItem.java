@@ -40,7 +40,7 @@ public class MealPlanItem {
 	 */
 	private Date date;
 	
-	/**
+	/**	
 	 * The type of meal (breakfast, lunch, or dinner)
 	 */
 	@Enumerated(EnumType.STRING)
