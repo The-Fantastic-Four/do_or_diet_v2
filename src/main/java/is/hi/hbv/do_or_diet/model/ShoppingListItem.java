@@ -4,7 +4,8 @@
  */
 package is.hi.hbv.do_or_diet.model;
 
-public class ShoppingListItem {
+public class ShoppingListItem 
+{
 	
 	/**
 	 * Unique identifier for this item on the shopping list
@@ -39,7 +40,8 @@ public class ShoppingListItem {
 	 * @param measurement the measurement used
 	 * @param checked whether this item is checked or not
 	 */
-	public ShoppingListItem(long id, String itemName, int amount, String measurement, boolean checked) {
+	public ShoppingListItem(long id, String itemName, int amount, String measurement, boolean checked) 
+	{
 		this.id = id;
 		this.itemName = itemName;
 		this.amount = amount;
@@ -47,43 +49,53 @@ public class ShoppingListItem {
 		this.checked = checked;
 	}
 
-	public long getId() {
+	public long getId() 
+	{
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(long id) 
+	{
 		this.id = id;
 	}
 
-	public String getItemName() {
+	public String getItemName() 
+	{
 		return itemName;
 	}
 
-	public void setItemName(String itemName) {
+	public void setItemName(String itemName) 
+	{
 		this.itemName = itemName;
 	}
 
-	public int getAmount() {
+	public int getAmount() 
+	{
 		return amount;
 	}
 
-	public void setAmount(int amount) {
+	public void setAmount(int amount) 
+	{
 		this.amount = amount;
 	}
 
-	public String getMeasurement() {
+	public String getMeasurement() 
+	{
 		return measurement;
 	}
 
-	public void setMeasurement(String measurement) {
+	public void setMeasurement(String measurement) 
+	{
 		this.measurement = measurement;
 	}
 
-	public boolean isChecked() {
+	public boolean isChecked() 
+	{
 		return checked;
 	}
 
-	public void setChecked(boolean checked) {
+	public void setChecked(boolean checked) 
+	{
 		this.checked = checked;
 	}
 }

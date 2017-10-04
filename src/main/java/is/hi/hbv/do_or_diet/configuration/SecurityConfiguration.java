@@ -1,3 +1,8 @@
+/**
+ * SecurityConfiguration controls user permits and pages
+ * @author Ragnheiður Ásta Karlsdóttir rak4@hi.is
+ * @author Viktor Alex Brynjarsson vab18@hi.is
+ */
 package is.hi.hbv.do_or_diet.configuration;
 
 import javax.sql.DataSource;
@@ -31,7 +36,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth)
-			throws Exception {
+			throws Exception 
+	{
 		auth.
 			jdbcAuthentication()
 				.usersByUsernameQuery(usersQuery)
@@ -41,8 +47,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 
 	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		
+	protected void configure(HttpSecurity http) throws Exception 
+	{
 		http.
 			authorizeRequests()
 				.antMatchers("/").permitAll()
@@ -62,7 +68,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Override
-	public void configure(WebSecurity web) throws Exception {
+	public void configure(WebSecurity web) throws Exception 
+	{
 	    web
 	       .ignoring()
 	       .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");

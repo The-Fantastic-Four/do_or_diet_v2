@@ -1,24 +1,22 @@
 /**
  * UserController enables the user to interact with their user accounts
  * @author Eiður Örn Gunnarsson eog26@hi.is
+ * @author Ragnheiður Ásta Karlsdóttir rak4@hi.is
+ * @author Viktor Alex Brynjarsson vab18@hi.is
  */
 package is.hi.hbv.do_or_diet.controller;
-
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import is.hi.hbv.do_or_diet.model.User;
-import is.hi.hbv.do_or_diet.service.UserService;
 import is.hi.hbv.do_or_diet.service.UserServiceImplementation;
 
 @Controller
@@ -34,7 +32,6 @@ public class UserController
 		modelAndView.setViewName("login");
 		return modelAndView;
 	}
-	
 	
 	@RequestMapping(value="/registration", method = RequestMethod.GET)
 	public ModelAndView registration()

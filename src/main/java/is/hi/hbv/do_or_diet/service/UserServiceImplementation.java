@@ -1,5 +1,7 @@
 /**
- * 
+ * UserServiceImplementation enables user management
+ * @author Ragnheiður Ásta Karlsdóttir rak4@hi.is
+ * @author Viktor Alex Brynjarsson vab18@hi.is
  */
 package is.hi.hbv.do_or_diet.service;
 
@@ -15,10 +17,6 @@ import is.hi.hbv.do_or_diet.model.User;
 import is.hi.hbv.do_or_diet.repository.RoleRepository;
 import is.hi.hbv.do_or_diet.repository.UserRepository;
 
-/**
- * @author heida
- *
- */
 @Service("userService")
 public class UserServiceImplementation implements UserService 
 {

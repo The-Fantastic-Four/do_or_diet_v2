@@ -20,7 +20,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="meal_plan")
-public class MealPlan {
+public class MealPlan 
+{
 	
 	/**
 	 * Unique identifier for the meal plan
@@ -66,51 +67,61 @@ public class MealPlan {
 	 * @param items list of items on the meal plan
 	 * @param dates list of dates on which the meal plan
 	 */
-	public MealPlan(long id, String name, List<MealPlanItem> items, List<Date> dates) {
+	public MealPlan(long id, String name, List<MealPlanItem> items, List<Date> dates) 
+	{
 		this.id = id;
 		this.name = name;
 		this.items = items;
 		this.dates = dates;
 	}
 
-	public long getId() {
+	public long getId() 
+	{
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(long id) 
+	{
 		this.id = id;
 	}
 
-	public List<MealPlanItem> getItems() {
+	public List<MealPlanItem> getItems() 
+	{
 		return items;
 	}
 
-	public void setItems(List<MealPlanItem> items) {
+	public void setItems(List<MealPlanItem> items) 
+	{
 		this.items = items;
 	}
 
-	public List<Date> getDates() {
+	public List<Date> getDates() 
+	{
 		return dates;
 	}
 
-	public void setDates(List<Date> dates) {
+	public void setDates(List<Date> dates) 
+	{
 		this.dates = dates;
 	}
 
-	public User getCreatedBy() {
+	public User getCreatedBy() 
+	{
 		return createdBy;
 	}
 
-	public void setCreatedBy(User createdBy) {
+	public void setCreatedBy(User createdBy) 
+	{
 		this.createdBy = createdBy;
 	}
 
-	public String getName() {
+	public String getName() 
+	{
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name) 
+	{
 		this.name = name;
 	}
-
 }

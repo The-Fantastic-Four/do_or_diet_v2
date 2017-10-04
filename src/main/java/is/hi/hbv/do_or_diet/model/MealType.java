@@ -4,7 +4,8 @@
  */
 package is.hi.hbv.do_or_diet.model;
 
-public enum MealType {
+public enum MealType 
+{
 	BREAKFAST("Morgunmatur", "breakfast"), 
 	LUNCH("Hádegismatur", "lunch"), 
 	DINNER("Kvöldmatur", "dinner");

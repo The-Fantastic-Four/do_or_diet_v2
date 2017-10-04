@@ -1,3 +1,8 @@
+/**
+ * IngredientType describes an ingredient
+ * @author Eiður Örn Gunnarsson eog26@hi.is
+ * @author Viktor Alex Brynjarsson vab18@hi.is
+ */
 package is.hi.hbv.do_or_diet.model;
 
 import javax.persistence.Entity;
@@ -9,7 +14,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="ingredient_type")
-public class IngredientType {
+public class IngredientType 
+{
 	@Id
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy="increment")
@@ -17,11 +23,13 @@ public class IngredientType {
 	
 	private String name;
 	
-	public IngredientType() {
+	public IngredientType() 
+	{
 		
 	}
 	
-	public IngredientType(long id, String name) {
+	public IngredientType(long id, String name) 
+	{
 		this.id = id;
 		this.name = name;
 	}
@@ -31,19 +39,23 @@ public class IngredientType {
 		return "[IngredientType name=" + this.name + "]";
 	}
 
-	public long getId() {
+	public long getId() 
+	{
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(long id) 
+	{
 		this.id = id;
 	}
 
-	public String getName() {
+	public String getName() 
+	{
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name) 
+	{
 		this.name = name;
 	}
 	
