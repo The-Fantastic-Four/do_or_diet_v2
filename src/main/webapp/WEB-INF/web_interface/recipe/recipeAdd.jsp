@@ -1,5 +1,5 @@
 <!--Síða til að bæta við uppskriftum
-	Fannar Þeyr Guðmundsson fthg2@hi.is -->
+	Fannar Þeyr Guðmundsson fthg2@hi.is  -->
 
 <%@page import="is.hi.hbv.do_or_diet.model.Recipe"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -21,9 +21,10 @@
   	<!-- Hérna er hnappur sem nýtir javascript til að leyfa að skrá fleiri hráefni fyrir nýja uppskrift -->
   	<div id="recipe">			
 		<title>items="${recipeList}" var="recipe"></title> 	
-	 		<form method="POST" action="http://localhost:8080/recipe" id="recipeForm" >
+	 		<form method="POST" action="" id="recipeForm" >
 		 		Nafn á uppskrift: <input type="text" name="name" id="recipeName">
 		 		<br>
+		 		skammtastærð fyrir: <input type="int" name="name" id="servings">
 		 		<br>
 	      		<textarea rows="15" cols="50" name="directions" id="directions"> Hvernig á að matreiða uppskriftina?</textarea>
 	      		<br>

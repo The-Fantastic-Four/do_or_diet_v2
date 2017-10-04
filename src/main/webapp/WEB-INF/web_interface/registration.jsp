@@ -9,49 +9,17 @@
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<form th:action="@{/}" method="get">
-		<button class="btn btn-md btn-warning btn-block" type="Submit">Go To Login Page</button>
-	</form>	
-	
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
-				<form autocomplete="off" action="#" th:action="/registration"
-					th:object="${user}" method="post" class="form-horizontal"
-					role="form">
-					<h2>Registration Form</h2>
-					<div class="form-group">
-						<div class="col-sm-9">
-						<input type="text" name="username" placeholder="Name"
-								class="form-control" /> 
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-sm-9">
-							<input type="text" name="email" placeholder="Email"
-								class="form-control" />
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-sm-9">
-							<input type="password" name="password"
-								placeholder="Password" class="form-control" />
-						</div>
-					</div>
+	<a href="/login">Login</a>
+	<form autocomplete="off" action="#" th:action="/registration"
+		th:object="${user}" method="post" role="form">
+		<h3>Registration</h3>
+		<input type="text" name="username" placeholder="Name" /><br>
+		<input type="text" name="email" placeholder="Email" /><br>
+		<input type="password" name="password" placeholder="Password"/><br>
 
-					<div class="form-group">
-						<div class="col-sm-9">
-							<button type="submit" class="btn btn-primary btn-block">Register User</button>
-						</div>
-					</div>
-					
-					<span th:utext="${successMessage}"></span>
-					
-					
-				</form>
-			</div>
-		</div>
-	</div>
+		<button type="submit">Register User</button>
+		<span th:utext="${successMessage}"></span>
+	</form>
 
 </body>
 </html>
