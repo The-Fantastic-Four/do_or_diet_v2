@@ -16,7 +16,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long>
 	
     List<Recipe> findAll();
     
-    // Suppressed as teacher had same warning and had not fixed
+    // Suppressed as teacher had same warning and had not fixed it
     @SuppressWarnings("unchecked")
 	Recipe save(Recipe recipe);
 	

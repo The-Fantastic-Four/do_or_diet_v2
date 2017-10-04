@@ -1,5 +1,7 @@
-<!--Síða til að bæta við uppskriftum
-	Fannar Þeyr Guðmundsson fthg2@hi.is  -->
+<!--
+	Síða til að bæta við uppskriftum
+	Fannar Þeyr Guðmundsson fthg2@hi.is  
+-->
 
 <%@page import="is.hi.hbv.do_or_diet.model.Recipe"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>

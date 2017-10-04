@@ -1,25 +1,24 @@
+<!--
+	Registration page for new users
+	@author Eiður Örn Gunnarsson eog26@hi.is
+	@author Ragnheiður Ásta Karlsdóttir rak4@hi.is
+-->
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Registration Form</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<title>Nýskráning</title>
 </head>
 <body>
-	<a href="/login">Login</a>
+	<a href="/login">Innskráning</a>
 	<form autocomplete="off" action="#" th:action="/registration"
 		th:object="${user}" method="post" role="form">
-		<h3>Registration</h3>
-		<input type="text" name="username" placeholder="Name" /><br>
+		<h3>Nýskráning</h3>
+		<input type="text" name="username" placeholder="Nafn" /><br>
 		<input type="text" name="email" placeholder="Email" /><br>
 		<input type="password" name="password" placeholder="Password"/><br>
 
-		<button type="submit">Register User</button>
-		<span th:utext="${successMessage}"></span>
+		<button type="submit">Skrá notanda</button>
 	</form>
-
 </body>
 </html>

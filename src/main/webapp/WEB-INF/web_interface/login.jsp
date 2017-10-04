@@ -1,20 +1,21 @@
+<!--
+	Log in page 
+	@author Eiður Örn Gunnarsson eog26@hi.is
+	@author Ragnheiður Ásta Karlsdóttir rak4@hi.is
+-->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>Spring Security Tutorial</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<title>Innskráning</title>
 </head>
 
 <body>
-	<a href="/registration">Registration</a>
+	<a href="/registration">Nýskráning</a>
 	<div>
 		<form th:action="@{/login}" method="POST" >
-			<h3>Login</h3>		 
+			<h3>Skrá inn</h3>		 
 			<input type="text" id="email" name="email" placeholder="Email"/><br> 
 			<input type="password" id="password" name="password" placeholder="Password"/><br> 
 			<button name="Submit" value="Login" type="Submit" th:text="Login">Login</button>
