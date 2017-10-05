@@ -1,32 +1,35 @@
 /**
  * ShoppingListItem describes a specific item on shopping list
+ * 
  * @author Eiður Örn Gunnarsson eog26@hi.is
  */
 package is.hi.hbv.do_or_diet.model;
 
-public class ShoppingListItem 
+public class ShoppingListItem
 {
-	
+
 	/**
 	 * Unique identifier for this item on the shopping list
 	 */
 	private long id;
-	
+
 	/**
 	 * The name of the item on the shopping list
 	 */
 	private String itemName;
-	
+
 	/**
-	 * The amount needed of this shopping list item (used in conjuction with measurement)
+	 * The amount needed of this shopping list item (used in conjuction with
+	 * measurement)
 	 */
 	private int amount;
-	
+
 	/**
-	 * The measurement used for this shopping list item (used in conjuction with amount)
+	 * The measurement used for this shopping list item (used in conjuction with
+	 * amount)
 	 */
 	private String measurement;
-	
+
 	/**
 	 * Whether this item has been checked
 	 */
@@ -34,13 +37,19 @@ public class ShoppingListItem
 
 	/**
 	 * Create a new shopping list item
-	 * @param id unique identifier for this item on the shopping list
-	 * @param itemName the name of the item
-	 * @param amount the amount needed
-	 * @param measurement the measurement used
-	 * @param checked whether this item is checked or not
+	 * 
+	 * @param id
+	 *            unique identifier for this item on the shopping list
+	 * @param itemName
+	 *            the name of the item
+	 * @param amount
+	 *            the amount needed
+	 * @param measurement
+	 *            the measurement used
+	 * @param checked
+	 *            whether this item is checked or not
 	 */
-	public ShoppingListItem(long id, String itemName, int amount, String measurement, boolean checked) 
+	public ShoppingListItem(long id, String itemName, int amount, String measurement, boolean checked)
 	{
 		this.id = id;
 		this.itemName = itemName;
@@ -49,52 +58,52 @@ public class ShoppingListItem
 		this.checked = checked;
 	}
 
-	public long getId() 
+	public long getId()
 	{
 		return id;
 	}
 
-	public void setId(long id) 
+	public void setId(long id)
 	{
 		this.id = id;
 	}
 
-	public String getItemName() 
+	public String getItemName()
 	{
 		return itemName;
 	}
 
-	public void setItemName(String itemName) 
+	public void setItemName(String itemName)
 	{
 		this.itemName = itemName;
 	}
 
-	public int getAmount() 
+	public int getAmount()
 	{
 		return amount;
 	}
 
-	public void setAmount(int amount) 
+	public void setAmount(int amount)
 	{
 		this.amount = amount;
 	}
 
-	public String getMeasurement() 
+	public String getMeasurement()
 	{
 		return measurement;
 	}
 
-	public void setMeasurement(String measurement) 
+	public void setMeasurement(String measurement)
 	{
 		this.measurement = measurement;
 	}
 
-	public boolean isChecked() 
+	public boolean isChecked()
 	{
 		return checked;
 	}
 
-	public void setChecked(boolean checked) 
+	public void setChecked(boolean checked)
 	{
 		this.checked = checked;
 	}

@@ -1,5 +1,6 @@
 /**
  * UserController enables the user to interact with their user accounts
+ * 
  * @author Eiður Örn Gunnarsson eog26@hi.is
  * @author Ragnheiður Ásta Karlsdóttir rak4@hi.is
  * @author Viktor Alex Brynjarsson vab18@hi.is
@@ -20,20 +21,20 @@ import is.hi.hbv.do_or_diet.model.User;
 import is.hi.hbv.do_or_diet.service.UserServiceImplementation;
 
 @Controller
-public class UserController 
+public class UserController
 {
 	@Autowired
 	private UserServiceImplementation userService;
 
-	@RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "/login" }, method = RequestMethod.GET)
 	public ModelAndView login()
 	{
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("login");
 		return modelAndView;
 	}
-	
-	@RequestMapping(value="/registration", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public ModelAndView registration()
 	{
 		ModelAndView modelAndView = new ModelAndView();
@@ -42,15 +43,15 @@ public class UserController
 		modelAndView.setViewName("registration");
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-	public ModelAndView createNewUser(@RequestParam String username, String password, String email, ModelMap model) 
+	public ModelAndView createNewUser(@RequestParam String username, String password, String email, ModelMap model)
 	{
 		User user = new User(username, password, email);
 		System.out.println("Username: " + user.getUsername());
 		System.out.println("Email: " + user.getEmail());
 		System.out.println("Password: " + user.getPassword());
-		
+
 		ModelAndView modelAndView = new ModelAndView();
 		User userExists = userService.findUserByEmail(user.getEmail());
 		if (userExists == null)
@@ -62,15 +63,15 @@ public class UserController
 		}
 		return modelAndView;
 	}
-	
-	@RequestMapping(value="/admin/home", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/admin/home", method = RequestMethod.GET)
 	public ModelAndView home()
 	{
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
 		modelAndView.addObject("userName", "Welcome " + user.getUsername() + " (" + user.getEmail() + ")");
-		modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
+		modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
 		modelAndView.setViewName("admin/home");
 		return modelAndView;
 	}

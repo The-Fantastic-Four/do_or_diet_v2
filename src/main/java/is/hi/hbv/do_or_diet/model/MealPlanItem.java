@@ -1,5 +1,7 @@
 /**
- * MealPlanItem describes the recipe, date, and type of meal for an item on a meal plan
+ * MealPlanItem describes the recipe, date, and type of meal for an item on a
+ * meal plan
+ * 
  * @author Eiður Örn Gunnarsson eog26@hi.is
  */
 package is.hi.hbv.do_or_diet.model;
@@ -17,107 +19,114 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="meal_plan_item")
-public class MealPlanItem 
+@Table(name = "meal_plan_item")
+public class MealPlanItem
 {
-	
+
 	/**
 	 * Unique identifier for the meal plan item
 	 */
 	@Id
-	@GeneratedValue(generator="increment")
-	@GenericGenerator(name="increment", strategy="increment")
+	@GeneratedValue(generator = "increment")
+	@GenericGenerator(name = "increment", strategy = "increment")
 	private long id;
-	
+
 	/**
 	 * The recipe chosen for this meal plan item
 	 */
 	@ManyToOne
-	@JoinColumn(name="recipe_id")
+	@JoinColumn(name = "recipe_id")
 	private Recipe recipe;
-	
+
 	/**
 	 * The date on which this meal is planned
 	 */
 	private Date date;
-	
-	/**	
+
+	/**
 	 * The type of meal (breakfast, lunch, or dinner)
 	 */
 	@Enumerated(EnumType.STRING)
 	private MealType mealType;
-	
+
 	/**
 	 * The meal plan that this item is on
 	 */
 	@ManyToOne
-	@JoinColumn(name="meal_plan_id")
+	@JoinColumn(name = "meal_plan_id")
 	private MealPlan mealPlan;
 
 	public MealPlanItem()
 	{
-		
+
 	}
-	
+
 	/**
 	 * Creates a new meal plan item
-	 * @param recipe the recipe for this meal
-	 * @param date the date which this meal is planned
-	 * @param mealType the type of meal (breakfast, lunch, or dinner)
+	 * 
+	 * @param recipe
+	 *            the recipe for this meal
+	 * @param date
+	 *            the date which this meal is planned
+	 * @param mealType
+	 *            the type of meal (breakfast, lunch, or dinner)
 	 */
-	public MealPlanItem(Recipe recipe, Date date, MealType mealType) 
+	public MealPlanItem(Recipe recipe, Date date, MealType mealType)
 	{
 		this.recipe = recipe;
 		this.date = date;
 		this.mealType = mealType;
 	}
 
-	public long getId() 
+	public long getId()
 	{
 		return id;
 	}
 
-	public Recipe getRecipe() 
+	public Recipe getRecipe()
 	{
 		return recipe;
 	}
 
-	public void setRecipe(Recipe recipe) 
+	public void setRecipe(Recipe recipe)
 	{
 		this.recipe = recipe;
 	}
 
-	public Date getDate() 
+	public Date getDate()
 	{
 		return date;
 	}
 
-	public void setDate(Date date) 
+	public void setDate(Date date)
 	{
 		this.date = date;
 	}
 
-	public MealType getMealType() 
+	public MealType getMealType()
 	{
 		return mealType;
 	}
 
-	public void setMealType(MealType mealType) 
+	public void setMealType(MealType mealType)
 	{
 		this.mealType = mealType;
 	}
-	
+
 	/**
 	 * @return the mealPlan
 	 */
-	public MealPlan getMealPlan() {
+	public MealPlan getMealPlan()
+	{
 		return mealPlan;
 	}
 
 	/**
-	 * @param mealPlan the mealPlan to set
+	 * @param mealPlan
+	 *            the mealPlan to set
 	 */
-	public void setMealPlan(MealPlan mealPlan) {
+	public void setMealPlan(MealPlan mealPlan)
+	{
 		this.mealPlan = mealPlan;
 	}
 }

@@ -1,5 +1,6 @@
 /**
  * Role describes the roles of user accounts
+ * 
  * @author Ragnheiður Ásta Karlsdóttir rak4@hi.is
  * @author Viktor Alex Brynjarsson vab18@hi.is
  */
@@ -12,33 +13,34 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="role")
-public class Role 
+@Table(name = "role")
+public class Role
 {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public int id;
-	
+
 	private String role;
-	
+
 	public Role()
 	{
-		
+
 	}
 
 	/**
 	 * @return the id
 	 */
-	public int getId() 
+	public int getId()
 	{
 		return id;
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
-	public void setId(int id) 
+	public void setId(int id)
 	{
 		this.id = id;
 	}
@@ -46,15 +48,16 @@ public class Role
 	/**
 	 * @return the role
 	 */
-	public String getRole() 
+	public String getRole()
 	{
 		return role;
 	}
 
 	/**
-	 * @param role the role to set
+	 * @param role
+	 *            the role to set
 	 */
-	public void setRole(String role) 
+	public void setRole(String role)
 	{
 		this.role = role;
 	}

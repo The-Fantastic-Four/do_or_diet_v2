@@ -1,5 +1,6 @@
 /**
  * Recipe describes a recipe
+ * 
  * @author Eiður Örn Gunnarsson eog26@hi.is
  */
 package is.hi.hbv.do_or_diet.model;
@@ -16,61 +17,68 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="recipe")
-public class Recipe 
+@Table(name = "recipe")
+public class Recipe
 {
-	
+
 	/**
 	 * Unique identifier for the recipe
 	 */
 	@Id
-	@GeneratedValue(generator="increment")
-	@GenericGenerator(name="increment", strategy="increment")
+	@GeneratedValue(generator = "increment")
+	@GenericGenerator(name = "increment", strategy = "increment")
 	private long id;
-	
+
 	/**
 	 * The name of the recipe
 	 */
 	private String name;
-	
+
 	/**
 	 * The categories this recipe belongs to
 	 */
 	@ElementCollection
 	private List<String> categories;
-	
+
 	/**
 	 * Cooking instructions for this recipe
 	 */
 	private String directions;
-	
+
 	/**
 	 * How many servings this recipe makes
 	 */
 	private int servings;
-	
+
 	/**
 	 * List of ingredients needed to cook this recipe
 	 */
-	@OneToMany(mappedBy="recipe")
+	@OneToMany(mappedBy = "recipe")
 	private List<IngredientQuantity> ingredients;
-	
-	public Recipe() 
+
+	public Recipe()
 	{
 
 	}
-	
+
 	/**
 	 * Creates a new recipe
-	 * @param id unique identifier for this recipe
-	 * @param name the name of this recipe
-	 * @param categories the categories this recipe belongs to
-	 * @param directions the instructions for this recipe
-	 * @param servings how many servings this recipe makes
-	 * @param ingredients list of ingredients needed to cook this recipe
+	 * 
+	 * @param id
+	 *            unique identifier for this recipe
+	 * @param name
+	 *            the name of this recipe
+	 * @param categories
+	 *            the categories this recipe belongs to
+	 * @param directions
+	 *            the instructions for this recipe
+	 * @param servings
+	 *            how many servings this recipe makes
+	 * @param ingredients
+	 *            list of ingredients needed to cook this recipe
 	 */
 	public Recipe(long id, String name, List<String> categories, String directions, int servings,
-			List<IngredientQuantity> ingredients) 
+			List<IngredientQuantity> ingredients)
 	{
 		this.id = id;
 		this.name = name;
@@ -80,61 +88,62 @@ public class Recipe
 		this.ingredients = ingredients;
 	}
 
-	public long getId() {
+	public long getId()
+	{
 		return id;
 	}
 
-	public void setId(long id) 
+	public void setId(long id)
 	{
 		this.id = id;
 	}
 
-	public String getName() 
+	public String getName()
 	{
 		return name;
 	}
 
-	public void setName(String name) 
+	public void setName(String name)
 	{
 		this.name = name;
 	}
 
-	public List<String> getCategories() 
+	public List<String> getCategories()
 	{
 		return categories;
 	}
 
-	public void setCategories(List<String> categories) 
+	public void setCategories(List<String> categories)
 	{
 		this.categories = categories;
 	}
 
-	public String getDirections() 
+	public String getDirections()
 	{
 		return directions;
 	}
 
-	public void setDirections(String directions) 
+	public void setDirections(String directions)
 	{
 		this.directions = directions;
 	}
 
-	public int getServings() 
+	public int getServings()
 	{
 		return servings;
 	}
 
-	public void setServings(int servings) 
+	public void setServings(int servings)
 	{
 		this.servings = servings;
 	}
 
-	public List<IngredientQuantity> getIngredients() 
+	public List<IngredientQuantity> getIngredients()
 	{
 		return ingredients;
 	}
 
-	public void setIngredients(List<IngredientQuantity> ingredients) 
+	public void setIngredients(List<IngredientQuantity> ingredients)
 	{
 		this.ingredients = ingredients;
 	}
