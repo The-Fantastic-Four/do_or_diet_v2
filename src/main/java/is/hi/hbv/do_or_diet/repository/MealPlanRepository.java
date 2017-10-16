@@ -20,5 +20,5 @@ public interface MealPlanRepository extends JpaRepository<MealPlan, Long>
 
 	// Suppressed as teacher had same warning and had not fixed it
 	@SuppressWarnings("unchecked")
-	MealPlan save(MealPlan recipe);
+	MealPlan save(MealPlan m);
 }

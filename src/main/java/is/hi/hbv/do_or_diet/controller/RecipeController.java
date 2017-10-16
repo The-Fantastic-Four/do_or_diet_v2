@@ -22,6 +22,7 @@ import is.hi.hbv.do_or_diet.model.IngredientType;
 import is.hi.hbv.do_or_diet.model.Recipe;
 import is.hi.hbv.do_or_diet.repository.IngredientTypeRepository;
 import is.hi.hbv.do_or_diet.repository.RecipeRepository;
+import is.hi.hbv.do_or_diet.service.RecipeService;
 import is.hi.hbv.do_or_diet.repository.IngredientQuantityRepository;
 
 @Controller
@@ -30,7 +31,7 @@ public class RecipeController
 {
 	// Instance of the recipe repository, used to get and create recipes
 	@Autowired
-	RecipeRepository recipes;
+	RecipeService recipeService;
 
 	@Autowired
 	IngredientTypeRepository ingredientTypes;
@@ -57,7 +58,7 @@ public class RecipeController
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String recipeRoute(@RequestBody Recipe recipe, Model model)
 	{
-		recipes.save(recipe);
+		recipeService.addRecipe(recipe);
 		return "recipe/index";
 	}
 
@@ -81,7 +82,7 @@ public class RecipeController
 	// gets recipes from recipeRepository and adds to model
 	public void getRecipes(Model model)
 	{
-		List<Recipe> recipeList = recipes.findAll();
+		List<Recipe> recipeList = recipeService.allRecipes();
 		model.addAttribute("recipeList", recipeList);
 	}
 }

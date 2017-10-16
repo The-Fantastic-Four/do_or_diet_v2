@@ -18,5 +18,6 @@ public interface IngredientTypeRepository extends JpaRepository<IngredientType, 
 
 	IngredientType findOne(Long id);
 
+	@SuppressWarnings("unchecked")
 	IngredientType save(IngredientType ingredient);
 }

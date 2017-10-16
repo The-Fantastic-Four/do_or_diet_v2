@@ -27,11 +27,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import is.hi.hbv.do_or_diet.model.MealPlan;
 import is.hi.hbv.do_or_diet.model.MealPlanItem;
+import is.hi.hbv.do_or_diet.model.MealPlanItemWrapper;
 import is.hi.hbv.do_or_diet.model.MealType;
 import is.hi.hbv.do_or_diet.model.Recipe;
 import is.hi.hbv.do_or_diet.repository.MealPlanItemRepository;
 import is.hi.hbv.do_or_diet.repository.MealPlanRepository;
 import is.hi.hbv.do_or_diet.repository.RecipeRepository;
+import is.hi.hbv.do_or_diet.service.MealPlanItemService;
+import is.hi.hbv.do_or_diet.service.MealPlanService;
+import is.hi.hbv.do_or_diet.service.RecipeService;
 
 @Controller
 @RequestMapping("/mealplan")
@@ -40,14 +44,14 @@ public class MealPlanController
 
 	// Instance of the meal plan repository, used to get and create meal plans
 	@Autowired
-	MealPlanRepository mPlanRep;
+	MealPlanService mealPlanService;
 
 	// Instance of the recipe repository, used to get and create recipes
 	@Autowired
-	RecipeRepository recipeRep;
+	RecipeService recipeService;
 
 	@Autowired
-	MealPlanItemRepository mealPlanItemRepository;
+	MealPlanItemService mealPlanItemService;
 
 	/**
 	 * Index page for the meal plans, shows a list of meal plans
@@ -91,9 +95,9 @@ public class MealPlanController
 			e.printStackTrace();
 		}
 
-		MealPlan m = new MealPlan(0, mName, new ArrayList<MealPlanItem>(), dates);
-		mPlanRep.save(m);
-		List<MealPlan> mealPlanList = mPlanRep.findAll();
+		MealPlan m = new MealPlan(mName, new ArrayList<MealPlanItem>(), dates);
+		mealPlanService.addMealPlan(m);
+		List<MealPlan> mealPlanList = mealPlanService.allMealPlans();
 		model.addAttribute("mealPlanList", mealPlanList);
 
 		return "mealplan/index";
@@ -111,8 +115,8 @@ public class MealPlanController
 	@RequestMapping("/{mealPlanId}")
 	public String showMealPlan(@PathVariable(value = "mealPlanId") long mealPlanId, ModelMap model)
 	{
-		model.addAttribute("mealPlan", mPlanRep.findOne(mealPlanId));
-		model.addAttribute("recipeList", recipeRep.findAll());
+		model.addAttribute("mealPlan", mealPlanService.findMealPlan(mealPlanId));
+		model.addAttribute("recipeList", recipeService.allRecipes());
 		return "mealplan/show";
 	}
 
@@ -134,29 +138,11 @@ public class MealPlanController
 			@RequestParam(value = "recipeId", required = true) long recipeId,
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateForRecipe, ModelMap model)
 	{
-		MealPlan mealPlan = mPlanRep.findOne(mealPlanId);
-		Recipe newRecipe = recipeRep.findOne(recipeId);
-
-		boolean mealExists = false;
-		for (MealPlanItem mealItem : mealPlan.getItems())
-		{
-			if (mealItem.getDate() == dateForRecipe)
-			{
-				mealItem.setRecipe(newRecipe);
-				mealPlanItemRepository.save(mealItem);
-				mealExists = true;
-			}
-		}
-
-		if (!mealExists)
-		{
-			MealPlanItem newItem = new MealPlanItem();
-			newItem.setDate(dateForRecipe);
-			newItem.setRecipe(newRecipe);
-			newItem.setMealType(MealType.DINNER);
-			newItem.setMealPlan(mealPlan);
-			mealPlanItemRepository.save(newItem);
-		}
+		MealPlan mealPlan = mealPlanService.findMealPlan(mealPlanId);
+		Recipe newRecipe = recipeService.findRecipe(recipeId);
+		
+		MealPlanItemWrapper wrapper = new MealPlanItemWrapper(mealPlan, newRecipe, dateForRecipe);
+		mealPlanItemService.addMealPlanItem(wrapper);
 
 		return new ModelAndView("redirect:/mealplan/" + mealPlanId);
 	}
@@ -169,7 +155,7 @@ public class MealPlanController
 	 */
 	private void addMealPlanListToModel(Model model)
 	{
-		List<MealPlan> mealPlanList = mPlanRep.findAll();
+		List<MealPlan> mealPlanList = mealPlanService.allMealPlans();
 		model.addAttribute("mealPlanList", mealPlanList);
 	}
 

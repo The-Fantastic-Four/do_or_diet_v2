@@ -64,8 +64,6 @@ public class MealPlan
 	/**
 	 * Creates a new meal plan
 	 * 
-	 * @param id
-	 *            unique identifier for the meal plan
 	 * @param name
 	 *            name of the meal plan
 	 * @param items
@@ -73,9 +71,8 @@ public class MealPlan
 	 * @param dates
 	 *            list of dates on which the meal plan
 	 */
-	public MealPlan(long id, String name, List<MealPlanItem> items, List<Date> dates)
+	public MealPlan(String name, List<MealPlanItem> items, List<Date> dates)
 	{
-		this.id = id;
 		this.name = name;
 		this.items = items;
 		this.dates = dates;
