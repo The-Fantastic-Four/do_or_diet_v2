@@ -1,6 +1,7 @@
 <!--
 	Shows a list of meal plans and allows the user to add a new meal plan 
 	@author Eiður Örn Gunnarsson eog26@hi.is
+	@author Viktor Alex Brynjarsson vab18@hi.is
 -->
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -41,6 +42,7 @@
 	  <div class="container">
 	  	<div class="columns">
 	  	  <div class="column is-two-thirds">
+			<h3 class="title is-3">Mín matarplön</h3>
 	  	  	<table class="table table is-fullwidth is-striped is-hoverable">
 	  	  	  <thead>
 	  	  	  	<tr>
