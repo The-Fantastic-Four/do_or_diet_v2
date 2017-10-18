@@ -127,4 +127,14 @@ public class MealPlan
 	{
 		this.name = name;
 	}
+	
+	public Date getDateFrom()
+	{
+		return this.dates.get(0);
+	}
+	
+	public Date getDateTo()
+	{
+		return this.dates.get(this.dates.size() - 1);
+	}
 }

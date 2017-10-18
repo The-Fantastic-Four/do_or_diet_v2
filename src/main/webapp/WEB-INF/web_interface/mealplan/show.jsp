@@ -12,6 +12,7 @@
 	<head>
 		<meta charset="utf-8">	
 	    <title>Matarplön - Breytingar</title>
+	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.min.css" type="text/css">
 	</head>
 	
 	<body>
