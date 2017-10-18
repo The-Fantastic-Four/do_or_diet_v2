@@ -42,7 +42,7 @@
 	  <div class="container">
 	  	<div class="columns">
 	  	  <div class="column is-two-thirds">
-			<h3 class="title is-3">Mín matarplön</h3>
+			<h3 class="title is-3">Matarplön</h3>
 	  	  	<table class="table table is-fullwidth is-striped is-hoverable">
 	  	  	  <thead>
 	  	  	  	<tr>
