@@ -31,9 +31,15 @@
 	  </div>
 	  <nav class="navbar" role="navigation" aria-label="main navigation">
 		<div class="container">
-	      <div class="navbar-brand">
-		    <a class="navbar-item" href="/mealplan">Matarplön</a>
-		    <a class="navbar-item" href="/recipe">Uppskriftir</a>
+	      <div class="navbar-menu">
+	        <div class="navbar-start">
+		      <a class="navbar-item" href="/mealplan">Matarplön</a>
+		      <a class="navbar-item" href="/recipe">Uppskriftir</a>
+		    </div>
+		    <div class="navbar-end">
+		      <a class="navbar-item" href="/login">Innskráning</a>
+		      <a class="navbar-item" href="/registration">Nýskráning</a>
+		    </div>
 		  </div>
 		</div>
 	  </nav>
