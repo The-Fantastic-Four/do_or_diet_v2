@@ -12,44 +12,63 @@
   
 	<head>
 		<meta charset="utf-8">	
-	    <title>New recipes</title>
+	    <title>Nýjar uppskriftir</title>
 	    <spring:url value="/resources/js/Addjs.js" var="mainJs" />
  		<script src="${mainJs}"></script>
+ 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.min.css" type="text/css">
+	    <link rel="stylesheet" href="/resources/css/styles.css" type="text/css" />
 	</head>
 	
 	<body>
-		<h1>Nýjar uppskriftir</h1>
+		<section class="hero is-medium">
+	  <div class="hero-body">
+	    <div class="container">
+	      <h1 class="title is-1">Nýjar uppskriftir</h1>
+	      <h2 class="subtitle">Hvað sem þú getur látið þér detta í hug</h2>
+   		</div>
+  	  </div>
+	  <nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="container">
+	      <div class="navbar-brand">
+		    <a class="navbar-item" href="/mealplan">Matarplön</a>
+		    <a class="navbar-item" href="/recipe">Uppskriftir</a>
+		  </div>
+		</div>
+	  </nav>
+	</section>
   	
   	<!-- Hérna er hnappur sem nýtir javascript til að leyfa að skrá fleiri hráefni fyrir nýja uppskrift -->
-  	<div id="recipe">			
-		<title>items="${recipeList}" var="recipe"></title> 	
-	 		<form method="POST" action="" id="recipeForm" >
-		 		Nafn á uppskrift: <input type="text" name="name" id="recipeName">
-		 		<br>
-		 		skammtastærð fyrir: <input type="int" name="name" id="servings">
-		 		<br>
-	      		<textarea rows="15" cols="50" name="directions" id="directions"> Hvernig á að matreiða uppskriftina?</textarea>
-	      		<br>
-	      		<input type="button" value="Bæta við hráefni" onClick="addInput('ingredientDiv')" />
-	      		<input type="button" value="í lagi" onClick="saveRecipe()" /> 
-      	      
-    		</form>
-    		
-    		<div id ="ingredientDiv">
-    		
-    		</div>
-    		
- 	 </div>
- 	 
- 	 
- 	 <!-- div>
- 	 	<%
- 	 		Recipe recipe = new Recipe();
- 	 		recipe.setName("kartoflur");
- 	 	%>
- 	 	
- 	 	<input type="text" value="<%= recipe.getName()%>"></input>
- 	 	
- 	 </div-->
+  	<section class="section">
+  		<div class="container">
+		  	<div id="recipe">
+		 		<form method="POST" action="" id="recipeForm" >
+		 			<div class="field">
+		 					<label class="label">Nafn á uppskrift:</label>
+		 					<div class="control">
+		  						<input class="input" type="text" id="recipeName" placeholder="Lasagna">
+		 					</div>
+					</div>
+					<div class="field">
+		 					<label class="label">Skammtastærð:</label>
+		 					<div class="control">
+		  						<input class="input" type="text" id="servings" placeholder="Gefur til kynna fjölda skammta">
+		 					</div>
+					</div>
+					<div class="field">
+		 					<label class="label">Hvernig á að matreiða uppskriftina?</label>
+		 					<div class="control">
+		   					<textarea class="textarea" id="directions" placeholder="Vinsamlega skrifið leiðbeiningar hér"></textarea>
+		 					</div>
+					</div>
+					<div class="field is-grouped">
+		      			<p class="control"><input type="button" class="button" value="Bæta við hráefni" onClick="addInput('ingredientDiv')" /></p>
+		      			<p class="control"><input type="button" class="button is-primary" value="Vista" onClick="saveRecipe()" /></p>
+		      		</div>
+		   		</form>
+		   		<div id ="ingredientDiv">
+		   		</div>
+		 	 </div>
+ 	 	</div>
+ 	 </section>
 	</body>
 </html>
