@@ -38,7 +38,7 @@
 	      <h3 class="title is-3">Allar uppskriftir</h3>
 	        <ul>
 	          <c:forEach items="${recipeList}" var="recipe">
-		        <li><c:out value="${recipe.name}"/></li>
+		        <li><a href="/recipe/${recipe.id}"><c:out value="${recipe.name}" /></a></li>
 		      </c:forEach>
 	        </ul>
 	      <a class="button is-primary" href="/recipe/recipeAdd">Bæta við uppskrift</a>
