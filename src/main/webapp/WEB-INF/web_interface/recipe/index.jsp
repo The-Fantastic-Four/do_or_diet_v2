@@ -34,8 +34,8 @@
 	</section>
 	<section class="section">
   	  <div class="container">
+        <h3 class="title is-3">Allar uppskriftir</h3>
   	    <div class="content">
-	      <h3 class="title is-3">Allar uppskriftir</h3>
 	        <ul>
 	          <c:forEach items="${recipeList}" var="recipe">
 		        <li><c:out value="${recipe.name}"/></li>
