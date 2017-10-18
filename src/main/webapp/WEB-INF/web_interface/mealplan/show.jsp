@@ -59,7 +59,7 @@
 	  	  	  <tbody>
 				<c:forEach items="${mealPlan.items}" var="items">
 				  <tr>
-				    <td><c:out value="${items.recipe.getName()}" /></td>
+				    <td><a href="/recipe/${items.recipe.id}"><c:out value="${items.recipe.getName()}" /></a></td>
 				    <td><c:out value="${items.date}" /></td>
 				    <td><c:out value="${items.mealType.displayName}" /></td>
 				  </tr>
