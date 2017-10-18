@@ -93,5 +93,14 @@
 		</div>
 	  </div>
 	</section>
+	<footer class="footer">
+	  <div class="container">
+	    <div class="content has-text-centered">
+	      <p>
+	        <strong>Do or Diet &copy;</strong> by <a href="https://github.com/The-Fantastic-Four">Team 10</a>.
+	      </p>
+	    </div>
+	  </div>
+	</footer>
   </body>
 </html>
