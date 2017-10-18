@@ -28,15 +28,15 @@
 	      </h2>
 	    </div>
 	  </div>
+	  <nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="container">
+	      <div class="navbar-brand">
+		    <a class="navbar-item" href="/mealplan">Matarplön</a>
+		    <a class="navbar-item" href="/recipe">Uppskriftir</a>
+		  </div>
+		</div>
+	  </nav>
 	</section>
-	<nav class="navbar" role="navigation" aria-label="main navigation">
-	  <div class="container">
-      <div class="navbar-brand">
-	    <a class="navbar-item" href="/mealplan">Matarplön</a>
-	    <a class="navbar-item" href="/recipe">Uppskriftir</a>
-	  </div>
-	  </div>
-	</nav>
 	<section class="section">
 	  <div class="container">
 	  	<div class="columns">

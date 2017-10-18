@@ -29,15 +29,15 @@
 	      </h2>
 	    </div>
 	  </div>
+	  <nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="container">
+	      <div class="navbar-brand">
+		    <a class="navbar-item" href="/mealplan">Matarplön</a>
+		    <a class="navbar-item" href="/recipe">Uppskriftir</a>
+		  </div>
+		</div>
+	  </nav>
 	</section>
-	<nav class="navbar" role="navigation" aria-label="main navigation">
-	  <div class="container">
-      <div class="navbar-brand">
-	    <a class="navbar-item" href="/mealplan">Matarplön</a>
-	    <a class="navbar-item" href="/recipe">Uppskriftir</a>
-	  </div>
-	  </div>
-	</nav>
 	<section class="section">
 	  <div class="container">
 	  	<div class="columns">
@@ -85,7 +85,7 @@
 			  </div>
 			  <div class="field">
 			    <div class="control">
-			      <button class="button is-primary" type="submit">Vista og bæta máltíðum við</button>
+			      <button class="button is-primary" type="submit">Skrá matarplan</button>
 			    </div>
 			  </div>
 			</form>
