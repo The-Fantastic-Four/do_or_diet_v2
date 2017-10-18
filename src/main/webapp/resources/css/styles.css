@@ -1,3 +1,24 @@
-.navbar {
-	background-color: lightgray;
+.hero .navbar {
+	background-color: rgba(0, 0, 0, 0.3);
+}
+
+.navbar-item {
+	color: #fff;
+}
+
+.hero {
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0.2)),
+      url('/resources/img/pasta.jpeg') center center / cover fixed;
+}
+
+.title.is-1 {
+	color: #fff;
+	text-shadow: 1px 1px 2px #000;
+}
+
+.subtitle {
+	color: #fff;
+	text-shadow: 1px 1px 2px #000;
 }
