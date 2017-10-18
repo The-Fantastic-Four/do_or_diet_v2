@@ -15,35 +15,33 @@
 	    <link rel="stylesheet" href="/resources/css/styles.css" type="text/css" />
 	</head>
 	
-	<body>
-		<section class="hero is-medium is-primary is-bold">
-			<div class="hero-body">
-	    		<div class="container">
-	      			<h1 class="title is-1">
-	       				Uppskriftir
-	      			</h1>
-	      			<h2 class="subtitle">
-	        			Allt milli himins og jarðar
-	      			</h2>
-	    		</div>
-	  		</div>
-		</section>
-			<nav class="navbar" role="navigation" aria-label="main navigation">
-	  			<div class="container">
-      				<div class="navbar-brand">
-	    				<a class="navbar-item" href="/mealplan">Matarplön</a>
-	    				<a class="navbar-item" href="/recipe">Uppskriftir</a>
-	  				</div>
-	  			</div>
-			</nav>
-		  	<div class="container">
-			<h1 class="title"></h1>
-			<c:forEach items="${recipeList}" var="recipe">
-				<c:out value="${recipe.name}"/><br>
-			</c:forEach><br>
-		<form action="http://localhost:8080/recipe/recipeAdd">
-    	<button class="button" type="submit">Bæta við uppskrift</button>
-		</form>
+  <body>
+	<section class="hero is-medium">
+	  <div class="hero-body">
+	    <div class="container">
+	      <h1 class="title is-1">Uppskriftir</h1>
+	      <h2 class="subtitle">Allt milli himins og jarðar</h2>
+   		</div>
+  	  </div>
+	  <nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="container">
+	      <div class="navbar-brand">
+		    <a class="navbar-item" href="/mealplan">Matarplön</a>
+		    <a class="navbar-item" href="/recipe">Uppskriftir</a>
+		  </div>
+		</div>
+	  </nav>
+	</section>
+	<section class="section">
+  	<div class="container">
+	  <h3 class="title is-3">Allar uppskriftir</h3>
+	  <ul>
+	    <c:forEach items="${recipeList}" var="recipe">
+		  <li><c:out value="${recipe.name}"/></li>
+		</c:forEach>
+	  </ul>
+	  <a class="button is-primary" href="/recipe/recipeAdd">Bæta við uppskrift</a>
 	  </div>
-	</body>
+	</section>
+  </body>
 </html>
