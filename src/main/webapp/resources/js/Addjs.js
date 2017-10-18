@@ -26,24 +26,18 @@
  
      		for (var i=0;i<counter;i++) {
      			
-     			function ingredientQuantity(name,quantity, measurement){		
-         			this.name =  document.getElementById('name'+i).value; 
-         			this.quantity = document.getElementById('quantity'+i).value;
-         			this.measurement = document.getElementById('measurement'+i).value;
-         		}	
-     			var ingredi = new ingredientQuantity(document.getElementById('name'+i).value,document.getElementById('quantity'+i).value, document.getElementById('measurement'+i).value);
+     			function ingredientQuantity(recipeName, ingredientName, measurement, quantity){		
+         			this.recipeName = recipeName; 
+         			this.ingredientName = ingredientName;
+         			this.measurement = measurement;
+         			this.quantity = quantity;
+         		} 	
+     			var ingredi = new ingredientQuantity(document.getElementById('recipeName').value, document.getElementById('name'+i).value, document.getElementById('measurement'+i).value, document.getElementById('quantity'+i).value);
       			var xmlhttp = new XMLHttpRequest();    
-     			var ingredientType = {name : "th"};
-     			ingredientType.name = document.getElementById('name'+i).value;
-     			xmlhttp.open("POST", "/recipe/ingredientType");
-     			xmlhttp.setRequestHeader("Content-Type", "application/json");
-     		   	xmlhttp.send(JSON.stringify(ingredientType));
-     		   	
+     			     		   	
      		   	xmlhttp.open("POST", "/recipe/ingredientQuantity");
     			xmlhttp.setRequestHeader("Content-Type", "application/json");
     		   	xmlhttp.send(JSON.stringify(ingredi));
-     		   	
-     		   	
       		}
      	}
      	
