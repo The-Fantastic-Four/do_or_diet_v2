@@ -12,6 +12,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -71,6 +73,20 @@ public class RecipeController
 	{
 		recipeService.addRecipe(recipe);
 		return "recipe/index";
+	}
+	
+	/**
+	 * Displays more information about a specific recipe
+	 * 
+	 * @param recipeId is the id of the recipe
+	 * @param model the model that contains all the necessary information
+	 * @return
+	 */
+	@RequestMapping("/{recipeId}")
+	public String showRecipe(@PathVariable(value = "recipeId") long recipeId, ModelMap model)
+	{
+		model.addAttribute("recipe", recipeService.findRecipe(recipeId));
+		return "recipe/show";
 	}
 	
 	/** receives object of type IngredientQuantityWrap from UI, w
