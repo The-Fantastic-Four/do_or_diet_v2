@@ -23,32 +23,31 @@
      	}
      	
      	function saveRecipe(){
-     		    	
-     		var recipe = {name, directions, servings}; 
- 			recipe.name = document.getElementById('recipeName').value;
- 		    recipe.directions = document.getElementById('directions').value;
- 		    recipe.servings = parseInt(document.getElementById('servings').value); 
-     		
-     		var xmlhttp = new XMLHttpRequest();   
-    		xmlhttp.open("POST", "/recipe");
-    		xmlhttp.setRequestHeader("Content-Type", "application/json");
-    		xmlhttp.send(JSON.stringify(recipe));
-     		     		
- 
-     		for (var i=0;i<counter;i++) {
-     			
-     			function ingredientQuantity(recipeName, ingredientName, measurement, quantity){		
-         			this.recipeName = recipeName; 
-         			this.ingredientName = ingredientName;
-         			this.measurement = measurement;
-         			this.quantity = quantity;
-         		} 	
-     			var ingredi = new ingredientQuantity(document.getElementById('recipeName').value, document.getElementById('name'+i).value, document.getElementById('measurement'+i).value, document.getElementById('quantity'+i).value);
-      			var xmlhttp = new XMLHttpRequest();    
-     			     		   	
+     		function ingredientQuantity(recipeName, ingredientName, measurement, quantity, directions, servings)
+     		{		
+         		this.recipeName = recipeName; 
+         		this.ingredientName = ingredientName;
+         		this.measurement = measurement;
+         		this.quantity = quantity;
+         		this.directions = directions;
+         		this.servings = servings;
+         	} 
+			var array = [];
+
+     		for (var i=0;i<counter;i++) 
+     		{    			
+     			var ingredi = new ingredientQuantity(document.getElementById('recipeName').value, 
+     			document.getElementById('name'+i).value, 
+     			document.getElementById('measurement'+i).value, 
+     			document.getElementById('quantity'+i).value, 
+     			document.getElementById('directions').value, 
+     			parseInt(document.getElementById('servings').value));
+     			array.push(ingredi);
+      			
+      		}
+      		var xmlhttp = new XMLHttpRequest();       		   	
      		   	xmlhttp.open("POST", "/recipe/ingredientQuantity");
     			xmlhttp.setRequestHeader("Content-Type", "application/json");
-    		   	xmlhttp.send(JSON.stringify(ingredi));
-      		}
+    		   	xmlhttp.send(JSON.stringify(array));
      	}
      	

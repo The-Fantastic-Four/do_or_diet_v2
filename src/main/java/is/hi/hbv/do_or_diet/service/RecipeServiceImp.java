@@ -2,6 +2,8 @@ package is.hi.hbv.do_or_diet.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +19,8 @@ public class RecipeServiceImp implements RecipeService
 {
 	@Autowired
 	RecipeRepository recipeRep;
-
+	
+	@Transactional
 	@Override
 	public void addRecipe(Recipe r)
 	{

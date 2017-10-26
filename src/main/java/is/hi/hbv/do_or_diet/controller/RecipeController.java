@@ -8,7 +8,6 @@
 package is.hi.hbv.do_or_diet.controller;
 
 import java.util.List;
-	
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -73,63 +72,128 @@ public class RecipeController
 		return "recipe/index";
 	}
 	
-	/** receives object of type IngredientQuantityWrap from UI, w
+	/** receives array of IngredientQuantityWrap objects from UI, w
 	*   
-	* @RequestBody wrap
-	*            receives the wrap object which contains name of recipe, ingredient, measurements and quantities 
+	* @RequestBody receives IngredientQuantityWrap objects which contains name of recipe, 
+	* ingredient, measurements, directions and quantities 
 	*            
-	* @param model
-	*            the model that contains all the necessary information
-	*  
 	* IngredientQuantity relies on id of recipe and ingredient. 
 	*/
 	@RequestMapping(value = "/ingredientQuantity", method = RequestMethod.POST)
-	public String addIngredientQuantity(@RequestBody IngredientQuantityWrap wrap, Model model)
+	public String addIngredientQuantity(@RequestBody IngredientQuantityWrap [] wrapArr)
 	{	
 		IngredientQuantity t = new IngredientQuantity();
-		ArrayList < Recipe > listRecipe;
-		listRecipe = (ArrayList < Recipe >) recipeService.allRecipes();		
-		for(Recipe recipe : listRecipe)
+		if(doesrecipeExist(wrapArr[0]) == true)
 		{
-			if(recipe.getName().equals(wrap.getRecipeName())) 
-			{
-				t.setRecipe(recipe);
-			}	
+			t.setRecipe(findRecipe(wrapArr[0]));
+		}else
+		{
+			t.setRecipe(setNewRecipe(wrapArr[0]));
 		}
-				
-		boolean ingredientExists = false;
-		List<IngredientType> listIngredientType;
-		listIngredientType = ingredientService.allIngredientTypes();
-		for(IngredientType ingredientType : listIngredientType)
+		for(int i = 0; i<wrapArr.length; i++) 
 		{
-			System.out.println(ingredientType.getName());
-			if(ingredientType.getName().equals(wrap.getIngredientName()))
-				t.setIngredient(ingredientType);
-				ingredientExists = true;
-		}
-		if (!ingredientExists)
-		{
-			IngredientType IngType = new IngredientType();
-			IngType.setName(wrap.getIngredientName());
-			ingredientTypes.save(IngType);
-			for(IngredientType ingredientType : listIngredientType)
+			IngredientQuantityWrap wrap = wrapArr[i];
+			if (doesIngredientExist(wrap) == true) 
 			{
-				if(ingredientType.getName().equals(wrap.getIngredientName()))
-					t.setIngredient(ingredientType);
-					ingredientExists = true;
+				t.setIngredient(findIngredient(wrap));	
+			}else
+			{
+				t.setIngredient(setNewIngredient(wrap));
 			}
+			t.setMeasurement(wrap.getMeasurement());
+			t.setQuantity(wrap.getQuantity());
+			ingredientQuantities.save(t);
 		}
-		
-		t.setMeasurement(wrap.getMeasurement());
-		t.setQuantity(wrap.getQuantity());
-		ingredientQuantities.save(t);
 		return "recipe/index";
 	}
 
+	
 	// gets recipes from recipeRepository and adds to model
 	public void getRecipes(Model model)
 	{
 		List<Recipe> recipeList = recipeService.allRecipes();
 		model.addAttribute("recipeList", recipeList);
+	}
+	
+	// finds existing recipies and checks if this recipe is already in database.
+	public boolean doesrecipeExist(IngredientQuantityWrap k) 
+	{
+		boolean exist = false;
+		ArrayList < Recipe > listRecipe;
+		listRecipe = (ArrayList < Recipe >) recipeService.allRecipes();	
+		for(Recipe recipe : listRecipe)
+		{
+			if(recipe.getName().equals(k.getRecipeName())) 
+			{
+				exist = true;
+			}	
+		}
+		
+		return exist;
+	}
+	
+	// find ingredient from database and returns it.
+	public IngredientType findIngredient(IngredientQuantityWrap k) 
+	{
+		IngredientType s = new IngredientType();
+		List<IngredientType> listIngredientType;
+		listIngredientType = ingredientService.allIngredientTypes();
+		for(IngredientType ingredientType : listIngredientType)
+		{
+			if(ingredientType.getName().equals(k.getIngredientName()))
+				s = ingredientType;
+		}
+		return s;
+	}
+	
+	//finds recipe in IngredientQuantityWrap from database. 
+	public Recipe findRecipe(IngredientQuantityWrap k) 
+	{
+		ArrayList < Recipe > listRecipe;
+		Recipe theRecipe = new Recipe();
+		listRecipe = (ArrayList < Recipe >) recipeService.allRecipes();	
+		for(Recipe recipe : listRecipe)
+		{
+			if(recipe.getName().equals(k.getRecipeName())) 
+			{
+				theRecipe = recipe;
+			}	
+		}	
+		return theRecipe;
+	}
+
+	//saves recipe from UI to database
+	public Recipe setNewRecipe(IngredientQuantityWrap k) 
+	{
+		Recipe newRecipe = new Recipe();
+		newRecipe.setName(k.getRecipeName());
+		newRecipe.setDirections(k.getDirections());
+		newRecipe.setServings(k.getServings());
+		recipeService.addRecipe(newRecipe);	
+		return newRecipe;
+	}
+	
+	//finds ingredients from database
+	public boolean doesIngredientExist(IngredientQuantityWrap k) {
+		boolean exist = false;
+		List<IngredientType> listIngredientType;
+		listIngredientType = ingredientService.allIngredientTypes();
+		for(IngredientType ingredientType : listIngredientType)
+		{
+			if(ingredientType.getName().equals(k.getIngredientName())&&(ingredientType.getName() != null)) 
+			{
+				exist = true;	
+			}
+		}
+		return exist;
+	}
+	
+	//takes new ingredient and saves it to database 
+	public IngredientType setNewIngredient(IngredientQuantityWrap l) 
+	{
+		IngredientType IngType = new IngredientType();
+		IngType.setName(l.getIngredientName());
+		ingredientTypes.save(IngType);
+		return IngType;
 	}
 }

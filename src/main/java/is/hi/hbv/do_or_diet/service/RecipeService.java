@@ -2,6 +2,8 @@ package is.hi.hbv.do_or_diet.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import is.hi.hbv.do_or_diet.model.Recipe;
 
 /**
@@ -17,6 +19,7 @@ public interface RecipeService
 	 * 
 	 * @param r
 	 */
+
 	public void addRecipe(Recipe r);
 
 	/**

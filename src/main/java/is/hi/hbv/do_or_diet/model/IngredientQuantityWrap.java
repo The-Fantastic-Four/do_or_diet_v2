@@ -12,18 +12,26 @@ public class IngredientQuantityWrap
 	private String measurement;
 	private String recipeName;
 	private String ingredientName;
+	private String categories;
+	private String directions;
+	private int servings;
+	
+
 	
 	public IngredientQuantityWrap()
 	{
 		
 	}
 	
-	public IngredientQuantityWrap(String recipeName, String ingredientName, String measurement, int quantity)
+	public IngredientQuantityWrap(String recipeName, String ingredientName, String measurement, int quantity, String categories, String directions, int servings)
 	{
 		this.recipeName = recipeName;
 		this.quantity = quantity;
 		this.measurement = measurement;
-		this.ingredientName = ingredientName;		
+		this.ingredientName = ingredientName;
+		this.categories = categories;
+		this.directions = directions;
+		this.servings = servings;
 	}
 
 	public String getMeasurement()
@@ -64,5 +72,35 @@ public class IngredientQuantityWrap
 	public void setIngredientName(String ingredientName)
 	{
 		this.ingredientName = ingredientName;
+	}
+
+	public String getDirections()
+	{
+		return directions;
+	}
+
+	public void setDirections(String directions)
+	{
+		this.directions = directions;
+	}
+
+	public String getCategories()
+	{
+		return categories;
+	}
+
+	public void setCategories(String categories)
+	{
+		this.categories = categories;
+	}
+
+	public int getServings()
+	{
+		return servings;
+	}
+
+	public void setServings(int servings)
+	{
+		this.servings = servings;
 	}
 }
