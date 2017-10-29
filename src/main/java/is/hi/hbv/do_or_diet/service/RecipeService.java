@@ -10,7 +10,7 @@ import is.hi.hbv.do_or_diet.model.Recipe;
  * Service that connects to the recipe repository
  * 
  * @author Eiður Örn Gunnarsson eog26@hi.is
- * @date 16. okt. 2017
+ * @date 29. okt. 2017
  */
 public interface RecipeService
 {
@@ -32,10 +32,12 @@ public interface RecipeService
 	/**
 	 * Fetches all recipes containing recipeName
 	 * 
-	 * @param recipeName name of recipe to be searched for
+	 * @param recipeName
+	 *            name of recipe to be searched for
 	 * @return list of all recipes containing the recipeName string
 	 */
 	public List<Recipe> findRecipeContaining(String recipeName);
+
 	/**
 	 * Finds a recipe in repository from recipe ID
 	 * 

@@ -12,14 +12,14 @@ import is.hi.hbv.do_or_diet.repository.RecipeRepository;
 
 /**
  * @author Eiður Örn Gunnarsson eog26@hi.is
- * @date 16. okt. 2017
+ * @date 29. okt. 2017
  */
 @Service
 public class RecipeServiceImp implements RecipeService
 {
 	@Autowired
 	RecipeRepository recipeRep;
-	
+
 	@Transactional
 	@Override
 	public void addRecipe(Recipe r)
@@ -38,7 +38,7 @@ public class RecipeServiceImp implements RecipeService
 	{
 		return recipeRep.findByNameContaining(recipeName);
 	}
-	
+
 	@Override
 	public Recipe findRecipe(long id)
 	{
