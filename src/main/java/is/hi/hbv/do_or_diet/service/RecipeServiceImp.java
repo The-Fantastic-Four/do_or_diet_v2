@@ -34,6 +34,12 @@ public class RecipeServiceImp implements RecipeService
 	}
 
 	@Override
+	public List<Recipe> findRecipeContaining(String recipeName)
+	{
+		return recipeRep.findByNameContaining(recipeName);
+	}
+	
+	@Override
 	public Recipe findRecipe(long id)
 	{
 		return recipeRep.findOne(id);

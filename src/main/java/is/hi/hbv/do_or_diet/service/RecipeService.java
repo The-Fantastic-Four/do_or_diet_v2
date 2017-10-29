@@ -30,6 +30,13 @@ public interface RecipeService
 	public List<Recipe> allRecipes();
 
 	/**
+	 * Fetches all recipes containing recipeName
+	 * 
+	 * @param recipeName name of recipe to be searched for
+	 * @return list of all recipes containing the recipeName string
+	 */
+	public List<Recipe> findRecipeContaining(String recipeName);
+	/**
 	 * Finds a recipe in repository from recipe ID
 	 * 
 	 * @param id

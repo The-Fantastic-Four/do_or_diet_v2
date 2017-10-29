@@ -17,15 +17,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import java.util.ArrayList;
 import is.hi.hbv.do_or_diet.model.IngredientQuantity;
 import is.hi.hbv.do_or_diet.model.IngredientQuantityWrap;
 import is.hi.hbv.do_or_diet.model.IngredientType;
 import is.hi.hbv.do_or_diet.model.Recipe;
-import is.hi.hbv.do_or_diet.repository.IngredientTypeRepository;
+import is.hi.hbv.do_or_diet.service.IngredientQuantityService;
 import is.hi.hbv.do_or_diet.service.IngredientTypeService;
 import is.hi.hbv.do_or_diet.service.RecipeService;
-import is.hi.hbv.do_or_diet.repository.IngredientQuantityRepository;
 
 @Controller
 @RequestMapping("/recipe")
@@ -37,14 +38,11 @@ public class RecipeController
 
 	// Instance of the ingredientType service, used to get and save ingredientTypes
 	@Autowired
-	IngredientTypeRepository ingredientTypes;
-	
-	@Autowired
-	IngredientTypeService ingredientService;
+	IngredientTypeService ingredientType;
 
 	// Instance of the ingredientQuantity repository, used to get and save ingredientQuantity
 	@Autowired
-	IngredientQuantityRepository ingredientQuantities;
+	IngredientQuantityService ingredientQuantities;
 
 	// Index page for the recipes, shows a list of recipes
 	@RequestMapping("")
@@ -53,26 +51,19 @@ public class RecipeController
 		getRecipes(model);
 		return "recipe/index";
 	}
-
+	
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public String searchForRecipeNameWithinIndex(@RequestParam(value = "recipeSearchName", required = true) String recipeSearchName, ModelMap model)
+	{
+		addRecipesContainingNameToModel(recipeSearchName, model);
+		return "recipe/index";
+	}
+	
 	// Redirects user to recipe Add page
 	@RequestMapping(value = "/recipeAdd")
 	public String recipeAdd()
 	{
 		return "recipe/recipeAdd";
-	}
-
-	/** receives recipe from UI and saves into repository and then into database.
-	*   
-	* @RequestBody recipe
-	*            receives the recipe object which contains name, directions, servings and Id
-	* @param model
-	*            the model that contains all the necessary information
-	*/
-	@RequestMapping(value = "", method = RequestMethod.POST)
-	public String recipeRoute(@RequestBody Recipe recipe, Model model)
-	{
-		recipeService.addRecipe(recipe);
-		return "recipe/index";
 	}
 	
 	/**
@@ -87,6 +78,19 @@ public class RecipeController
 	{
 		model.addAttribute("recipe", recipeService.findRecipe(recipeId));
 		return "recipe/show";
+	}
+	
+	@RequestMapping("/searchForRecipe")
+	public String displaySearchForRecipe()
+	{
+		return "recipe/searchForRecipe";
+	}
+	
+	@RequestMapping(value = "/searchForRecipe", method = RequestMethod.POST)
+	public String searchForRecipeName(@RequestParam(value = "recipeName", required = true) String recipeName, ModelMap model)
+	{
+		addRecipesContainingNameToModel(recipeName, model);
+		return "recipe/index";
 	}
 	
 	/** receives array of IngredientQuantityWrap objects from UI, w
@@ -119,7 +123,7 @@ public class RecipeController
 			}
 			t.setMeasurement(wrap.getMeasurement());
 			t.setQuantity(wrap.getQuantity());
-			ingredientQuantities.save(t);
+			ingredientQuantities.addIngredientQuantity(t);
 		}
 		return "recipe/index";
 	}
@@ -154,7 +158,7 @@ public class RecipeController
 	{
 		IngredientType s = new IngredientType();
 		List<IngredientType> listIngredientType;
-		listIngredientType = ingredientService.allIngredientTypes();
+		listIngredientType = ingredientType.allIngredientTypes();
 		for(IngredientType ingredientType : listIngredientType)
 		{
 			if(ingredientType.getName().equals(k.getIngredientName()))
@@ -194,7 +198,7 @@ public class RecipeController
 	public boolean doesIngredientExist(IngredientQuantityWrap k) {
 		boolean exist = false;
 		List<IngredientType> listIngredientType;
-		listIngredientType = ingredientService.allIngredientTypes();
+		listIngredientType = ingredientType.allIngredientTypes();
 		for(IngredientType ingredientType : listIngredientType)
 		{
 			if(ingredientType.getName().equals(k.getIngredientName())&&(ingredientType.getName() != null)) 
@@ -208,9 +212,15 @@ public class RecipeController
 	//takes new ingredient and saves it to database 
 	public IngredientType setNewIngredient(IngredientQuantityWrap l) 
 	{
-		IngredientType IngType = new IngredientType();
-		IngType.setName(l.getIngredientName());
-		ingredientTypes.save(IngType);
-		return IngType;
+		IngredientType ingType = new IngredientType();
+		ingType.setName(l.getIngredientName());
+		ingredientType.addIngredientType(ingType);
+		return ingType;
+	}
+	
+	private void addRecipesContainingNameToModel(String recipeName, ModelMap model) 
+	{
+		List<Recipe> recipeList = recipeService.findRecipeContaining(recipeName);
+		model.addAttribute("recipeList", recipeList);
 	}
 }
