@@ -21,10 +21,10 @@
 	  <div class="hero-body">
 	    <div class="container">
 	      <h1 class="title is-1">
-	        Matarplan
+	        <c:out value="${mealPlan.name}" />
 	      </h1>
 	      <h2 class="subtitle">
-	        <c:out value="${mealPlan.name}" />
+	        Matarplan
 	      </h2>
 	    </div>
 	  </div>
