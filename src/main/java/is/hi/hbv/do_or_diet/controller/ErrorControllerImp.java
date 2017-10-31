@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @date 31. okt. 2017
  */
 @Controller
-public class InvalidURLController implements ErrorController
+public class ErrorControllerImp implements ErrorController
 {
 	private static final String PATH = "/error";
 	
@@ -29,12 +29,12 @@ public class InvalidURLController implements ErrorController
 	/**
 	 * Responds to an invalid URL request
 	 * 
-	 * @param request the URL that is invalid
-	 * @return response to the invalid URL
+	 * @param request the request containing an error
+	 * @return response to the error
 	 */
 	@RequestMapping(value = PATH)
-    public ModelAndView invalidURL(HttpServletRequest request) {
-        return new ModelAndView("invalidURLPage", "attrs", getErrorAttributes(request, false));
+    public ModelAndView errorOccurance(HttpServletRequest request) {
+        return new ModelAndView("errorPage", "attrs", getErrorAttributes(request, false));
     }
 	
 	/**

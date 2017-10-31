@@ -20,8 +20,8 @@
 	<section class="hero is-medium">
 	  <div class="hero-body">
 	    <div class="container">
-	      <h1 class="title is-1">Röng slóð</h1>
-	      <h2 class="subtitle">Þessi slóð er ekki til</h2>
+	      <h1 class="title is-1">Villa kom upp</h1>
+	      <h2 class="subtitle">Eitthvað hefur farið úrskeðis</h2>
    		</div>
   	  </div>
 	  <nav class="navbar" role="navigation" aria-label="main navigation">
