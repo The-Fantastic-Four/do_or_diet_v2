@@ -10,12 +10,16 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import is.hi.hbv.do_or_diet.model.MealPlan;
+import is.hi.hbv.do_or_diet.model.ShoppingList;
+import is.hi.hbv.do_or_diet.model.User;
 
 public interface MealPlanRepository extends JpaRepository<MealPlan, Long>
 {
 
 	List<MealPlan> findAll();
 
+	List<MealPlan> findByCreatedBy(User creator);
+	
 	MealPlan findOne(Long id);
 
 	// Suppressed as teacher had same warning and had not fixed it

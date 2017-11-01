@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import is.hi.hbv.do_or_diet.model.MealPlan;
+import is.hi.hbv.do_or_diet.model.User;
 import is.hi.hbv.do_or_diet.repository.MealPlanRepository;
 
 /**
@@ -26,9 +27,9 @@ public class MealPlanServiceImp implements MealPlanService
 	}
 
 	@Override
-	public List<MealPlan> allMealPlans()
+	public List<MealPlan> allMealPlans(User user)
 	{
-		return mealPlanRep.findAll();
+		return mealPlanRep.findByCreatedBy(user);
 	}
 
 	@Override
