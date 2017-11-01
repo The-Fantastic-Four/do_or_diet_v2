@@ -31,11 +31,11 @@ public class ShoppingListController
 	// Instance of the meal plan repository used to get meal plans
 	@Autowired
 	MealPlanService mealPlanService;
-	
+
 	// Instance of the shopping list service used to create and get shopping lists
 	@Autowired
 	ShoppingListService shoppingListService;
-	
+
 	// Instance of the user repository used to get the current user
 	@Autowired
 	UserService userService;
@@ -51,42 +51,43 @@ public class ShoppingListController
 	public String indexPage(Model model, Authentication authentication)
 	{
 		User user = userService.findUserByEmail(authentication.getName());
-		
+
 		List<ShoppingList> shoppingLists = shoppingListService.allShoppingLists(user);
-		
+
 		model.addAttribute("shoppingLists", shoppingLists);
-		
+
 		return "shoppinglist/index";
 	}
-	
 
 	@RequestMapping("/{shoppingListId}")
-	public String showMealPlan(@PathVariable(value = "shoppingListId") long shoppingListId, ModelMap model, Authentication authentication)
+	public String showMealPlan(@PathVariable(value = "shoppingListId") long shoppingListId, ModelMap model,
+			Authentication authentication)
 	{
 		User user = userService.findUserByEmail(authentication.getName());
 		ShoppingList sl = shoppingListService.findShoppingList(shoppingListId);
-		
-		if (sl.getOwner() != user) {
+
+		if (sl.getOwner() != user)
+		{
 			throw new AccessDeniedException("Innskráður notandi hefur ekki aðgang að þessum innkaupalista!");
 		}
-		
+
 		model.addAttribute("shoppingList", sl);
-		
+
 		return "shoppinglist/show";
 	}
-	
-	
+
 	@RequestMapping("/createFromMealPlan/{mealPlanId}")
-	public ModelAndView createFromMealPlan(@PathVariable(value = "mealPlanId") long mealPlanId, ModelMap model, Authentication authentication)
+	public ModelAndView createFromMealPlan(@PathVariable(value = "mealPlanId") long mealPlanId, ModelMap model,
+			Authentication authentication)
 	{
 		MealPlan mealPlan = mealPlanService.findMealPlan(mealPlanId);
 		model.addAttribute("mealPlan", mealPlan);
 		User user = userService.findUserByEmail(authentication.getName());
-		
+
 		ShoppingList sl = shoppingListService.createFromMealPlan(mealPlan, user);
-		
+
 		model.addAttribute("shoppingList", sl);
-		
+
 		return new ModelAndView("redirect:/shoppinglist/" + sl.getId());
 	}
 }

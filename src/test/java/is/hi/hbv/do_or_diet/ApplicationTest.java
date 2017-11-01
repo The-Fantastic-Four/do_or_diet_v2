@@ -1,6 +1,6 @@
 /**
- * ApplicationTest tests that when a Http request is sent to /
- * we recieve the index page.
+ * ApplicationTest tests that when a Http request is sent to / we recieve the
+ * index page.
  * 
  * @author Ragnheiður Ásta Karlsdóttir rak4@hi.is
  * @author Viktor Alex Brynjarsson vab18@hi.is
@@ -26,14 +26,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class ApplicationTest
 {
+	// Server is mocked and does not run
 	@Autowired
 	private MockMvc mockMvc;
-	
+
+	/**
+	 * Method to check if sending an http request to / returns the index page
+	 * 
+	 * @throws Exception
+	 */
 	@Test
-	public void applicationTest() throws Exception 
+	public void applicationTest() throws Exception
 	{
-		this.mockMvc.perform(get("/"))
-			.andDo(print()).andExpect(status().isOk())
-			.andExpect(view().name("welcome/index"));
+		this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
+				.andExpect(view().name("welcome/index"));
 	}
 }

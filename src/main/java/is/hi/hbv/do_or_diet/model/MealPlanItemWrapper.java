@@ -16,9 +16,13 @@ public class MealPlanItemWrapper
 
 	/**
 	 * Constructor for the MealPlanItemWrapper
-	 * @param mealPlan meal plan to be stored
-	 * @param recipe recipe to be stored
-	 * @param date date to be stored
+	 * 
+	 * @param mealPlan
+	 *            meal plan to be stored
+	 * @param recipe
+	 *            recipe to be stored
+	 * @param date
+	 *            date to be stored
 	 */
 	public MealPlanItemWrapper(MealPlan mealPlan, Recipe recipe, Date date)
 	{
@@ -43,4 +47,3 @@ public class MealPlanItemWrapper
 	}
 
 }
-	

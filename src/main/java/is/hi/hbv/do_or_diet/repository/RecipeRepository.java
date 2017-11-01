@@ -19,8 +19,9 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long>
 	List<Recipe> findAll();
 
 	Recipe findOne(Long id);
-	
+
 	List<Recipe> findByNameContaining(String recipeName);
+
 	// Suppressed as teacher had same warning and had not fixed it
 	@SuppressWarnings("unchecked")
 	Recipe save(Recipe recipe);

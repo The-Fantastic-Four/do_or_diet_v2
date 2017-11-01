@@ -23,7 +23,7 @@ public class SmokeTest
 {
 	@Autowired
 	WelcomeController welcomeController;
-	
+
 	/**
 	 * Method to check if WelcomeController has been created
 	 */

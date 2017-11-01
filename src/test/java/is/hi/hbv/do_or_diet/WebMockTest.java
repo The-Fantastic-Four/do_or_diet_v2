@@ -1,5 +1,5 @@
 /**
- * WebMockTest tests on the weblayer and uses WebMvcTest
+ * WebMockTest tests on the web layer and uses WebMvcTest
  * 
  * @author Ragnheiður Ásta Karlsdóttir rak4@hi.is
  * @author Viktor Alex Brynjarsson vab18@hi.is
@@ -27,24 +27,31 @@ import is.hi.hbv.do_or_diet.service.UserService;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(UserController.class)
-public class WebMockTest {
+public class WebMockTest
+{
+	// Server is not initialized
+	@Autowired
+	private MockMvc mockMvc;
 
-    @Autowired
-    private MockMvc mockMvc;
+	// Mock user service
+	@MockBean
+	private UserService service;
 
-    @MockBean
-    private UserService service;
-
-    @Test
-    @WithMockUser(username = "test", password = "test", roles = "USER")
-    public void registerMockUser() throws Exception {
-        when(service.findUserByEmail("test@hi.is"))
-        			.thenReturn(null);
-        this.mockMvc.perform(post("/registration")
-        		.param("username", "test")
-        		.param("password", "1234")
-        		.param("email", "test@hi.is"))
-        	.andDo(print()).andExpect(status().isOk())
-    		.andExpect(model().attribute("successMessage", "Skráning tókst"));
-    }
+	/**
+	 * Tests that user registration returns success message on successful user
+	 * registration.
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	@WithMockUser(username = "test", password = "test", roles = "USER")
+	public void registerMockUser() throws Exception
+	{
+		when(service.findUserByEmail("test@hi.is")).thenReturn(null);
+		this.mockMvc
+				.perform(post("/registration").param("username", "test").param("password", "1234").param("email",
+						"test@hi.is"))
+				.andDo(print()).andExpect(status().isOk())
+				.andExpect(model().attribute("successMessage", "Skráning tókst"));
+	}
 }

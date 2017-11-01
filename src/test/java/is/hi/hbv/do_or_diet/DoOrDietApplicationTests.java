@@ -17,8 +17,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class DoOrDietApplicationTests
 {
 
-	/** 
-	 *  Aðferð til að athuga hvort að forritið keyri.
+	/**
+	 * Method that tests that the application runs
 	 */
 	@Test
 	public void contextLoads()

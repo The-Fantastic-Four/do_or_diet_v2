@@ -38,7 +38,7 @@ public class MealPlan
 	 * Name of the meal plan
 	 */
 	@NotNull
-	@Size(min=1, max=35, message="Lengd nafns þarf að vera á bilinu 1-35")
+	@Size(min = 1, max = 35, message = "Lengd nafns þarf að vera á bilinu 1-35")
 	private String name;
 
 	/**
@@ -132,12 +132,12 @@ public class MealPlan
 	{
 		this.name = name;
 	}
-	
+
 	public Date getDateFrom()
 	{
 		return this.dates.get(0);
 	}
-	
+
 	public Date getDateTo()
 	{
 		return this.dates.get(this.dates.size() - 1);

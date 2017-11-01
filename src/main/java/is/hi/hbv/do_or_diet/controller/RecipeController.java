@@ -123,14 +123,15 @@ public class RecipeController
 		addRecipesContainingNameToModel(recipeName, model);
 		return "recipe/index";
 	}
-	
+
 	@RequestMapping(value = "/changeRecipe", method = RequestMethod.POST)
-	public String changeRecipe(@RequestParam(value="/changeRecipe")  Recipe recipe,	ModelMap model)
+	public String changeRecipe(@RequestParam(value = "/changeRecipe") Recipe recipe, ModelMap model)
 	{
 		System.out.println("Bla");
 		model.addAttribute(recipe);
 		return "recipe/changeRecipe";
 	}
+
 	/**
 	 * receives array of IngredientQuantityWrap objects from UI, w
 	 * 

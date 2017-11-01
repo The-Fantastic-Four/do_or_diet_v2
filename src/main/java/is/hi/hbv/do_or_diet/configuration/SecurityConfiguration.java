@@ -47,17 +47,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
 	@Override
 	protected void configure(HttpSecurity http) throws Exception
 	{
-		http.authorizeRequests()
-			.antMatchers("/", "/login", "/registration").permitAll()
-			.antMatchers("/recipe/**").permitAll()
-			.antMatchers("/shoppinglist/**").authenticated()
-			.antMatchers("/mealplan/**").authenticated()
-			.anyRequest().authenticated()
-			.and().csrf().disable()
-			.formLogin().loginPage("/login").failureUrl("/login?error=true").defaultSuccessUrl("/")
-			.usernameParameter("email").passwordParameter("password").and().logout()
-			.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").and()
-			.exceptionHandling().accessDeniedPage("/access-denied");
+		http.authorizeRequests().antMatchers("/", "/login", "/registration").permitAll().antMatchers("/recipe/**")
+				.permitAll().antMatchers("/shoppinglist/**").authenticated().antMatchers("/mealplan/**").authenticated()
+				.anyRequest().authenticated().and().csrf().disable().formLogin().loginPage("/login")
+				.failureUrl("/login?error=true").defaultSuccessUrl("/").usernameParameter("email")
+				.passwordParameter("password").and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logoutSuccessUrl("/").and().exceptionHandling().accessDeniedPage("/access-denied");
 	}
 
 	@Override

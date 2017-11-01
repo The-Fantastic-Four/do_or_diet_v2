@@ -43,17 +43,17 @@ public class ShoppingList
 	@ManyToOne
 	@JoinColumn(name = "meal_plan_id")
 	private MealPlan mealPlan;
-	
+
 	/**
 	 * The owner of this shopping list
 	 */
 	@ManyToOne
 	@JoinColumn(name = "user_owner_id")
 	private User owner;
-	
+
 	public ShoppingList()
 	{
-		
+
 	}
 
 	/**

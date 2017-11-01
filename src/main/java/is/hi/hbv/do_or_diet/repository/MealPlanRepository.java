@@ -18,7 +18,7 @@ public interface MealPlanRepository extends JpaRepository<MealPlan, Long>
 	List<MealPlan> findAll();
 
 	List<MealPlan> findByCreatedBy(User creator);
-	
+
 	MealPlan findOne(Long id);
 
 	// Suppressed as teacher had same warning and had not fixed it

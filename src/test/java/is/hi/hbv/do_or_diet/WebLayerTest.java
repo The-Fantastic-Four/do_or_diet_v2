@@ -1,5 +1,5 @@
 /**
- * WebLayerTest tests on the weblayer and uses WebMvcTest
+ * WebLayerTest tests on the web layer and uses WebMvcTest
  * 
  * @author Ragnheiður Ásta Karlsdóttir rak4@hi.is
  * @author Viktor Alex Brynjarsson vab18@hi.is
@@ -30,16 +30,16 @@ public class WebLayerTest
 	// Server is not initialized
 	@Autowired
 	private MockMvc mockMvc;
-	
+
 	/**
-	 * Method that checks if it works to send a HTTP request to the 
+	 * Method that checks if it works to send a HTTP request to the
 	 * WelcomeController and receive the index page.
 	 */
 	@Test
 	@WithMockUser(username = "test", password = "test", roles = "USER")
-	public void webLayerTest() throws Exception {
-		this.mockMvc.perform(get("/")).andDo(print())
-			.andExpect(status().isOk())
-			.andExpect(view().name("welcome/index"));
+	public void webLayerTest() throws Exception
+	{
+		this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
+				.andExpect(view().name("welcome/index"));
 	}
 }
