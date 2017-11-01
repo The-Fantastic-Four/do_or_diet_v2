@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import is.hi.hbv.do_or_diet.model.IngredientQuantity;
@@ -121,7 +122,14 @@ public class RecipeController
 		addRecipesContainingNameToModel(recipeName, model);
 		return "recipe/index";
 	}
-
+	
+	@RequestMapping(value = "/changeRecipe", method = RequestMethod.POST)
+	public String changeRecipe(@RequestParam(value="/changeRecipe")  Recipe recipe,	ModelMap model)
+	{
+		System.out.println("Bla");
+		model.addAttribute(recipe);
+		return "recipe/changeRecipe";
+	}
 	/**
 	 * receives array of IngredientQuantityWrap objects from UI, w
 	 * 
@@ -131,19 +139,19 @@ public class RecipeController
 	 *              IngredientQuantity relies on id of recipe and ingredient.
 	 */
 	@RequestMapping(value = "/ingredientQuantity", method = RequestMethod.POST)
-	public String addIngredientQuantity(@RequestBody IngredientQuantityWrap[] wrapArr)
+	public ModelAndView addIngredientQuantity(@RequestBody IngredientQuantityWrap[] wrapArr, Model model)
 	{
-		IngredientQuantity t = new IngredientQuantity();
-		if (doesrecipeExist(wrapArr[0]) == true)
-		{
-			t.setRecipe(findRecipe(wrapArr[0]));
-		}
-		else
-		{
-			t.setRecipe(setNewRecipe(wrapArr[0]));
-		}
 		for (int i = 0; i < wrapArr.length; i++)
 		{
+			IngredientQuantity t = new IngredientQuantity();
+			if (doesrecipeExist(wrapArr[i]) == true)
+			{
+				t.setRecipe(findRecipe(wrapArr[0]));
+			}
+			else
+			{
+				t.setRecipe(setNewRecipe(wrapArr[0]));
+			}
 			IngredientQuantityWrap wrap = wrapArr[i];
 			if (doesIngredientExist(wrap) == true)
 			{
@@ -157,7 +165,8 @@ public class RecipeController
 			t.setQuantity(wrap.getQuantity());
 			ingredientQuantities.addIngredientQuantity(t);
 		}
-		return "recipe/index";
+		getRecipes(model);
+		return new ModelAndView("redirect:/index");
 	}
 
 	// gets recipes from recipeRepository and adds to model

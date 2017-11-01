@@ -12,6 +12,7 @@
 	<head>
 		<meta charset="utf-8">	
 	    <title>Uppskriftir</title>
+	    <script src="${mainJs}"></script>
 	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.min.css" type="text/css">
 	    <link rel="stylesheet" href="/resources/css/styles.css" type="text/css" />
 	</head>
@@ -44,27 +45,50 @@
 	  </nav>
 	</section>
 	<section class="section">
+	  <h3 class="title is-3">Uppskrift</h3>
 	  <div class="container">
 	  	<div class="columns">
-	  	  <div class="column is-two-thirds">
-			<h3 class="title is-3">Uppskrift</h3>
-	  	  	<table class="table table is-fullwidth is-striped is-hoverable">
-	  	  	  <thead>
-	  	  	  	<tr>
-	  	  	  	  <th>Uppskrift</th>
-	  	  	  	  <th>Fjöldi manns</th>
-	  	  	  	  <th>Leiðbeiningar</th>
-	  	  	  	</tr>
-	  	  	  </thead>
-	  	  	  <tbody>
-	  	  	  	<tr>
-				  <td><c:out value="${recipe.name}" /></td>
-				  <td><c:out value="${recipe.servings}" /></td>
-			      <td><c:out value="${recipe.directions}" /></td>
-				</tr>
-			  </tbody>
-			</table>
-		  </div>
+	  	  	<div class = "two-thirds column">
+	 			<table class="table table is-fullwidth is-striped is-hoverable">
+	  			  <thead>
+	  	  			<tr>
+	  	  			  <th>Uppskrift af</th>
+	  	  		 	  <th>Fjöldi skammta</th>
+	  	  			  <th>Leiðbeiningar</th>
+	  	  			</tr>
+	  	  		  </thead>
+	  	  		  <tbody>
+	  	  			<tr>
+					  <td><c:out value="${recipe.name}" /></td>
+					  <td><c:out value="${recipe.servings}" /></td>
+				   	  <td><c:out value="${recipe.directions}" /></td>
+					</tr>
+				  </tbody>
+				</table>
+			  </div>
+			  <div class = "one-third column">
+			  	<form action="" th:action="@{/changeRecipe}" th:object="${recipe}" method="post">
+			  		<button name="changeRecipe" type="submit">Breyta uppskrift</button>
+		  		</form>
+			  	<table class="table table is-fullwidth is-striped is-hoverable">
+			  		<thead>
+					  	<tr>
+						  	<th>Hráefni</th>
+					  		<th>Fjöldi</th>
+					  		<th>Mælieining</th>
+						</tr>
+					</thead>
+			   	    <tbody>
+						<c:forEach items="${recipe.ingredients}" var="IngrtQuantity">
+			   			  <tr>
+		 	   	   		 	 <td><c:out value="${IngrtQuantity.ingredient.name}" /></a></td>
+		  	   				 <td><c:out value="${IngrtQuantity.quantity}" /></td>
+		  	   		   	 	 <td><c:out value="${IngrtQuantity.measurement}" /></td>
+		  	  			  </tr>
+				    	 </c:forEach>
+					</tbody>
+				</table>	
+		  	 </div>		 		  
 	    </div>
 	  </div>
 	</section>
