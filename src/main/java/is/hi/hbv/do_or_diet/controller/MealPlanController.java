@@ -3,6 +3,7 @@
  * 
  * @author Eiður Örn Gunnarsson eog26@hi.is
  * @author Viktor Alex Brynjarsson vab18@hi.is
+ * @date   01. nov. 2017
  */
 package is.hi.hbv.do_or_diet.controller;
 
@@ -14,6 +15,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.AccessDeniedException;
@@ -21,6 +24,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -62,48 +67,51 @@ public class MealPlanController
 	 * 
 	 * @param model
 	 *            the model that contains all the necessary information
-	 * @return
+	 * @return site that displays related meal plans
 	 */
 	@RequestMapping("")
 	public String indexPage(Model model, Authentication authentication)
 	{
 		User user = userService.findUserByEmail(authentication.getName());
 		addMealPlanListToModel(model, user);
+		model.addAttribute("mealPlanForm", new MealPlan());
 		return "mealplan/index";
 	}
 
 	/**
 	 * Creates a new meal plan, redirects to the index page upon creation
 	 * 
-	 * @param mName
-	 * 
-	 *            the meal plan name
-	 * @param fromDate
-	 *            is the date which the meal plan begins on
-	 * @param toDate
-	 *            is the date which the meal plan ends on
-	 * @param model
-	 *            the model that contains all the necessary information
-	 * @return
+	 * @param mealPlan object containing the name of the meal plan
+	 * @param errors obtained from validation
+	 * @param fromDate is the date which the meal plan begins on
+	 * @param toDate is the date which the meal plan ends on
+	 * @param model the model that contains all the necessary information
+	 * @param authentication
+	 * @return site that displays meal plans including the new one if successfully created
 	 */
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public String newMealPlan(@RequestParam(value = "mName", required = true) String mName, String fromDate,
-			String toDate, Model model, Authentication authentication)
+	public String newMealPlan(
+			@Valid 
+			@ModelAttribute("mealPlanForm") 
+			MealPlan mealPlan, BindingResult errors, 
+			String fromDate, String toDate, Model model, 
+			Authentication authentication)
 	{
 		User user = userService.findUserByEmail(authentication.getName());
+		if(!errors.hasErrors()) {
+			ArrayList<Date> dates = new ArrayList<Date>();
+			try
+			{
+				dates = generateDatesBetween(convertToDate(fromDate), convertToDate(toDate));
+			}
+			catch (ParseException e)
+			{
+				e.printStackTrace();
+			}
 
-		ArrayList<Date> dates = new ArrayList<Date>();
-		try
-		{
-			dates = generateDatesBetween(convertToDate(fromDate), convertToDate(toDate));
+			MealPlan m = new MealPlan(mealPlan.getName(), new ArrayList<MealPlanItem>(), dates, user);
+			mealPlanService.addMealPlan(m);
 		}
-		catch (ParseException e)
-		{
-			e.printStackTrace();
-		}
-
-		MealPlan m = new MealPlan(mName, new ArrayList<MealPlanItem>(), dates, user);
-		mealPlanService.addMealPlan(m);
 
 		addMealPlanListToModel(model, user);
 
@@ -117,7 +125,7 @@ public class MealPlanController
 	 *            unique identifier for the meal plan that is being viewed
 	 * @param model
 	 *            the model that contains all the necessary information
-	 * @return
+	 * @return more detailed information for the specified meal plan
 	 */
 	@RequestMapping("/{mealPlanId}")
 	public String showMealPlan(@PathVariable(value = "mealPlanId") long mealPlanId, ModelMap model, Authentication authentication)
@@ -146,7 +154,7 @@ public class MealPlanController
 	 *            the date for which the meal is planned to be had
 	 * @param model
 	 *            the model that contains all the necessary information
-	 * @return
+	 * @return the site that allows editing of meal plans
 	 */
 	@RequestMapping(value = "/{mealPlanId}/edit", method = RequestMethod.POST)
 	public ModelAndView editDateMeal(@PathVariable(value = "mealPlanId") long mealPlanId,
