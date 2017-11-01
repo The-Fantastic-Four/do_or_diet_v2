@@ -10,9 +10,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class DoOrDietApplicationTests
 {
 
+	/** 
+	 *  Aðferð til að athuga hvort að forritið keyri.
+	 */
 	@Test
 	public void contextLoads()
 	{
 	}
-
 }
