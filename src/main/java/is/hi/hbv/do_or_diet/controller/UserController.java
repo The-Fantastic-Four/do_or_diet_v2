@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import is.hi.hbv.do_or_diet.model.User;
-import is.hi.hbv.do_or_diet.service.UserServiceImplementation;
+import is.hi.hbv.do_or_diet.service.UserServiceImp;
 
 @Controller
 public class UserController
 {
 	@Autowired
-	private UserServiceImplementation userService;
+	private UserServiceImp userService;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login()
@@ -48,9 +48,6 @@ public class UserController
 	public ModelAndView createNewUser(@RequestParam String username, String password, String email, ModelMap model)
 	{
 		User user = new User(username, password, email);
-		System.out.println("Username: " + user.getUsername());
-		System.out.println("Email: " + user.getEmail());
-		System.out.println("Password: " + user.getPassword());
 
 		ModelAndView modelAndView = new ModelAndView();
 		User userExists = userService.findUserByEmail(user.getEmail());

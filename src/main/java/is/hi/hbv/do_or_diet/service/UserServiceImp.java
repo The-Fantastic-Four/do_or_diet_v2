@@ -19,7 +19,7 @@ import is.hi.hbv.do_or_diet.repository.RoleRepository;
 import is.hi.hbv.do_or_diet.repository.UserRepository;
 
 @Service("userService")
-public class UserServiceImplementation implements UserService
+public class UserServiceImp implements UserService
 {
 
 	@Autowired

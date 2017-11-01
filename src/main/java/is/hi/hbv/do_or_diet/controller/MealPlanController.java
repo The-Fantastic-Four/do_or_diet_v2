@@ -16,6 +16,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -28,14 +30,12 @@ import org.springframework.web.servlet.ModelAndView;
 import is.hi.hbv.do_or_diet.model.MealPlan;
 import is.hi.hbv.do_or_diet.model.MealPlanItem;
 import is.hi.hbv.do_or_diet.model.MealPlanItemWrapper;
-import is.hi.hbv.do_or_diet.model.MealType;
 import is.hi.hbv.do_or_diet.model.Recipe;
-import is.hi.hbv.do_or_diet.repository.MealPlanItemRepository;
-import is.hi.hbv.do_or_diet.repository.MealPlanRepository;
-import is.hi.hbv.do_or_diet.repository.RecipeRepository;
+import is.hi.hbv.do_or_diet.model.User;
 import is.hi.hbv.do_or_diet.service.MealPlanItemService;
 import is.hi.hbv.do_or_diet.service.MealPlanService;
 import is.hi.hbv.do_or_diet.service.RecipeService;
+import is.hi.hbv.do_or_diet.service.UserService;
 
 @Controller
 @RequestMapping("/mealplan")
@@ -52,6 +52,10 @@ public class MealPlanController
 
 	@Autowired
 	MealPlanItemService mealPlanItemService;
+	
+	// Instance of the user repository used to get the current user
+	@Autowired
+	UserService userService;
 
 	/**
 	 * Index page for the meal plans, shows a list of meal plans
@@ -61,9 +65,10 @@ public class MealPlanController
 	 * @return
 	 */
 	@RequestMapping("")
-	public String indexPage(Model model)
+	public String indexPage(Model model, Authentication authentication)
 	{
-		addMealPlanListToModel(model);
+		User user = userService.findUserByEmail(authentication.getName());
+		addMealPlanListToModel(model, user);
 		return "mealplan/index";
 	}
 
@@ -71,6 +76,7 @@ public class MealPlanController
 	 * Creates a new meal plan, redirects to the index page upon creation
 	 * 
 	 * @param mName
+	 * 
 	 *            the meal plan name
 	 * @param fromDate
 	 *            is the date which the meal plan begins on
@@ -82,8 +88,9 @@ public class MealPlanController
 	 */
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String newMealPlan(@RequestParam(value = "mName", required = true) String mName, String fromDate,
-			String toDate, ModelMap model)
+			String toDate, Model model, Authentication authentication)
 	{
+		User user = userService.findUserByEmail(authentication.getName());
 
 		ArrayList<Date> dates = new ArrayList<Date>();
 		try
@@ -95,10 +102,10 @@ public class MealPlanController
 			e.printStackTrace();
 		}
 
-		MealPlan m = new MealPlan(mName, new ArrayList<MealPlanItem>(), dates);
+		MealPlan m = new MealPlan(mName, new ArrayList<MealPlanItem>(), dates, user);
 		mealPlanService.addMealPlan(m);
-		List<MealPlan> mealPlanList = mealPlanService.allMealPlans();
-		model.addAttribute("mealPlanList", mealPlanList);
+
+		addMealPlanListToModel(model, user);
 
 		return "mealplan/index";
 	}
@@ -113,9 +120,17 @@ public class MealPlanController
 	 * @return
 	 */
 	@RequestMapping("/{mealPlanId}")
-	public String showMealPlan(@PathVariable(value = "mealPlanId") long mealPlanId, ModelMap model)
+	public String showMealPlan(@PathVariable(value = "mealPlanId") long mealPlanId, ModelMap model, Authentication authentication)
 	{
-		model.addAttribute("mealPlan", mealPlanService.findMealPlan(mealPlanId));
+		User user = userService.findUserByEmail(authentication.getName());
+		MealPlan mealPlan = mealPlanService.findMealPlan(mealPlanId);
+		
+		if (mealPlan.getCreatedBy() != user)
+		{
+			throw new AccessDeniedException("Innskráður notandi hefur ekki aðgang að þessu matarplani");
+		}
+		
+		model.addAttribute("mealPlan", mealPlan);
 		model.addAttribute("recipeList", recipeService.allRecipes());
 		return "mealplan/show";
 	}
@@ -136,9 +151,16 @@ public class MealPlanController
 	@RequestMapping(value = "/{mealPlanId}/edit", method = RequestMethod.POST)
 	public ModelAndView editDateMeal(@PathVariable(value = "mealPlanId") long mealPlanId,
 			@RequestParam(value = "recipeId", required = true) long recipeId,
-			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateForRecipe, ModelMap model)
+			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateForRecipe, ModelMap model, Authentication authentication)
 	{
+		User user = userService.findUserByEmail(authentication.getName());
 		MealPlan mealPlan = mealPlanService.findMealPlan(mealPlanId);
+		
+		if (mealPlan.getCreatedBy() != user)
+		{
+			throw new AccessDeniedException("Innskráður notandi hefur ekki aðgang að þessu matarplani");
+		}
+		
 		Recipe newRecipe = recipeService.findRecipe(recipeId);
 		
 		MealPlanItemWrapper wrapper = new MealPlanItemWrapper(mealPlan, newRecipe, dateForRecipe);
@@ -153,9 +175,9 @@ public class MealPlanController
 	 * @param model
 	 *            the model which the list of meal plans is to be added to.
 	 */
-	private void addMealPlanListToModel(Model model)
+	private void addMealPlanListToModel(Model model, User user)
 	{
-		List<MealPlan> mealPlanList = mealPlanService.allMealPlans();
+		List<MealPlan> mealPlanList = mealPlanService.allMealPlans(user);
 		model.addAttribute("mealPlanList", mealPlanList);
 	}
 

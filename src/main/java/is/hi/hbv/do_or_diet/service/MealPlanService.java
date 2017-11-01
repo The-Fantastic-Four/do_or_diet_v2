@@ -3,6 +3,7 @@ package is.hi.hbv.do_or_diet.service;
 import java.util.List;
 
 import is.hi.hbv.do_or_diet.model.MealPlan;
+import is.hi.hbv.do_or_diet.model.User;
 
 /**
  * Service that connects to the meal plan repository
@@ -21,11 +22,12 @@ public interface MealPlanService
 	public void addMealPlan(MealPlan m);
 
 	/**
-	 * Fetches all of the meal plans from repository
+	 * Fetches all of the meal plans from repository created by user
 	 * 
+	 * @param user only fetch meal plans created by this user
 	 * @return list of meal plans
 	 */
-	public List<MealPlan> allMealPlans();
+	public List<MealPlan> allMealPlans(User user);
 
 	/**
 	 * Finds a meal plan in repository from meal plan ID

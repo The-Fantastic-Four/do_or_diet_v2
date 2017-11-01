@@ -71,11 +71,12 @@ public class MealPlan
 	 * @param dates
 	 *            list of dates on which the meal plan
 	 */
-	public MealPlan(String name, List<MealPlanItem> items, List<Date> dates)
+	public MealPlan(String name, List<MealPlanItem> items, List<Date> dates, User createdBy)
 	{
 		this.name = name;
 		this.items = items;
 		this.dates = dates;
+		this.createdBy = createdBy;
 	}
 
 	public long getId()

@@ -2,28 +2,59 @@
  * Describes a shopping list created from a meal plan
  * 
  * @author Eiður Örn Gunnarsson eog26@hi.is
+ * @author Viktor Alex Brynjarsson vab18@hi.is
  */
 package is.hi.hbv.do_or_diet.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name = "shopping_list")
 public class ShoppingList
 {
 
 	/**
 	 * Unique identifier for this shopping list
 	 */
+	@Id
+	@GeneratedValue(generator = "increment")
+	@GenericGenerator(name = "increment", strategy = "increment")
 	private long id;
 
 	/**
 	 * List of items on this shopping list
 	 */
-	private ArrayList<ShoppingListItem> items;
+	@OneToMany(mappedBy = "shoppingList")
+	private List<ShoppingListItem> items;
 
 	/**
 	 * The meal plan this shopping list was created from
 	 */
+	@ManyToOne
+	@JoinColumn(name = "meal_plan_id")
 	private MealPlan mealPlan;
+	
+	/**
+	 * The owner of this shopping list
+	 */
+	@ManyToOne
+	@JoinColumn(name = "user_owner_id")
+	private User owner;
+	
+	public ShoppingList()
+	{
+		
+	}
 
 	/**
 	 * Create a new shopping list
@@ -35,7 +66,7 @@ public class ShoppingList
 	 * @param mealPlan
 	 *            the meal plan this shopping list was created from
 	 */
-	public ShoppingList(long id, ArrayList<ShoppingListItem> items, MealPlan mealPlan)
+	public ShoppingList(long id, List<ShoppingListItem> items, MealPlan mealPlan)
 	{
 		this.id = id;
 		this.items = items;
@@ -52,12 +83,12 @@ public class ShoppingList
 		this.id = id;
 	}
 
-	public ArrayList<ShoppingListItem> getItems()
+	public List<ShoppingListItem> getItems()
 	{
 		return items;
 	}
 
-	public void setItems(ArrayList<ShoppingListItem> items)
+	public void setItems(List<ShoppingListItem> items)
 	{
 		this.items = items;
 	}
@@ -70,5 +101,15 @@ public class ShoppingList
 	public void setMealPlan(MealPlan mealPlan)
 	{
 		this.mealPlan = mealPlan;
+	}
+
+	public User getOwner()
+	{
+		return owner;
+	}
+
+	public void setOwner(User owner)
+	{
+		this.owner = owner;
 	}
 }
