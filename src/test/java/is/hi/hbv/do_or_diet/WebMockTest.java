@@ -1,10 +1,15 @@
+/**
+ * WebMockTest tests on the weblayer and uses WebMvcTest
+ * 
+ * @author Ragnheiður Ásta Karlsdóttir rak4@hi.is
+ * @author Viktor Alex Brynjarsson vab18@hi.is
+ * @date október 2017 HBV501G Hugbúnaðarverkefni 1
+ */
 package is.hi.hbv.do_or_diet;
 
-import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
@@ -18,7 +23,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import is.hi.hbv.do_or_diet.controller.UserController;
-import is.hi.hbv.do_or_diet.model.User;
 import is.hi.hbv.do_or_diet.service.UserService;
 
 @RunWith(SpringRunner.class)

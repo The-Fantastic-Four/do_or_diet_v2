@@ -1,3 +1,10 @@
+/**
+ * HttpRequestTest sends a url to a test web client
+ * 
+ * @author Ragnheiður Ásta Karlsdóttir rak4@hi.is
+ * @author Viktor Alex Brynjarsson vab18@hi.is
+ * @date október 2017 HBV501G Hugbúnaðarverkefni 1
+ */
 package is.hi.hbv.do_or_diet;
 
 import org.junit.Test;

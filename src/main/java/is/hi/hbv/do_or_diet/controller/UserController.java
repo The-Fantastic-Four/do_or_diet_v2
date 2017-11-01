@@ -4,6 +4,7 @@
  * @author Eiður Örn Gunnarsson eog26@hi.is
  * @author Ragnheiður Ásta Karlsdóttir rak4@hi.is
  * @author Viktor Alex Brynjarsson vab18@hi.is
+ * @date Október 2017
  */
 package is.hi.hbv.do_or_diet.controller;
 
@@ -19,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import is.hi.hbv.do_or_diet.model.User;
 import is.hi.hbv.do_or_diet.service.UserService;
-import is.hi.hbv.do_or_diet.service.UserServiceImp;
 
 @Controller
 public class UserController

@@ -1,29 +1,25 @@
+/**
+ * WebLayerTest tests on the weblayer and uses WebMvcTest
+ * 
+ * @author Ragnheiður Ásta Karlsdóttir rak4@hi.is
+ * @author Viktor Alex Brynjarsson vab18@hi.is
+ * @date október 2017 HBV501G Hugbúnaðarverkefni 1
+ */
 package is.hi.hbv.do_or_diet;
 
-import is.hi.hbv.do_or_diet.configuration.SecurityConfiguration;
-import is.hi.hbv.do_or_diet.configuration.WebMvcConfig;
 import is.hi.hbv.do_or_diet.controller.WelcomeController;
 
-import static javax.management.Query.value;
-import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.hamcrest.Matchers.containsString;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import org.springframework.security.test.context.support.WithMockUser;
 
