@@ -18,13 +18,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import is.hi.hbv.do_or_diet.model.User;
+import is.hi.hbv.do_or_diet.service.UserService;
 import is.hi.hbv.do_or_diet.service.UserServiceImp;
 
 @Controller
 public class UserController
 {
 	@Autowired
-	private UserServiceImp userService;
+	private UserService userService;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login()
