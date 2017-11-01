@@ -16,6 +16,13 @@
   <jsp:body>
       <div class="columns is-centered">
           <div class="column is-narrow">
+          	  <c:if test="${not empty successMessage}">
+          	    <article class="message is-success">
+				  <div class="message-body">
+					<c:out value="${successMessage}" />
+				  </div>
+			    </article>
+			  </c:if>
               <form autocomplete="off" action="#" th:action="/registration"
                   th:object="${user}" method="post" role="form">
                 <h3 class="title is-3">Nýskráning</h3>

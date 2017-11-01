@@ -54,7 +54,7 @@ public class UserController
 		if (userExists == null)
 		{
 			userService.saveUser(user);
-			modelAndView.addObject("successMessage", "User has been registered successfully");
+			modelAndView.addObject("successMessage", "Skráning tókst");
 			modelAndView.addObject("user", new User());
 			modelAndView.setViewName("registration");
 		}
