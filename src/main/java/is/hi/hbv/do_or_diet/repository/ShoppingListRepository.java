@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import is.hi.hbv.do_or_diet.model.MealPlan;
 import is.hi.hbv.do_or_diet.model.ShoppingList;
 import is.hi.hbv.do_or_diet.model.User;
 

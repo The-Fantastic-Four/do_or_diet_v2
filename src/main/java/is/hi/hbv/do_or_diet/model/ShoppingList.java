@@ -8,7 +8,6 @@ package is.hi.hbv.do_or_diet.model;
 
 import java.util.List;
 
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

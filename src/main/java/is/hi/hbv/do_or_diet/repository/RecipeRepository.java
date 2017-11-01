@@ -10,7 +10,6 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import is.hi.hbv.do_or_diet.model.MealPlan;
 import is.hi.hbv.do_or_diet.model.Recipe;
 
 public interface RecipeRepository extends JpaRepository<Recipe, Long>

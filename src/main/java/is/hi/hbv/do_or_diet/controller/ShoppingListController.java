@@ -5,12 +5,9 @@
  */
 package is.hi.hbv.do_or_diet.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.PermissionDeniedDataAccessException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -20,11 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import is.hi.hbv.do_or_diet.model.IngredientQuantity;
 import is.hi.hbv.do_or_diet.model.MealPlan;
-import is.hi.hbv.do_or_diet.model.MealPlanItem;
 import is.hi.hbv.do_or_diet.model.ShoppingList;
-import is.hi.hbv.do_or_diet.model.ShoppingListItem;
 import is.hi.hbv.do_or_diet.model.User;
 import is.hi.hbv.do_or_diet.service.MealPlanService;
 import is.hi.hbv.do_or_diet.service.ShoppingListService;
