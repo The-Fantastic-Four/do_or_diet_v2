@@ -14,6 +14,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
+ * Error controller that handles occurring HTTP errors
+ * 
  * @author Ebba Þóra Hvannberg
  * @author Modified by: Eiður Örn Gunnarsson eog26@hi.is
  * @date 31. okt. 2017

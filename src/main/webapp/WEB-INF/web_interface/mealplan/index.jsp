@@ -7,6 +7,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <t:genericpage>
   <jsp:attribute name="header">
@@ -42,11 +43,12 @@
       </div>
       <div class="column">
         <h3 class="title is-3">Nýtt matarplan</h3>
-        <form method="POST" action="">
+        <form:form method="POST" action="" modelAttribute="mealPlanForm">
           <div class="field">
-            <label class="label" for="mName">Hvað á matarplanið að heita?</label>
+            <form:label class="label" for="mName" path="name" >Hvað á matarplanið að heita?</form:label>
             <div class="control">
-              <input class="input" name="mName" type="text" placeholder="Heiti">
+              <form:input class="input" name="mName" path="name" type="text" placeholder="Heiti" />
+              <form:errors path="name" />
             </div>
           </div>
           <div class="field">
@@ -66,7 +68,7 @@
               <button class="button is-primary" type="submit">Skrá matarplan</button>
             </div>
           </div>
-        </form>
+        </form:form>
       </div>
     </div>
   </jsp:body>

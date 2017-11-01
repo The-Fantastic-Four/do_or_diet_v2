@@ -3,12 +3,6 @@
      	function addInput(divName){
      		if(counter < limit){
      			var newdiv = document.createElement('div');
-     			/*newdiv.innerHTML = '<div class="field"><label class="label">Fjöldi</label>';
-     			newdiv.innerHTML += '<div class="control"><input class="input" type="int" name="quantity" id="quantity' + counter + '"></div></div>';
-     			newdiv.innerHTML += '<div class="field"><label class="label">Hráefni ' +  (counter + 1) + '</label>';
-     			newdiv.innerHTML += '<div class="control"><input class="input" type="text" name="ingredients[name][0]" id="name' + counter + '" placeholder="Text input"></div></div>';
-     			newdiv.innerHTML += '<div class="field"><label class="label">Mælieining</label>';
-     			newdiv.innerHTML += '<div class="control"><input class="input" type="text" name="measurement" id="measurement' + counter + '"></div></div>' ;*/
      			newHtml = '<div class="field is-grouped">';
      			newHtml += '<div class="control"><input class="input" type="int" name="quantity" id="quantity' + counter + '" placeholder="Fjöldi"></div>';
      			newHtml += '<div class="control is-expanded"><input class="input" type="text" name="ingredients[name][0]" id="name' + counter + '" placeholder="Hráefni"></div>';
@@ -22,7 +16,33 @@
      		}
      	}
      	
-     	function saveRecipe(){
+     	function removeInput(divName)
+     	{
+     		if(counter > 0)
+     		{
+     			var list = document.getElementById(divName);
+     			list.removeChild(list.childNodes[counter]);	
+     			counter--;
+     		}
+     	}
+     	function saveRecipe()
+     	{
+     		
+     		if(document.getElementById('recipeName').value )
+     		{
+
+     		}else
+     		{
+     			alert("Uppskrift verður að heita eitthvað");
+     			return;
+     		}
+     		if(document.getElementById('directions').value)
+     		{
+     		}else
+     		{
+     			alert("Vinsamlegast fylltu inn leiðbeiningar");
+     			return;
+     		}
      		function ingredientQuantity(recipeName, ingredientName, measurement, quantity, directions, servings)
      		{		
          		this.recipeName = recipeName; 
@@ -49,5 +69,5 @@
      		   	xmlhttp.open("POST", "/recipe/ingredientQuantity");
     			xmlhttp.setRequestHeader("Content-Type", "application/json");
     		   	xmlhttp.send(JSON.stringify(array));
+    		window.location.href = "http://localhost:8080/recipe";   	
      	}
-     	
