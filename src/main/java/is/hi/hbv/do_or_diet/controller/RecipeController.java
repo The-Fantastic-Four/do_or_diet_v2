@@ -5,6 +5,7 @@
  * @author Eiður Örn Gunnarsson eog26@hi.is
  * @author Fannar Þeyr Guðmundsson fthg2@hi.is
  * @author Ragnheiður Ásta Karlsdóttir rak4@hi.is
+ * @date október 2017
  */
 package is.hi.hbv.do_or_diet.controller;
 

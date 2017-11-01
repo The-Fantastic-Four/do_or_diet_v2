@@ -2,6 +2,7 @@
  * IngredientQuantityWrap keeps wraps variables as one object from UI
  * 
  * @author Fannar Þeyr Guðmundsson fthg2@hi.is
+ * @date október 2017
  */
 package is.hi.hbv.do_or_diet.model;
 
