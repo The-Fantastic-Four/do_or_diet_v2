@@ -3,7 +3,7 @@
   <persistence-unit name="is.hi.hbv.do_or_diet.jpa" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/doordiet"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://doordiet.cntudlnkkc7a.eu-west-1.rds.amazonaws.com:5432/doordiet"/>
       <property name="javax.persistence.jdbc.user" value="doordietmaster"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
       <property name="javax.persistence.jdbc.password" value="dmxC$ZgYs!1o5Gh"/>
