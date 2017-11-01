@@ -45,7 +45,8 @@
 		 			<div class="field">
 		 					<label class="label">Nafn á uppskrift:</label>
 		 					<div class="control">
-		  						<input class="input" type="text" id="recipeName" placeholder="Lasagna">
+		  						<input class="input" type="text" id="recipeName" value="" placeholder="Lasagna">
+		  						<input type="hidden" id="recipeId" value="">
 		 					</div>
 					</div>
 					<div class="field">
@@ -62,6 +63,7 @@
 					</div>
 					<div class="field is-grouped">
 		      			<p class="control"><input type="button" class="button" value="Bæta við hráefni" onClick="addInput('ingredientDiv')" /></p>
+		      			<p class="control"><input type="button" class="button" value="Fjarlægja hráefni" onClick="removeInput('ingredientDiv')" /></p>
 		      			<p class="control"><input type="button" class="button is-primary" value="Vista" onClick="saveRecipe()" /></p>
 		      		</div>
 		   		</form>

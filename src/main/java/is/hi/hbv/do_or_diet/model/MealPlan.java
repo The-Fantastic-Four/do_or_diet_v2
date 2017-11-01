@@ -15,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -35,6 +37,8 @@ public class MealPlan
 	/**
 	 * Name of the meal plan
 	 */
+	@NotNull
+	@Size(min=1, max=35, message="Lengd nafns þarf að vera á bilinu 1-35")
 	private String name;
 
 	/**
