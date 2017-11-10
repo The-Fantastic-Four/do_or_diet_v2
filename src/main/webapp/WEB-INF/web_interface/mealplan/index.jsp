@@ -34,8 +34,8 @@
             <c:forEach items="${mealPlanList}" var="mPlan">
               <tr>
                 <td><a href="/mealplan/${mPlan.id}"><c:out value="${mPlan.getName()}" /></a></td>
-                <td><c:out value="${mPlan.getDateFrom()}" /></td>
-                <td><c:out value="${mPlan.getDateTo()}" /></td>
+                <td><c:out value="${mPlan.getDateFrom().toString().substring(0,10)}" /></td>
+                <td><c:out value="${mPlan.getDateTo().toString().substring(0,10)}" /></td>
               </tr>
             </c:forEach>
           </tbody>
