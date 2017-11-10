@@ -37,7 +37,7 @@ public class MealPlan
 	/**
 	 * Name of the meal plan
 	 */
-	@NotNull
+	@NotNull(message = "Þessi reitur má ekki vera tómur.")
 	@Size(min = 1, max = 35, message = "Lengd nafns þarf að vera á bilinu 1-35")
 	private String name;
 

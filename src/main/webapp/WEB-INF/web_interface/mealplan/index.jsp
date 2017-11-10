@@ -52,15 +52,17 @@
             </div>
           </div>
           <div class="field">
-            <label class="label" for="fromDate">Tímabil frá</label>
+            <form:label class="label" for="fromDate" path="fromDate">Tímabil frá</form:label>
             <div class="control">
-              <input class="input" name="fromDate" type="text" placeholder="DD/MM/YYYY" />
+              <form:input class="input" name="fromDate" path="fromDate" type="text" placeholder="DD/MM/YYYY" />
+              <form:errors path="fromDate" />
             </div>
           </div>
           <div class="field">
-            <label class="label" for="toDate">Tímabil til</label>
+            <form:label class="label" for="toDate" path="toDate">Tímabil til</form:label>
             <div class="control">
-              <input class="input" name="toDate" type="text" placeholder="DD/MM/YYYY" />
+              <form:input class="input" name="toDate" path="toDate" type="text" placeholder="DD/MM/YYYY" />
+              <form:errors path="toDate" />
             </div>
           </div>
           <div class="field">
