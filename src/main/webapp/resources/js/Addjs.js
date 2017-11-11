@@ -70,5 +70,5 @@
      		   	xmlhttp.open("POST", "/recipe/ingredientQuantity");
     			xmlhttp.setRequestHeader("Content-Type", "application/json");
     		   	xmlhttp.send(JSON.stringify(array));
-    		window.location.href = "http://localhost:8080/recipe";   	
+    		window.location.href = "/recipe";   	
      	}
