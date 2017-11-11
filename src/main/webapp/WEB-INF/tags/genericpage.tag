@@ -11,7 +11,7 @@
 	<head>
 		<meta charset="utf-8">	
 	    <title>Do or Diet!</title>
-	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.min.css" type="text/css">
+	    <link rel="stylesheet" href="/resources/css/bulma_custom.css" type="text/css">
 	    <link rel="stylesheet" href="/resources/css/styles.css" type="text/css" />
 	</head>
 	
