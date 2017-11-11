@@ -4,7 +4,7 @@
 -->
 <%@tag description="Generic template" pageEncoding="UTF-8"%>
 <%@attribute name="header" fragment="true" %>
-<!--%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %-->
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="is">
 
@@ -31,11 +31,13 @@
 		      <a class="navbar-item" href="/shoppinglist">Innkaupalistar</a>
 		    </div>
 		    <div class="navbar-end">
-          <!-- sec:authorize access="isAuthenticated()">
-            <a class="navbar-item" href="#">Loggaður inn</a>
-          </sec:authorize-->
+	          <sec:authorize access="isAuthenticated()">
+	            <a class="navbar-item" href="/logout">Útskráning</a>
+	          </sec:authorize>
+	          <sec:authorize access="!isAuthenticated()">
 		      <a class="navbar-item" href="/login">Innskráning</a>
 		      <a class="navbar-item" href="/registration">Nýskráning</a>
+	          </sec:authorize>
 		    </div>
 		  </div>
 		</div>
