@@ -125,7 +125,7 @@ public class RecipeController
 	}
 	
 	@RequestMapping(value = "/changeRecipe", method = RequestMethod.POST)
-	public String changeRecipe(@RequestParam(value="/changeRecipe")  Recipe recipe,	ModelMap model)
+	public String changeRecipe(@RequestParam(value="recipe")  Recipe recipe,	ModelMap model)
 	{
 		System.out.println("Bla");
 		model.addAttribute(recipe);
