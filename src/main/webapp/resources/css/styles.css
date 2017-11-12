@@ -1,5 +1,22 @@
-.hero .navbar {
+.hero .navbar,
+.hero .navbar-menu {
 	background-color: rgba(0, 0, 0, 0.3);
+}
+
+.navbar-burger {
+	background: transparent;
+	border: none;
+	margin-right: 6px;
+}
+
+.navbar-burger:focus:not(:active),
+.navbar-burger.is-focused:not(:active) {
+	box-shadow: 0 0 0 0.125em rgba(255, 255, 255, 0.25);
+}
+
+.navbar-burger span {
+	background-color: #ffffff;
+	height: 2px;
 }
 
 .navbar-item {
