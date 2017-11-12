@@ -10,7 +10,7 @@ import is.hi.hbv.do_or_diet.model.User;
 public interface ShoppingListRepository extends JpaRepository<ShoppingList, Long>
 {
 	List<ShoppingList> findAll();
-	
+
 	List<ShoppingList> findByOwner(User owner);
 
 	ShoppingList findOne(Long id);

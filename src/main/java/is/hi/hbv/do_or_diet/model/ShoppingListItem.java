@@ -56,10 +56,10 @@ public class ShoppingListItem
 	@ManyToOne
 	@JoinColumn(name = "shopping_list_id")
 	private ShoppingList shoppingList;
-	
+
 	public ShoppingListItem()
 	{
-		
+
 	}
 
 	/**
@@ -134,7 +134,7 @@ public class ShoppingListItem
 	{
 		this.checked = checked;
 	}
-	
+
 	public void setShoppingList(ShoppingList shoppingList)
 	{
 		this.shoppingList = shoppingList;

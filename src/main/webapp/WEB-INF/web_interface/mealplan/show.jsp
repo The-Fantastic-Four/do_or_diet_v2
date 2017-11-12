@@ -34,7 +34,7 @@
             <c:forEach items="${mealPlan.items}" var="items">
               <tr>
                 <td><a href="/recipe/${items.recipe.id}"><c:out value="${items.recipe.getName()}" /></a></td>
-                <td><c:out value="${items.date}" /></td>
+                <td><c:out value="${items.date.toString().substring(0,10)}" /></td>
                 <td><c:out value="${items.mealType.displayName}" /></td>
               </tr>
             </c:forEach>
@@ -76,6 +76,7 @@
             </div>
           </div>
         </form>
+        <br>
         <h3 class="title is-3">Útbúa innkaupalista</h3>
         <div class="field">
           <div class="control">

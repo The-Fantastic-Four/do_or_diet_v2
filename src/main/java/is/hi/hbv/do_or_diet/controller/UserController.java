@@ -4,6 +4,7 @@
  * @author Eiður Örn Gunnarsson eog26@hi.is
  * @author Ragnheiður Ásta Karlsdóttir rak4@hi.is
  * @author Viktor Alex Brynjarsson vab18@hi.is
+ * @date Október 2017
  */
 package is.hi.hbv.do_or_diet.controller;
 
@@ -18,13 +19,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import is.hi.hbv.do_or_diet.model.User;
-import is.hi.hbv.do_or_diet.service.UserServiceImp;
+import is.hi.hbv.do_or_diet.service.UserService;
 
 @Controller
 public class UserController
 {
 	@Autowired
-	private UserServiceImp userService;
+	private UserService userService;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login()
@@ -48,7 +49,7 @@ public class UserController
 	public ModelAndView createNewUser(@RequestParam String username, String password, String email, ModelMap model)
 	{
 		User user = new User(username, password, email);
-
+		System.out.println("Numero uno");
 		ModelAndView modelAndView = new ModelAndView();
 		User userExists = userService.findUserByEmail(user.getEmail());
 		if (userExists == null)
@@ -57,6 +58,7 @@ public class UserController
 			modelAndView.addObject("successMessage", "Skráning tókst");
 			modelAndView.addObject("user", new User());
 			modelAndView.setViewName("registration");
+			System.out.println("Numero dos");
 		}
 		return modelAndView;
 	}

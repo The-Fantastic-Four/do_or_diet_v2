@@ -34,8 +34,8 @@
             <c:forEach items="${mealPlanList}" var="mPlan">
               <tr>
                 <td><a href="/mealplan/${mPlan.id}"><c:out value="${mPlan.getName()}" /></a></td>
-                <td><c:out value="${mPlan.getDateFrom()}" /></td>
-                <td><c:out value="${mPlan.getDateTo()}" /></td>
+                <td><c:out value="${mPlan.getDateFrom().toString().substring(0,10)}" /></td>
+                <td><c:out value="${mPlan.getDateTo().toString().substring(0,10)}" /></td>
               </tr>
             </c:forEach>
           </tbody>
@@ -52,15 +52,17 @@
             </div>
           </div>
           <div class="field">
-            <label class="label" for="fromDate">Tímabil frá</label>
+            <form:label class="label" for="fromDate" path="fromDate">Tímabil frá</form:label>
             <div class="control">
-              <input class="input" name="fromDate" type="text" placeholder="DD/MM/YYYY" />
+              <form:input class="input" name="fromDate" path="fromDate" type="text" placeholder="DD/MM/YYYY" />
+              <form:errors path="fromDate" />
             </div>
           </div>
           <div class="field">
-            <label class="label" for="toDate">Tímabil til</label>
+            <form:label class="label" for="toDate" path="toDate">Tímabil til</form:label>
             <div class="control">
-              <input class="input" name="toDate" type="text" placeholder="DD/MM/YYYY" />
+              <form:input class="input" name="toDate" path="toDate" type="text" placeholder="DD/MM/YYYY" />
+              <form:errors path="toDate" />
             </div>
           </div>
           <div class="field">

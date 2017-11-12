@@ -1,5 +1,5 @@
 <!--
-	Index page for the site 
+	Error page for the site 
 	@author Viktor Alex Brynjarsson vab18@hi.is
 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>

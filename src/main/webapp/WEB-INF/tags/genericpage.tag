@@ -4,14 +4,14 @@
 -->
 <%@tag description="Generic template" pageEncoding="UTF-8"%>
 <%@attribute name="header" fragment="true" %>
-<!--%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %-->
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="is">
 
 	<head>
 		<meta charset="utf-8">	
 	    <title>Do or Diet!</title>
-	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.min.css" type="text/css">
+	    <link rel="stylesheet" href="/resources/css/bulma_custom.css" type="text/css">
 	    <link rel="stylesheet" href="/resources/css/styles.css" type="text/css" />
 	</head>
 	
@@ -31,11 +31,13 @@
 		      <a class="navbar-item" href="/shoppinglist">Innkaupalistar</a>
 		    </div>
 		    <div class="navbar-end">
-          <!-- sec:authorize access="isAuthenticated()">
-            <a class="navbar-item" href="#">Loggaður inn</a>
-          </sec:authorize-->
+	          <sec:authorize access="isAuthenticated()">
+	            <a class="navbar-item" href="/logout">Útskráning</a>
+	          </sec:authorize>
+	          <sec:authorize access="!isAuthenticated()">
 		      <a class="navbar-item" href="/login">Innskráning</a>
 		      <a class="navbar-item" href="/registration">Nýskráning</a>
+	          </sec:authorize>
 		    </div>
 		  </div>
 		</div>

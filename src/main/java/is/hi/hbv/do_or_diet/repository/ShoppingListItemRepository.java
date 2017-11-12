@@ -15,6 +15,6 @@ public interface ShoppingListItemRepository extends JpaRepository<ShoppingListIt
 	// Suppressed as teacher had same warning and had not fixed it
 	@SuppressWarnings("unchecked")
 	ShoppingListItem save(ShoppingListItem m);
-	
+
 	List<ShoppingListItem> save(List<ShoppingListItem> items);
 }

@@ -24,40 +24,45 @@ import org.springframework.web.servlet.ModelAndView;
 public class ErrorControllerImp implements ErrorController
 {
 	private static final String PATH = "/error";
-	
+
 	@Autowired
 	private ErrorAttributes errorAttributes;
-	
+
 	/**
 	 * Responds to an invalid URL request
 	 * 
-	 * @param request the request containing an error
+	 * @param request
+	 *            the request containing an error
 	 * @return response to the error
 	 */
 	@RequestMapping(value = PATH)
-    public ModelAndView errorOccurance(HttpServletRequest request) {
-        return new ModelAndView("errorPage", "attrs", getErrorAttributes(request, false));
-    }
-	
+	public ModelAndView errorOccurance(HttpServletRequest request)
+	{
+		return new ModelAndView("errorPage", "attrs", getErrorAttributes(request, false));
+	}
+
 	/**
 	 * Returns the PATH for the error
 	 */
 	@Override
-    public String getErrorPath() {
-        return PATH;
-    } 
-	
+	public String getErrorPath()
+	{
+		return PATH;
+	}
+
 	/**
 	 * Fetches the error attribute that came from the HTTP request
 	 * 
-	 * @param request the HTTP request
-	 * @param includeStackTrace if true, returns stack trace. Otherwise it does not
-	 * @return set containing the name and value of error attributes linked together.
+	 * @param request
+	 *            the HTTP request
+	 * @param includeStackTrace
+	 *            if true, returns stack trace. Otherwise it does not
+	 * @return set containing the name and value of error attributes linked
+	 *         together.
 	 */
-	private Map<String, Object> getErrorAttributes(HttpServletRequest request,
-			boolean includeStackTrace) {
+	private Map<String, Object> getErrorAttributes(HttpServletRequest request, boolean includeStackTrace)
+	{
 		RequestAttributes requestAttributes = new ServletRequestAttributes(request);
-		return this.errorAttributes.getErrorAttributes(requestAttributes,
-				includeStackTrace);
+		return this.errorAttributes.getErrorAttributes(requestAttributes, includeStackTrace);
 	}
 }

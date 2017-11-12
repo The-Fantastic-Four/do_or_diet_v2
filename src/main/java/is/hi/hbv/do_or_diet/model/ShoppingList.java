@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -35,6 +36,7 @@ public class ShoppingList
 	 * List of items on this shopping list
 	 */
 	@OneToMany(mappedBy = "shoppingList")
+	@OrderBy("itemName ASC")
 	private List<ShoppingListItem> items;
 
 	/**
@@ -43,17 +45,17 @@ public class ShoppingList
 	@ManyToOne
 	@JoinColumn(name = "meal_plan_id")
 	private MealPlan mealPlan;
-	
+
 	/**
 	 * The owner of this shopping list
 	 */
 	@ManyToOne
 	@JoinColumn(name = "user_owner_id")
 	private User owner;
-	
+
 	public ShoppingList()
 	{
-		
+
 	}
 
 	/**

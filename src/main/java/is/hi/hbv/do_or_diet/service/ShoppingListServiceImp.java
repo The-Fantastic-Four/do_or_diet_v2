@@ -20,7 +20,7 @@ public class ShoppingListServiceImp implements ShoppingListService
 {
 	@Autowired
 	ShoppingListRepository shoppingListRepository;
-	
+
 	@Autowired
 	ShoppingListItemRepository shoppingListItemRepository;
 
@@ -31,39 +31,39 @@ public class ShoppingListServiceImp implements ShoppingListService
 		sl.setOwner(owner);
 		sl.setMealPlan(mealPlan);
 		sl = shoppingListRepository.save(sl);
-		
+
 		HashMap<String, ShoppingListItem> items = new HashMap<>();
 		for (MealPlanItem mealPlanItem : mealPlan.getItems())
 		{
 			if (mealPlanItem.getRecipe() == null || mealPlanItem.getRecipe().getIngredients() == null)
 				continue;
-			
+
 			for (IngredientQuantity ingredient : mealPlanItem.getRecipe().getIngredients())
 			{
 				if (ingredient.getIngredient() == null)
 					continue;
-				
+
 				String ingredientName = ingredient.getIngredient().getName();
 				String hashKey = ingredientName + ingredient.getMeasurement();
-				
+
 				ShoppingListItem item = null;
 				if (items.containsKey(hashKey))
 					item = items.get(hashKey);
 				else
 					item = new ShoppingListItem();
-				
+
 				item.setAmount(item.getAmount() + ingredient.getQuantity());
 				item.setChecked(false);
 				item.setItemName(ingredient.getIngredient().getName());
 				item.setMeasurement(ingredient.getMeasurement());
 				item.setShoppingList(sl);
-	
+
 				items.put(hashKey, item);
 			}
 		}
 		List<ShoppingListItem> itemList = shoppingListItemRepository.save(items.values());
 		sl.setItems(itemList);
-		
+
 		return sl;
 	}
 

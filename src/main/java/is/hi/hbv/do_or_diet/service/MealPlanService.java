@@ -24,7 +24,8 @@ public interface MealPlanService
 	/**
 	 * Fetches all of the meal plans from repository created by user
 	 * 
-	 * @param user only fetch meal plans created by this user
+	 * @param user
+	 *            only fetch meal plans created by this user
 	 * @return list of meal plans
 	 */
 	public List<MealPlan> allMealPlans(User user);
@@ -32,7 +33,8 @@ public interface MealPlanService
 	/**
 	 * Finds a meal plan in repository from meal plan ID
 	 * 
-	 * @param id of meal plan
+	 * @param id
+	 *            of meal plan
 	 * @return meal plan with the appropriate ID
 	 */
 	public MealPlan findMealPlan(long id);

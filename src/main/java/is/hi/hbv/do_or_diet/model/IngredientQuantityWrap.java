@@ -16,15 +16,14 @@ public class IngredientQuantityWrap
 	private String categories;
 	private String directions;
 	private int servings;
-	
 
-	
 	public IngredientQuantityWrap()
 	{
-		
+
 	}
-	
-	public IngredientQuantityWrap(String recipeName, String ingredientName, String measurement, int quantity, String categories, String directions, int servings)
+
+	public IngredientQuantityWrap(String recipeName, String ingredientName, String measurement, int quantity,
+			String categories, String directions, int servings)
 	{
 		this.recipeName = recipeName;
 		this.quantity = quantity;

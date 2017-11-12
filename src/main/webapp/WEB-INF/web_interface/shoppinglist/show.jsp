@@ -20,15 +20,15 @@
     <div class="columns">
       <div class="column">
         <h3 class="title is-3">Innkaup</h3>
-        <table class="table table is-fullwidth is-striped is-hoverable">
-          <!--thead>
+        <table class="table table is-striped is-hoverable">
+          <thead>
           <tr>
             <th>&nbsp;</th>
             <th>Heiti</th>
-            <th></th>
-            <th>Máltíð</th>
+            <th>Magn</th>
+            <th>Mælieining</th>
           </tr>
-          </thead-->
+          </thead>
           <tbody>
             <c:forEach items="${shoppingList.getItems()}" var="item">
               <tr>

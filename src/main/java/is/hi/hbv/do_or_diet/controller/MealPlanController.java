@@ -3,7 +3,7 @@
  * 
  * @author Eiður Örn Gunnarsson eog26@hi.is
  * @author Viktor Alex Brynjarsson vab18@hi.is
- * @date   01. nov. 2017
+ * @date 10. nov. 2017
  */
 package is.hi.hbv.do_or_diet.controller;
 
@@ -35,6 +35,7 @@ import org.springframework.web.servlet.ModelAndView;
 import is.hi.hbv.do_or_diet.model.MealPlan;
 import is.hi.hbv.do_or_diet.model.MealPlanItem;
 import is.hi.hbv.do_or_diet.model.MealPlanItemWrapper;
+import is.hi.hbv.do_or_diet.model.NewMealPlanForm;
 import is.hi.hbv.do_or_diet.model.Recipe;
 import is.hi.hbv.do_or_diet.model.User;
 import is.hi.hbv.do_or_diet.service.MealPlanItemService;
@@ -57,7 +58,7 @@ public class MealPlanController
 
 	@Autowired
 	MealPlanItemService mealPlanItemService;
-	
+
 	// Instance of the user repository used to get the current user
 	@Autowired
 	UserService userService;
@@ -74,35 +75,43 @@ public class MealPlanController
 	{
 		User user = userService.findUserByEmail(authentication.getName());
 		addMealPlanListToModel(model, user);
-		model.addAttribute("mealPlanForm", new MealPlan());
+		model.addAttribute("mealPlanForm", new NewMealPlanForm());
 		return "mealplan/index";
 	}
 
 	/**
 	 * Creates a new meal plan, redirects to the index page upon creation
 	 * 
-	 * @param mealPlan object containing the name of the meal plan
-	 * @param errors obtained from validation
-	 * @param fromDate is the date which the meal plan begins on
-	 * @param toDate is the date which the meal plan ends on
-	 * @param model the model that contains all the necessary information
+	 * @param mealPlan
+	 *            object containing the name of the meal plan
+	 * @param errors
+	 *            obtained from validation
+	 * @param fromDate
+	 *            is the date which the meal plan begins on
+	 * @param toDate
+	 *            is the date which the meal plan ends on
+	 * @param model
+	 *            the model that contains all the necessary information
 	 * @param authentication
-	 * @return site that displays meal plans including the new one if successfully created
+	 * @return site that displays meal plans including the new one if successfully
+	 *         created
 	 */
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public String newMealPlan(
-			@Valid 
-			@ModelAttribute("mealPlanForm") 
-			MealPlan mealPlan, BindingResult errors, 
-			String fromDate, String toDate, Model model, 
-			Authentication authentication)
+	public String newMealPlan(@Valid @ModelAttribute("mealPlanForm") NewMealPlanForm mealPlan, BindingResult errors,
+			Model model, Authentication authentication)
 	{
+		System.out.println(mealPlan.getName());
+		System.out.println(mealPlan.getFromDate());
+		System.out.println(mealPlan.getToDate());
+		
 		User user = userService.findUserByEmail(authentication.getName());
-		if(!errors.hasErrors()) {
+		if (!errors.hasErrors())
+		{
 			ArrayList<Date> dates = new ArrayList<Date>();
 			try
 			{
-				dates = generateDatesBetween(convertToDate(fromDate), convertToDate(toDate));
+				dates = generateDatesBetween(convertToDate(mealPlan.getFromDate()),
+						convertToDate(mealPlan.getToDate()));
 			}
 			catch (ParseException e)
 			{
@@ -128,16 +137,17 @@ public class MealPlanController
 	 * @return more detailed information for the specified meal plan
 	 */
 	@RequestMapping("/{mealPlanId}")
-	public String showMealPlan(@PathVariable(value = "mealPlanId") long mealPlanId, ModelMap model, Authentication authentication)
+	public String showMealPlan(@PathVariable(value = "mealPlanId") long mealPlanId, ModelMap model,
+			Authentication authentication)
 	{
 		User user = userService.findUserByEmail(authentication.getName());
 		MealPlan mealPlan = mealPlanService.findMealPlan(mealPlanId);
-		
+
 		if (mealPlan.getCreatedBy() != user)
 		{
 			throw new AccessDeniedException("Innskráður notandi hefur ekki aðgang að þessu matarplani");
 		}
-		
+
 		model.addAttribute("mealPlan", mealPlan);
 		model.addAttribute("recipeList", recipeService.allRecipes());
 		return "mealplan/show";
@@ -159,18 +169,19 @@ public class MealPlanController
 	@RequestMapping(value = "/{mealPlanId}/edit", method = RequestMethod.POST)
 	public ModelAndView editDateMeal(@PathVariable(value = "mealPlanId") long mealPlanId,
 			@RequestParam(value = "recipeId", required = true) long recipeId,
-			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateForRecipe, ModelMap model, Authentication authentication)
+			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateForRecipe, ModelMap model,
+			Authentication authentication)
 	{
 		User user = userService.findUserByEmail(authentication.getName());
 		MealPlan mealPlan = mealPlanService.findMealPlan(mealPlanId);
-		
+
 		if (mealPlan.getCreatedBy() != user)
 		{
 			throw new AccessDeniedException("Innskráður notandi hefur ekki aðgang að þessu matarplani");
 		}
-		
+
 		Recipe newRecipe = recipeService.findRecipe(recipeId);
-		
+
 		MealPlanItemWrapper wrapper = new MealPlanItemWrapper(mealPlan, newRecipe, dateForRecipe);
 		mealPlanItemService.addMealPlanItem(wrapper);
 
