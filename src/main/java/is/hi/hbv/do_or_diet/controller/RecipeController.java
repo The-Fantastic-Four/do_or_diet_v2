@@ -1,6 +1,5 @@
-
 /**
- * RecipieController enables the user to interact with recipies
+ * RecipieController enables the user to interact with recipes
  * 
  * @author Eiður Örn Gunnarsson eog26@hi.is
  * @author Fannar Þeyr Guðmundsson fthg2@hi.is
@@ -12,6 +11,7 @@ package is.hi.hbv.do_or_diet.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -27,9 +27,11 @@ import is.hi.hbv.do_or_diet.model.IngredientQuantity;
 import is.hi.hbv.do_or_diet.model.IngredientQuantityWrap;
 import is.hi.hbv.do_or_diet.model.IngredientType;
 import is.hi.hbv.do_or_diet.model.Recipe;
+import is.hi.hbv.do_or_diet.model.User;
 import is.hi.hbv.do_or_diet.service.IngredientQuantityService;
 import is.hi.hbv.do_or_diet.service.IngredientTypeService;
 import is.hi.hbv.do_or_diet.service.RecipeService;
+import is.hi.hbv.do_or_diet.service.UserService;
 
 @Controller
 @RequestMapping("/recipe")
@@ -38,6 +40,10 @@ public class RecipeController
 	// Instance of the recipe service, used to get and create recipes
 	@Autowired
 	RecipeService recipeService;
+	
+	// Instance of the user service, used to manage user accounts
+	@Autowired
+	UserService userService;
 
 	// Instance of the ingredientType service, used to get and save ingredientTypes
 	@Autowired
@@ -50,9 +56,14 @@ public class RecipeController
 
 	// Index page for the recipes, shows a list of recipes
 	@RequestMapping("")
-	public String index(Model model)
+	public String index(Model model, Authentication authentication)
 	{
-		getRecipes(model);
+		User user = null;
+		if(authentication != null)
+		{
+			user = userService.findUserByEmail(authentication.getName());
+		}
+		getRecipes(model, user);
 		return "recipe/index";
 	}
 
@@ -142,8 +153,14 @@ public class RecipeController
 	 *              IngredientQuantity relies on id of recipe and ingredient.
 	 */
 	@RequestMapping(value = "/ingredientQuantity", method = RequestMethod.POST)
-	public ModelAndView addIngredientQuantity(@RequestBody IngredientQuantityWrap[] wrapArr, Model model)
+	public ModelAndView addIngredientQuantity(@RequestBody IngredientQuantityWrap[] wrapArr, Model model, Authentication authentication)
 	{
+		User user = null;
+		if(authentication != null)
+		{
+			user = userService.findUserByEmail(authentication.getName());
+		}
+		
 		for (int i = 0; i < wrapArr.length; i++)
 		{
 			IngredientQuantity t = new IngredientQuantity();
@@ -153,7 +170,7 @@ public class RecipeController
 			}
 			else
 			{
-				t.setRecipe(setNewRecipe(wrapArr[0]));
+				t.setRecipe(setNewRecipe(wrapArr[0], user));
 			}
 			IngredientQuantityWrap wrap = wrapArr[i];
 			if (doesIngredientExist(wrap) == true)
@@ -168,15 +185,21 @@ public class RecipeController
 			t.setQuantity(wrap.getQuantity());
 			ingredientQuantities.addIngredientQuantity(t);
 		}
-		getRecipes(model);
+		
 		return new ModelAndView("redirect:/index");
 	}
 
 	// gets recipes from recipeRepository and adds to model
-	public void getRecipes(Model model)
+	public void getRecipes(Model model, User user)
 	{
 		List<Recipe> recipeList = recipeService.allRecipes();
 		model.addAttribute("recipeList", recipeList);
+		
+		if (user != null)
+		{
+			List<Recipe> myRecipeList = recipeService.myRecipes(user);
+			model.addAttribute("myRecipeList", myRecipeList);
+		}
 	}
 
 	// finds existing recipies and checks if this recipe is already in database.
@@ -227,13 +250,14 @@ public class RecipeController
 	}
 
 	// saves recipe from UI to database
-	public Recipe setNewRecipe(IngredientQuantityWrap k)
+	public Recipe setNewRecipe(IngredientQuantityWrap k, User user)
 	{
 		Recipe newRecipe = new Recipe();
 		newRecipe.setName(k.getRecipeName());
 		newRecipe.setDirections(k.getDirections());
 		newRecipe.setServings(k.getServings());
-		newRecipe.setIs_private(false);
+		newRecipe.setPrivate(false);
+		newRecipe.setCreatedBy(user);
 		recipeService.addRecipe(newRecipe);
 		return newRecipe;
 	}

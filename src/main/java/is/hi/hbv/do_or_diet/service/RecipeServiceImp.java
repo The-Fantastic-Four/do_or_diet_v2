@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import is.hi.hbv.do_or_diet.model.Recipe;
+import is.hi.hbv.do_or_diet.model.User;
 import is.hi.hbv.do_or_diet.repository.RecipeRepository;
 
 /**
@@ -34,6 +35,12 @@ public class RecipeServiceImp implements RecipeService
 	}
 
 	@Override
+	public List<Recipe> myRecipes(User user)
+	{
+		return recipeRep.findByCreatedBy(user);
+	}
+
+	@Override
 	public List<Recipe> findRecipeContaining(String recipeName)
 	{
 		return recipeRep.findByNameContaining(recipeName);
@@ -44,5 +51,4 @@ public class RecipeServiceImp implements RecipeService
 	{
 		return recipeRep.findOne(id);
 	}
-
 }
