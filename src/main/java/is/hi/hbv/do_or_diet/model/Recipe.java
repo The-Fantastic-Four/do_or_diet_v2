@@ -36,6 +36,11 @@ public class Recipe
 	private String name;
 
 	/**
+	 * boolean value if recipe should be visible or not
+	 */
+	private boolean is_private;
+
+	/**
 	 * The categories this recipe belongs to
 	 */
 	@ElementCollection
@@ -79,17 +84,25 @@ public class Recipe
 	 *            list of ingredients needed to cook this recipe
 	 */
 	public Recipe(long id, String name, List<String> categories, String directions, int servings,
-			List<IngredientQuantity> ingredients)
+			List<IngredientQuantity> ingredients, boolean is_private)
 	{
 		this.id = id;
-
 		this.name = name;
 		this.categories = categories;
 		this.directions = directions;
 		this.servings = servings;
 		this.ingredients = ingredients;
+		this.is_private = is_private;
 	}
-
+	
+	public void setIs_private(boolean is_private)
+	{
+		this.is_private = is_private;
+	}
+	public boolean  getIs_private()
+	{
+		return is_private;
+	}
 	public long getId()
 	{
 		return id;

@@ -31,17 +31,14 @@
   	  		  </thead>
   	  		  <tbody>
   	  			<tr>
-				  <td><c:out value="${recipe.name}" /></td>
-				  <td><c:out value="${recipe.servings}" /></td>
-			   	  <td><c:out value="${recipe.directions}" /></td>
+				  <td contenteditable="True" id="recipeName"><c:out value="${recipe.name}" /></td>
+				  <td contenteditable="True" id="servings"><c:out value="${recipe.servings}" /></td>
+			   	  <td contenteditable="True" id="directions"><c:out value="${recipe.directions}" /></td>
 				</tr>
 			  </tbody>
 			</table>
 		  </div>
 		  <div class = "one-third column">
-		  	<form action="" th:action="@{/changeRecipe}" th:object="${recipe}" method="post">
-		  		<button name="changeRecipe" type="submit">Breyta uppskrift</button>
-	  		</form>
 		  	<table class="table table is-fullwidth is-striped is-hoverable">
 		  		<thead>
 				  	<tr>
@@ -53,12 +50,17 @@
 		   	    <tbody>
 					<c:forEach items="${recipe.ingredients}" var="IngrtQuantity">
 		   			  <tr>
-	 	   	   		 	 <td><c:out value="${IngrtQuantity.ingredient.name}" /></a></td>
-	  	   				 <td><c:out value="${IngrtQuantity.quantity}" /></td>
-	  	   		   	 	 <td><c:out value="${IngrtQuantity.measurement}" /></td>
+	 	   	   		 	 <td contenteditable="True" id="name"><c:out value="${IngrtQuantity.ingredient.name}" /></a></td>
+	  	   				 <td contenteditable="True" id="quantity"><c:out value="${IngrtQuantity.quantity}" /></td>
+	  	   		   	 	 <td contenteditable="True" id="measurement"><c:out value="${IngrtQuantity.measurement}" /></td>
 	  	  			  </tr>
 			    	 </c:forEach>
 				</tbody>
+				<foot>
+					<form action="" th:action="@{/changeRecipe}" th:object="${recipe}" method="post">
+		  			<button name="changeRecipe" type="submit">Breyta uppskrift</button>
+	  				</form>
+				</foot>
 			</table>	
 	  	 </div>		 		  
     </div>

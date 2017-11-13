@@ -125,11 +125,8 @@ public class RecipeController
 	}
 
 	@RequestMapping(value = "/changeRecipe", method = RequestMethod.POST)
-<<<<<<< HEAD
-	public String changeRecipe(@RequestParam(value="recipe")  Recipe recipe,	ModelMap model)
-=======
+
 	public String changeRecipe(@RequestParam(value = "/changeRecipe") Recipe recipe, ModelMap model)
->>>>>>> branch 'master' of https://github.com/The-Fantastic-Four/do_or_diet_v2.git
 	{
 		System.out.println("Bla");
 		model.addAttribute(recipe);
@@ -236,6 +233,7 @@ public class RecipeController
 		newRecipe.setName(k.getRecipeName());
 		newRecipe.setDirections(k.getDirections());
 		newRecipe.setServings(k.getServings());
+		newRecipe.setIs_private(false);
 		recipeService.addRecipe(newRecipe);
 		return newRecipe;
 	}
