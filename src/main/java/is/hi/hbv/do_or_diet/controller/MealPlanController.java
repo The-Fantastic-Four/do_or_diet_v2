@@ -3,7 +3,7 @@
  * 
  * @author Eiður Örn Gunnarsson eog26@hi.is
  * @author Viktor Alex Brynjarsson vab18@hi.is
- * @date 10. nov. 2017
+ * @date 13. nov. 2017
  */
 package is.hi.hbv.do_or_diet.controller;
 
@@ -38,6 +38,7 @@ import is.hi.hbv.do_or_diet.model.MealPlanItemWrapper;
 import is.hi.hbv.do_or_diet.model.NewMealPlanForm;
 import is.hi.hbv.do_or_diet.model.Recipe;
 import is.hi.hbv.do_or_diet.model.User;
+import is.hi.hbv.do_or_diet.repository.MealPlanRepository;
 import is.hi.hbv.do_or_diet.service.MealPlanItemService;
 import is.hi.hbv.do_or_diet.service.MealPlanService;
 import is.hi.hbv.do_or_diet.service.RecipeService;
@@ -100,10 +101,6 @@ public class MealPlanController
 	public String newMealPlan(@Valid @ModelAttribute("mealPlanForm") NewMealPlanForm mealPlan, BindingResult errors,
 			Model model, Authentication authentication)
 	{
-		System.out.println(mealPlan.getName());
-		System.out.println(mealPlan.getFromDate());
-		System.out.println(mealPlan.getToDate());
-		
 		User user = userService.findUserByEmail(authentication.getName());
 		if (!errors.hasErrors())
 		{
@@ -186,6 +183,30 @@ public class MealPlanController
 		mealPlanItemService.addMealPlanItem(wrapper);
 
 		return new ModelAndView("redirect:/mealplan/" + mealPlanId);
+	}
+
+	/**
+	 * Delete a meal plan from database
+	 * 
+	 * @param mealPlanId
+	 *            of the meal plan to be deleted
+	 * @param authentication
+	 *            for the user
+	 * @return to index of all meal plans for said user
+	 */
+	@RequestMapping(value = "/deleteMealPlan/{mealPlanId}")
+	public String deleteMealPlan(@PathVariable(value = "mealPlanId") long mealPlanId, Authentication authentication)
+	{
+		User user = userService.findUserByEmail(authentication.getName());
+		MealPlan mealPlan = mealPlanService.findMealPlan(mealPlanId);
+
+		if (mealPlan.getCreatedBy() != user)
+		{
+			throw new AccessDeniedException("Innskráður notandi hefur ekki aðgang að þessu matarplani");
+		}
+
+		mealPlanService.deleteMealPlan(mealPlanId);
+		return "mealplan/index";
 	}
 
 	/**
