@@ -9,7 +9,7 @@ package is.hi.hbv.do_or_diet.model;
 public class IngredientQuantityWrap
 {
 
-	private int quantity;
+	private String quantity;
 	private String measurement;
 	private String recipeName;
 	private String ingredientName;
@@ -22,7 +22,7 @@ public class IngredientQuantityWrap
 
 	}
 
-	public IngredientQuantityWrap(String recipeName, String ingredientName, String measurement, int quantity,
+	public IngredientQuantityWrap(String recipeName, String ingredientName, String measurement, String quantity,
 			String categories, String directions, int servings)
 	{
 		this.recipeName = recipeName;
@@ -44,12 +44,12 @@ public class IngredientQuantityWrap
 		this.measurement = measurement;
 	}
 
-	public int getQuantity()
+	public String getQuantity()
 	{
 		return quantity;
 	}
 
-	public void setQuantity(int quantity)
+	public void setQuantity(String quantity)
 	{
 		this.quantity = quantity;
 	}

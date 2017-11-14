@@ -57,7 +57,7 @@
 			    	 </c:forEach>
 				</tbody>
 				<foot>
-					<form action="" th:action="@{/changeRecipe}" th:object="${recipe}" method="post">
+					<form action="#" th:action="@{/changeRecipe/recipeId}" th:object="${recipe}" method="POST">
 		  			<button name="changeRecipe" type="submit">Breyta uppskrift</button>
 	  				</form>
 				</foot>

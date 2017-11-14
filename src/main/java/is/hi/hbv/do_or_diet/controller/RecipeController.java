@@ -124,9 +124,9 @@ public class RecipeController
 		return "recipe/index";
 	}
 
-	@RequestMapping(value = "/changeRecipe", method = RequestMethod.POST)
-
-	public String changeRecipe(@RequestParam(value = "/changeRecipe") Recipe recipe, ModelMap model)
+	
+	@RequestMapping(value = "/changeRecipe/{recipeId}#", method = RequestMethod.POST)
+	public String changeRecipe(Recipe recipe, ModelMap model)
 	{
 		System.out.println("Bla");
 		model.addAttribute(recipe);
@@ -165,7 +165,7 @@ public class RecipeController
 				t.setIngredient(setNewIngredient(wrap));
 			}
 			t.setMeasurement(wrap.getMeasurement());
-			t.setQuantity(wrap.getQuantity());
+			t.setQuantity(Double.parseDouble(wrap.getQuantity()));
 			ingredientQuantities.addIngredientQuantity(t);
 		}
 		getRecipes(model);

@@ -37,7 +37,7 @@ public class ShoppingListItem
 	 * The amount needed of this shopping list item (used in conjuction with
 	 * measurement)
 	 */
-	private int amount;
+	private double amount;
 
 	/**
 	 * The measurement used for this shopping list item (used in conjuction with
@@ -76,7 +76,7 @@ public class ShoppingListItem
 	 * @param checked
 	 *            whether this item is checked or not
 	 */
-	public ShoppingListItem(long id, String itemName, int amount, String measurement, boolean checked)
+	public ShoppingListItem(long id, String itemName, double amount, String measurement, boolean checked)
 	{
 		this.id = id;
 		this.itemName = itemName;
@@ -105,12 +105,12 @@ public class ShoppingListItem
 		this.itemName = itemName;
 	}
 
-	public int getAmount()
+	public double getAmount()
 	{
 		return amount;
 	}
 
-	public void setAmount(int amount)
+	public void setAmount(double amount)
 	{
 		this.amount = amount;
 	}

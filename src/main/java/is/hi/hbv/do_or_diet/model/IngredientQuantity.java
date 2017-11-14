@@ -26,7 +26,7 @@ public class IngredientQuantity
 	@GenericGenerator(name = "increment", strategy = "increment")
 	private long id;
 
-	private int quantity;
+	private double quantity;
 	private String measurement;
 
 	@ManyToOne
@@ -42,7 +42,7 @@ public class IngredientQuantity
 
 	}
 
-	public IngredientQuantity(long id, int quantity, String measurement, IngredientType ingredient, Recipe recipe)
+	public IngredientQuantity(long id, double quantity, String measurement, IngredientType ingredient, Recipe recipe)
 	{
 		this.id = id;
 		this.quantity = quantity;
@@ -61,12 +61,12 @@ public class IngredientQuantity
 		this.id = id;
 	}
 
-	public int getQuantity()
+	public double getQuantity()
 	{
 		return quantity;
 	}
 
-	public void setQuantity(int quantity)
+	public void setQuantity(double quantity)
 	{
 		this.quantity = quantity;
 	}

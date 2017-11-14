@@ -12,7 +12,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import is.hi.hbv.do_or_diet.model.IngredientQuantity;
-import is.hi.hbv.do_or_diet.model.Recipe;
+
 
 public interface IngredientQuantityRepository extends JpaRepository<IngredientQuantity, Long>
 {

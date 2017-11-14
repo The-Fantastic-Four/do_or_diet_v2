@@ -4,7 +4,7 @@
      		if(counter < limit){
      			var newdiv = document.createElement('div');
      			newHtml = '<div class="field is-grouped">';
-     			newHtml += '<div class="control"><input class="input" type="int" name="quantity" id="quantity' + counter + '" placeholder="Fjöldi"></div>';
+     			newHtml += '<div class="control"><input class="input" type="number" step="any" name="quantity" id="quantity' + counter + '" placeholder="Fjöldi"></div>';
      			newHtml += '<div class="control"><input class="input" type="text" name="measurement" id="measurement' + counter + '" placeholder="Mælieining"></div>' ;
      			newHtml += '<div class="control is-expanded"><input class="input" type="text" name="ingredients[name][0]" id="name' + counter + '" placeholder="Hráefni"></div>';
      			newHtml += '</div>';
@@ -42,7 +42,7 @@
      		}else
      		{
      			alert("Vinsamlegast fylltu inn leiðbeiningar");
-     			return;
+     			return; 
      		}
      		function ingredientQuantity(recipeName, ingredientName, measurement, quantity, directions, servings)
      		{		
@@ -60,7 +60,7 @@
      			var ingredi = new ingredientQuantity(document.getElementById('recipeName').value, 
      			document.getElementById('name'+i).value, 
      			document.getElementById('measurement'+i).value, 
-     			document.getElementById('quantity'+i).value, 
+     			parseFloat(document.getElementById('quantity'+i).value), 
      			document.getElementById('directions').value, 
      			parseInt(document.getElementById('servings').value));
      			array.push(ingredi);
@@ -70,5 +70,5 @@
      		   	xmlhttp.open("POST", "/recipe/ingredientQuantity");
     			xmlhttp.setRequestHeader("Content-Type", "application/json");
     		   	xmlhttp.send(JSON.stringify(array));
-    		window.location.href = "/recipe";   	
+    			window.location.href = "/recipe";   	
      	}
