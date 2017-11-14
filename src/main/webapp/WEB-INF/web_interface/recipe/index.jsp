@@ -7,6 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <t:genericpage>
   <jsp:attribute name="header">
@@ -20,6 +21,19 @@
   <jsp:body>
 	<div class="columns">
 		<div class="column">
+			<sec:authorize access="isAuthenticated()">
+				<h3 class="title is-3">Mínar uppskriftir</h3>
+				<div class="content">
+					<ul>
+						<c:forEach items="${myRecipeList}" var="recipe">
+							<li><a href="/recipe/${recipe.id}"><c:out
+									value="${recipe.name}" /></a></li>
+						</c:forEach>
+					</ul>
+				<a class="button is-primary" href="/recipe/recipeAdd">Bæta við
+					uppskrift</a>
+				</div>
+			</sec:authorize>
 			<h3 class="title is-3">Allar uppskriftir</h3>
 			<div class="content">
 				<ul>
@@ -28,8 +42,6 @@
 									value="${recipe.name}" /></a></li>
 					</c:forEach>
 				</ul>
-				<a class="button is-primary" href="/recipe/recipeAdd">Bæta við
-					uppskrift</a>
 			</div>
 		</div>
 		<div class="column">

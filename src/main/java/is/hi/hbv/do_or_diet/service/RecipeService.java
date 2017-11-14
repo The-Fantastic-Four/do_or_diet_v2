@@ -3,6 +3,7 @@ package is.hi.hbv.do_or_diet.service;
 import java.util.List;
 
 import is.hi.hbv.do_or_diet.model.Recipe;
+import is.hi.hbv.do_or_diet.model.User;
 
 /**
  * Service that connects to the recipe repository
@@ -26,6 +27,13 @@ public interface RecipeService
 	 * @return list of all recipes
 	 */
 	public List<Recipe> allRecipes();
+	
+	/**
+	 * Fetches users recipes from repository
+	 * @param user whose recipes are fetched
+	 * @return list of users recipes
+	 */
+	public List<Recipe> myRecipes(User user);
 
 	/**
 	 * Fetches all recipes containing recipeName

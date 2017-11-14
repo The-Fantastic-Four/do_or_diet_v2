@@ -11,7 +11,7 @@ import is.hi.hbv.do_or_diet.repository.MealPlanRepository;
 
 /**
  * @author Eiður Örn Gunnarsson eog26@hi.is
- * @date 16. okt. 2017
+ * @date 13. nov. 2017
  */
 @Service
 public class MealPlanServiceImp implements MealPlanService
@@ -30,6 +30,12 @@ public class MealPlanServiceImp implements MealPlanService
 	public List<MealPlan> allMealPlans(User user)
 	{
 		return mealPlanRep.findByCreatedBy(user);
+	}
+	
+	@Override
+	public void deleteMealPlan(long id)
+	{
+		mealPlanRep.deleteById(id);
 	}
 
 	@Override

@@ -12,6 +12,8 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -36,11 +38,6 @@ public class Recipe
 	private String name;
 
 	/**
-	 * boolean value if recipe should be visible or not
-	 */
-	private boolean is_private;
-
-	/**
 	 * The categories this recipe belongs to
 	 */
 	@ElementCollection
@@ -61,6 +58,18 @@ public class Recipe
 	 */
 	@OneToMany(mappedBy = "recipe")
 	private List<IngredientQuantity> ingredients;
+
+	/**
+	 * Says if recipe is private or not
+	 */
+	private boolean isPrivate;
+	
+	/*
+	 * Identifies who made the recipe
+	 */
+	@ManyToOne
+	@JoinColumn(name = "created_by_user_id")
+	private User createdBy;
 
 	public Recipe()
 	{
@@ -92,17 +101,8 @@ public class Recipe
 		this.directions = directions;
 		this.servings = servings;
 		this.ingredients = ingredients;
-		this.is_private = is_private;
 	}
 	
-	public void setIs_private(boolean is_private)
-	{
-		this.is_private = is_private;
-	}
-	public boolean  getIs_private()
-	{
-		return is_private;
-	}
 	public long getId()
 	{
 		return id;
@@ -161,5 +161,25 @@ public class Recipe
 	public void setIngredients(List<IngredientQuantity> ingredients)
 	{
 		this.ingredients = ingredients;
+	}
+
+	public boolean isPrivate()
+	{
+		return isPrivate;
+	}
+
+	public void setPrivate(boolean isPrivate)
+	{
+		this.isPrivate = isPrivate;
+	}
+
+	public User getCreatedBy()
+	{
+		return createdBy;
+	}
+
+	public void setCreatedBy(User createdBy)
+	{
+		this.createdBy = createdBy;
 	}
 }
