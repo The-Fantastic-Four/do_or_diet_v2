@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import is.hi.hbv.do_or_diet.model.IngredientQuantity;
 import is.hi.hbv.do_or_diet.model.IngredientQuantityWrap;
@@ -115,10 +116,11 @@ public class RecipeController
 	 * @param model
 	 *            the model that contains the info
 	 * @return
+	 * @throws SQLException
 	 */
 	@RequestMapping("/{recipeId}/own")
 	public ModelAndView ownRecipe(@PathVariable(value = "recipeId") long recipeId, ModelMap model,
-			Authentication authentication)
+			Authentication authentication) throws SQLException
 	{
 		User user = null;
 		if (authentication != null)
@@ -126,12 +128,26 @@ public class RecipeController
 			user = userService.findUserByEmail(authentication.getName());
 		}
 
-		Recipe originalRecipe = recipeService.findRecipe(recipeId);
-		Recipe newRecipe = recipeService.ownRecipe(originalRecipe, user);
+		try
+		{
+			Recipe originalRecipe = recipeService.findRecipe(recipeId);
+			Recipe newRecipe = recipeService.ownRecipe(originalRecipe, user);
 
-		newRecipe.setIngredients(ingredientQuantities.copyIngredients(originalRecipe, newRecipe));
+			newRecipe.setIngredients(ingredientQuantities.copyIngredients(originalRecipe, newRecipe));
+		}
+		catch (Exception e)
+		{
+			throw new SQLException("Ekki tókst að finna uppskrift og búa til afrit af henni.");
+		}
 
 		return new ModelAndView("redirect:/recipe");
+	}
+
+	@RequestMapping("/changeRecipe/{recipeId}")
+	public String changeRecipe(@PathVariable(value = "recipeId") long recipeId, ModelMap model)
+	{
+		model.addAttribute("recipe", recipeService.findRecipe(recipeId));
+		return "recipe/changeRecipe";
 	}
 
 	/**
@@ -160,6 +176,52 @@ public class RecipeController
 	{
 		addRecipesContainingNameToModel(recipeName, model);
 		return "recipe/index";
+	}
+
+	@RequestMapping(value = "/changeRecipe", method = RequestMethod.POST)
+	public void changeRecipe(Recipe recipe, ModelMap model)
+	{
+		System.out.println("Bla");
+		// model.addAttribute(recipe);
+		// return "recipe/changeRecipe";
+	}
+
+	@RequestMapping(value = "/changeRecipe/save", method = RequestMethod.POST)
+	public ModelAndView changeIngredientQuantity(@RequestBody IngredientQuantityWrap[] wrapArr, Model model,
+			Authentication authentication)
+	{
+		ingredientQuantities.deleteIngredientQuantity(wrapArr[0].getRecipeId());
+		User user = null;
+		if (authentication != null)
+		{
+			user = userService.findUserByEmail(authentication.getName());
+		}
+		Recipe chRecipe = new Recipe();
+		chRecipe.setId(wrapArr[0].getRecipeId());
+		chRecipe.setName(wrapArr[0].getRecipeName());
+		chRecipe.setCreatedBy(user);
+		chRecipe.setDirections(wrapArr[0].getDirections());
+		chRecipe.setServings(wrapArr[0].getServings());
+		chRecipe.setPrivate(false);
+		recipeService.addRecipe(chRecipe);
+		for (int i = 0; i < wrapArr.length; i++)
+		{
+			IngredientQuantity t = new IngredientQuantity();
+			t.setRecipe(chRecipe);
+			IngredientQuantityWrap wrap = wrapArr[i];
+			if (doesIngredientExist(wrap) == true)
+			{
+				t.setIngredient(findIngredient(wrap));
+			}
+			else
+			{
+				t.setIngredient(setNewIngredient(wrap));
+			}
+			t.setMeasurement(wrap.getMeasurement());
+			t.setQuantity(Double.parseDouble(wrap.getQuantity()));
+			ingredientQuantities.addIngredientQuantity(t);
+		}
+		return new ModelAndView("redirect:/index");
 	}
 
 	/**
@@ -201,7 +263,7 @@ public class RecipeController
 				t.setIngredient(setNewIngredient(wrap));
 			}
 			t.setMeasurement(wrap.getMeasurement());
-			t.setQuantity(wrap.getQuantity());
+			t.setQuantity(Double.parseDouble(wrap.getQuantity()));
 			ingredientQuantities.addIngredientQuantity(t);
 		}
 

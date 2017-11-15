@@ -3,6 +3,7 @@
 	@author Eiður Örn Gunnarsson eog26@hi.is
 	@author Viktor Alex Brynjarsson vab18@hi.is
 	@author Fannar Þeyr Guðmundsson fthg2@hi.is
+	@date November 2017
 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -27,6 +28,7 @@
   	  	<table class="table table is-fullwidth is-striped is-hoverable">
   	  	  <thead>
   	  	  	<tr>
+  	  	  	  <th>nr</th>	
   	  	  	  <th>Uppskrift</th>
   	  	  	  <th>Fjöldi manns</th>
   	  	  	  <th>Leiðbeiningar</th>
@@ -34,14 +36,14 @@
   	  	  </thead>
   	  	  <tbody>
   	  	  	<tr>
-  	  	  	  <input type="hidden" name="recipeId" value="${recipe.id}">
+  	  	  	  <td id="recipeId"><c:out value="${recipe.id}"/></td>
 			  <td contenteditable="true" id="recipeName"><c:out value="${recipe.name}" /></td>
 			  <td contenteditable="true" id="servings"><c:out value="${recipe.servings}" /></td>
 		      <td contenteditable="true" id="directions"><c:out value="${recipe.directions}" /></td>
 			</tr>
 		  </tbody>
 		 </table> 
-		 <table class="table table is-fullwidth is-striped is-hoverable">
+		 <table class="table id=myTable table is-fullwidth is-striped is-hoverable">
 		  <thead>
 		  	<tr>
 			  	<th>Hráefni</th>
@@ -51,19 +53,22 @@
 		  <thead>
 		  <tbody>
 			<tr>
-				<c:forEach items="${recipe.ingredients}" var="IngrtQuantity">
+				<c:forEach items="${recipe.ingredients}" var="IngrtQuantity" varStatus="loop">
 		   		  <tr>
-	 	   	   	 	 <td contenteditable="true" id="name(${IngrtQuantity.index})"><c:out value="${IngrtQuantity.ingredient.name}" /></a></td>
-	  	   			 <td contenteditable="true" id="quantity(${IngrtQuantity.index})"><c:out value="${IngrtQuantity.quantity}" /></td>
-	  	   	    	 <td contenteditable="true" id="measurement(${IngrtQuantity.index})"><c:out value="${IngrtQuantity.measurement}" /></td>
+	 	   	   	 	 <td contenteditable="true" id="name${loop.index}"><c:out value="${IngrtQuantity.ingredient.name}" /></a></td>
+	  	   			 <td contenteditable="true" id="quantity${loop.index}"><c:out value="${IngrtQuantity.quantity}" /></td>
+	  	   	    	 <td contenteditable="true" id="measurement${loop.index}"><c:out value="${IngrtQuantity.measurement}" /></td>
+	  	   	    	 <input type="hidden" id="number">
 	  	  		  </tr>
 			    </c:forEach>
 			 </tr>
 		  </tbody>	  	    		
 		 </table>
-		 <button name="changeRecipe" type="submit">Vista breytingar</button>
+	     <p class="control"><input type="button" class="button is-primary" value="Vista" onClick="saveChangedRecipe()" /></p>
 		</form> 
 	  </div>		  				  
     </div>
+    <spring:url value="/resources/js/Addjs.js" var="mainJs" />
+	<script src="${mainJs}"></script>
   </jsp:body>
 </t:genericpage>

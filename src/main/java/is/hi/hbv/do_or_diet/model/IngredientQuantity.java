@@ -20,29 +20,54 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "ingredient_quantity")
 public class IngredientQuantity
 {
-
+	/**
+	 * Id of the Ingredient Quantity
+	 */
 	@Id
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")
 	private long id;
-
-	private int quantity;
+	/**
+	 * The amount referenced ingredient
+	 */
+	private double quantity;
+	/**
+	 * What type of measurement is used for the ingredient
+	 */
 	private String measurement;
 
+	/**
+	 * Type of ingredient
+	 */
 	@ManyToOne
 	@JoinColumn(name = "ingredient_type_id")
 	private IngredientType ingredient;
 
+	/**
+	 * Recipe that ingredient quantity is for
+	 */
 	@ManyToOne
 	@JoinColumn(name = "recipe_id")
 	private Recipe recipe;
 
+	/**
+	 * Empty constructor
+	 */
 	public IngredientQuantity()
 	{
 
 	}
 
-	public IngredientQuantity(long id, int quantity, String measurement, IngredientType ingredient, Recipe recipe)
+	/**
+	 * IngredientQuantity constructor with fields
+	 * 
+	 * @param id of ingredient quantity
+	 * @param quantity the amount of ingredient type
+	 * @param measurement the measurement for the ingredient
+	 * @param ingredient 
+	 * @param recipe
+	 */
+	public IngredientQuantity(long id, double quantity, String measurement, IngredientType ingredient, Recipe recipe)
 	{
 		this.id = id;
 		this.quantity = quantity;
@@ -61,12 +86,12 @@ public class IngredientQuantity
 		this.id = id;
 	}
 
-	public int getQuantity()
+	public double getQuantity()
 	{
 		return quantity;
 	}
 
-	public void setQuantity(int quantity)
+	public void setQuantity(double quantity)
 	{
 		this.quantity = quantity;
 	}

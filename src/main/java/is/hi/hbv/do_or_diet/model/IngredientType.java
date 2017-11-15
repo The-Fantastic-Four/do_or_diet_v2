@@ -18,11 +18,17 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "ingredient_type")
 public class IngredientType
 {
+	/**
+	 * Database id for this ingredient
+	 */
 	@Id
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")
 	private long id;
 
+	/**
+	 * Name of the ingredient
+	 */
 	private String name;
 
 	public IngredientType()

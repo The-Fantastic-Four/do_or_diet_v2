@@ -1,16 +1,18 @@
 <!--
 	Base for all pages
 	@author Viktor Alex Brynjarsson vab18@hi.is
+	@date November 2017
 -->
 <%@tag description="Generic template" pageEncoding="UTF-8"%>
 <%@attribute name="header" fragment="true" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
-<html lang="is">
+<html lang="is" xmlns:th="http://www.thymeleaf.org">
 
 	<head>
 		<meta charset="utf-8">	
 	    <title>Do or Diet!</title>
+	    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" type="text/css">
 	    <link rel="stylesheet" href="/resources/css/bulma_custom.css" type="text/css">
 	    <link rel="stylesheet" href="/resources/css/styles.css" type="text/css" />
 	</head>

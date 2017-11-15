@@ -32,13 +32,13 @@ public class RecipeServiceImp implements RecipeService
 	@Override
 	public List<Recipe> allRecipes()
 	{
-		return recipeRep.findByIsPrivateFalse();
+		return recipeRep.findByIsPrivateFalseOrderByNameAsc();
 	}
 
 	@Override
 	public List<Recipe> myRecipes(User user)
 	{
-		return recipeRep.findByCreatedBy(user);
+		return recipeRep.findByCreatedByOrderByNameAsc(user);
 	}
 
 	@Override

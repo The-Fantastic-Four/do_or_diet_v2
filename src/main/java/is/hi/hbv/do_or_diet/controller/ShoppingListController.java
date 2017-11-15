@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import is.hi.hbv.do_or_diet.model.MealPlan;
@@ -74,6 +75,27 @@ public class ShoppingListController
 		}
 
 		model.addAttribute("shoppingList", sl);
+
+		return "shoppinglist/show";
+	}
+
+	@RequestMapping(value = "/{shoppingListId}/{shoppingListItemId}/toggleItemChecked", method = RequestMethod.POST)
+	public String toggleIngredientItem(@PathVariable(value = "shoppingListId") long shoppingListId, 
+			@PathVariable(value = "shoppingListItemId") long shoppingListItemId,
+			ModelMap model,
+			Authentication authentication)
+	{
+		User user = userService.findUserByEmail(authentication.getName());
+		ShoppingList sl = shoppingListService.findShoppingList(shoppingListId);
+
+		if (sl.getOwner() != user)
+		{
+			throw new AccessDeniedException("Innskráður notandi hefur ekki aðgang að þessum innkaupalista!");
+		}
+		
+		shoppingListService.toggleShoppingListItem(shoppingListItemId);
+
+		model.addAttribute("shoppingList", shoppingListService.findShoppingList(shoppingListId));
 
 		return "shoppinglist/show";
 	}

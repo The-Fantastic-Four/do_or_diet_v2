@@ -17,18 +17,17 @@ import is.hi.hbv.do_or_diet.model.User;
 public interface RecipeRepository extends JpaRepository<Recipe, Long>
 {
 
-	List<Recipe> findAll();
+	List<Recipe> findAllByOrderByNameAsc();
 
 	Recipe findOne(Long id);
 
 	List<Recipe> findByNameContaining(String recipeName);
-
-	List<Recipe> findByCreatedBy(User creator);
-
-	List<Recipe> findByIsPrivateFalse();
+	
+	List<Recipe> findByCreatedByOrderByNameAsc(User creator);
+	
+	List<Recipe> findByIsPrivateFalseOrderByNameAsc();
 
 	// Suppressed as teacher had same warning and had not fixed it
 	@SuppressWarnings("unchecked")
 	Recipe save(Recipe recipe);
-
 }

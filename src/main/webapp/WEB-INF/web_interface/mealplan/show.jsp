@@ -2,6 +2,7 @@
 	Show and edit a specific mealplan
 	@author Eiður Örn Gunnarsson eog26@hi.is
 	@author Viktor Alex Brynjarsson vab18@hi.is
+	@date September 2017
 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -49,9 +50,22 @@
             <div class="control">
               <div class="select">
                 <select name="recipeId">
-                  <c:forEach items="${recipeList}" var="recipe">
-                    <option value="${recipe.id}">${recipe.name}</option>
-                  </c:forEach>
+                <c:choose>
+                    <c:when test="${myRecipeList.isEmpty()}">
+                    </c:when>
+                    <c:otherwise>
+                      <optgroup label="Mínar uppskriftir">
+                        <c:forEach items="${myRecipeList}" var="recipe">
+                          <option value="${recipe.id}">${recipe.name}</option>
+                        </c:forEach>
+                      </optgroup>
+                    </c:otherwise>
+                  </c:choose>
+                  <optgroup label="Almennar uppskriftir">
+                    <c:forEach items="${recipeList}" var="recipe">
+                      <option value="${recipe.id}">${recipe.name}</option>
+                    </c:forEach>
+                  </optgroup>
                 </select>
               </div>
             </div>

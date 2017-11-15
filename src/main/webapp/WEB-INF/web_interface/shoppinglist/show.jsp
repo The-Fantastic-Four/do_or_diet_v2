@@ -1,6 +1,7 @@
 <!--
 	Show an shopping list
 	@author Viktor Alex Brynjarsson vab18@hi.is
+	@date November 1
 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -24,18 +25,29 @@
           <thead>
           <tr>
             <th>&nbsp;</th>
-            <th>Heiti</th>
-            <th>Magn</th>
+            <th class="has-text-right">Magn</th>
             <th>Mælieining</th>
+            <th>Heiti</th>
           </tr>
           </thead>
           <tbody>
             <c:forEach items="${shoppingList.getItems()}" var="item">
               <tr>
-                <td><input type="checkbox"></td>
-                <td><c:out value="${item.getItemName()}" /></td>
-                <td><c:out value="${item.getAmount()}" /></td>
+                <td>
+                	<form action="/shoppinglist/${shoppingList.getId()}/${item.getId()}/toggleItemChecked" method="POST">
+                		<c:choose>
+						    <c:when test="${item.isChecked()}">
+                				<button type="submit" class="button"><i class="ion-android-checkbox-outline"></i></button>
+						    </c:when>    
+						    <c:otherwise>
+                				<button type="submit" class="button"><i class="ion-android-checkbox-outline-blank"></i></button>
+						    </c:otherwise>
+						</c:choose>
+                	</form>
+                </td>
+                <td class="has-text-right"><c:out value="${item.getAmount()}" /></td>
                 <td><c:out value="${item.getMeasurement()}" /></td>
+                <td><c:out value="${item.getItemName()}" /></td>
               </tr>
             </c:forEach>
           </tbody>

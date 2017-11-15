@@ -3,10 +3,11 @@
  * 
  * @author Eiður Örn Gunnarsson eog26@hi.is
  * @author Viktor Alex Brynjarsson vab18@hi.is
- * @date 13. nóv. 2017
+ * @date 13. nov. 2017
  */
 package is.hi.hbv.do_or_diet.controller;
 
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,6 +19,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.interceptor.CacheOperationInvoker.ThrowableWrapper;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
@@ -38,6 +40,7 @@ import is.hi.hbv.do_or_diet.model.MealPlanItemWrapper;
 import is.hi.hbv.do_or_diet.model.NewMealPlanForm;
 import is.hi.hbv.do_or_diet.model.Recipe;
 import is.hi.hbv.do_or_diet.model.User;
+import is.hi.hbv.do_or_diet.repository.MealPlanRepository;
 import is.hi.hbv.do_or_diet.service.MealPlanItemService;
 import is.hi.hbv.do_or_diet.service.MealPlanService;
 import is.hi.hbv.do_or_diet.service.RecipeService;
@@ -95,10 +98,11 @@ public class MealPlanController
 	 * @param authentication
 	 * @return site that displays meal plans including the new one if successfully
 	 *         created
+	 * @throws org.apache.el.parser.ParseException
 	 */
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String newMealPlan(@Valid @ModelAttribute("mealPlanForm") NewMealPlanForm mealPlan, BindingResult errors,
-			Model model, Authentication authentication)
+			Model model, Authentication authentication) throws org.apache.el.parser.ParseException
 	{
 		User user = userService.findUserByEmail(authentication.getName());
 		if (!errors.hasErrors())
@@ -111,7 +115,7 @@ public class MealPlanController
 			}
 			catch (ParseException e)
 			{
-				e.printStackTrace();
+				throw new org.apache.el.parser.ParseException("Mistókst að búa til dagsetningar fyrir matarplan.");
 			}
 
 			MealPlan m = new MealPlan(mealPlan.getName(), new ArrayList<MealPlanItem>(), dates, user);
@@ -146,6 +150,7 @@ public class MealPlanController
 
 		model.addAttribute("mealPlan", mealPlan);
 		model.addAttribute("recipeList", recipeService.allRecipes());
+		model.addAttribute("myRecipeList", recipeService.myRecipes(user));
 		return "mealplan/show";
 	}
 
@@ -192,10 +197,12 @@ public class MealPlanController
 	 * @param authentication
 	 *            for the user
 	 * @return to index of all meal plans for said user
+	 * 
+	 * @throws SQLException
 	 */
 	@RequestMapping(value = "/deleteMealPlan/{mealPlanId}")
 	public String deleteMealPlan(@PathVariable(value = "mealPlanId") long mealPlanId, Model model,
-			Authentication authentication)
+			Authentication authentication) throws SQLException
 	{
 		User user = userService.findUserByEmail(authentication.getName());
 		MealPlan mealPlan = mealPlanService.findMealPlan(mealPlanId);
@@ -205,7 +212,15 @@ public class MealPlanController
 			throw new AccessDeniedException("Innskráður notandi hefur ekki aðgang að þessu matarplani");
 		}
 
-		mealPlanService.deleteMealPlan(mealPlanId);
+		try
+		{
+			mealPlanService.deleteMealPlan(mealPlanId);
+		}
+		catch (Exception e)
+		{
+			throw new SQLException("Ekki tókst að eyða út úr gagnagrunni");
+		}
+
 		if (!model.containsAttribute("mealPlanForm"))
 			model.addAttribute("mealPlanForm", new NewMealPlanForm());
 		addMealPlanListToModel(model, userService.findUserByEmail(authentication.getName()));
