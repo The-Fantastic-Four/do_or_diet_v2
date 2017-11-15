@@ -38,7 +38,6 @@ import is.hi.hbv.do_or_diet.model.MealPlanItemWrapper;
 import is.hi.hbv.do_or_diet.model.NewMealPlanForm;
 import is.hi.hbv.do_or_diet.model.Recipe;
 import is.hi.hbv.do_or_diet.model.User;
-import is.hi.hbv.do_or_diet.repository.MealPlanRepository;
 import is.hi.hbv.do_or_diet.service.MealPlanItemService;
 import is.hi.hbv.do_or_diet.service.MealPlanService;
 import is.hi.hbv.do_or_diet.service.RecipeService;

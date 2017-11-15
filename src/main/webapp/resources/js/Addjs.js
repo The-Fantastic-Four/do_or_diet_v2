@@ -53,13 +53,25 @@
      			parseInt(document.getElementById('servings').innerHTML),
      			parseInt(document.getElementById('recipeId').innerHTML));
      			arrayNew.push(changedIngr);
-      		
       		}
       		var xmlhttp = new XMLHttpRequest();       		   	
      	   	xmlhttp.open("POST", "/recipe/changeRecipe/save");
     		xmlhttp.setRequestHeader("Content-Type", "application/json");
+    	   	xmlhttp.onload = function()
+    	   	{
+    	   		if (xmlhttp.status >= 200 && xmlhttp.status < 400) {
+    	   			console.log(xmlhttp);  
+    	   			window.location.href = "/recipe/";
+    	   		} else {
+  					alert("Þetta er ekki þín uppskrift, prufaðu að bæta henni í þínar uppskrift");
+    	   		}
+    	   	};
+    		xmlhttp.onerror = function () {
+  				alert("Eitthvað slæmt gerðist!!");
+			};
+			
     	   	xmlhttp.send(JSON.stringify(arrayNew));
-    		window.location.href = "/";  
+    		
          } 	
          	
      	function saveRecipe()

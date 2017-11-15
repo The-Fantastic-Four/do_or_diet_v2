@@ -11,6 +11,7 @@ package is.hi.hbv.do_or_diet.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -167,23 +168,30 @@ public class RecipeController
 	}
 
 	
-	@RequestMapping(value = "/changeRecipe", method = RequestMethod.POST)
-	public void changeRecipe(Recipe recipe, ModelMap model)
-	{
-		System.out.println("Bla");
-		//model.addAttribute(recipe);
-		//return "recipe/changeRecipe";
-	}
 
+	/**
+	 * receives array of IngredientQuantityWrap objects from UI, w
+	 * 
+	 * @RequestBody wrap receives the wrap object which contains recipe which will be changed in database,
+	 *              
+	 *  
+	 *            @param model    the model that contains all the necessary informationt.
+	 *              
+	 *            @param authentication
+	 *             
+	 */
 	@RequestMapping(value = "/changeRecipe/save", method = RequestMethod.POST)
 	public ModelAndView changeIngredientQuantity(@RequestBody IngredientQuantityWrap[] wrapArr, Model model, Authentication authentication)
 	{
-		ingredientQuantities.deleteIngredientQuantity(wrapArr[0].getRecipeId());
-		User user = null;
-		if(authentication != null)
+		User user = userService.findUserByEmail(authentication.getName());
+		Recipe th = recipeService.findRecipe(wrapArr[0].getRecipeId());
+
+		if (th.getCreatedBy() != user)
 		{
-			user = userService.findUserByEmail(authentication.getName());
-		}		
+			throw new AccessDeniedException("Innskráður notandi hefur ekki aðgang að þessari uppskrift, bættu henni í þínar uppskriftir og reyndu aftur");
+		}
+		ingredientQuantities.deleteIngredientQuantity(wrapArr[0].getRecipeId());
+				
 		Recipe chRecipe = new Recipe();
 		chRecipe.setId(wrapArr[0].getRecipeId());
 		chRecipe.setName(wrapArr[0].getRecipeName());
@@ -209,15 +217,17 @@ public class RecipeController
 			t.setQuantity(Double.parseDouble(wrap.getQuantity()));
 			ingredientQuantities.addIngredientQuantity(t);
 		}	
-		return new ModelAndView("redirect:/index");
+		return new ModelAndView("redirect:/recipe");
 	}
 	/**
 	 * receives array of IngredientQuantityWrap objects from UI, w
 	 * 
-	 * @RequestBody wrap receives the wrap object which contains name of recipe,
-	 *              ingredient, measurements and quantities
-	 * 
-	 *              IngredientQuantity relies on id of recipe and ingredient.
+	 * @RequestBody wrap receives the wrap object which contains name of recipe and adds,
+	 * it´s attributes to database
+	 * @param model    the model that contains all the necessary information.
+	 *              
+	 *            @param authentication
+	 *
 	 */
 	@RequestMapping(value = "/ingredientQuantity", method = RequestMethod.POST)
 	public ModelAndView addIngredientQuantity(@RequestBody IngredientQuantityWrap[] wrapArr, Model model, Authentication authentication)
@@ -253,7 +263,7 @@ public class RecipeController
 			ingredientQuantities.addIngredientQuantity(t);
 		}
 		
-		return new ModelAndView("redirect:/index");
+		return new ModelAndView("redirect:/recipe");
 	}
 
 	// gets recipes from recipeRepository and adds to model
