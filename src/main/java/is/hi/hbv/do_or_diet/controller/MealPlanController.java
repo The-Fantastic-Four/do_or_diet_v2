@@ -147,6 +147,7 @@ public class MealPlanController
 
 		model.addAttribute("mealPlan", mealPlan);
 		model.addAttribute("recipeList", recipeService.allRecipes());
+		model.addAttribute("myRecipeList", recipeService.myRecipes(user));
 		return "mealplan/show";
 	}
 
@@ -195,7 +196,7 @@ public class MealPlanController
 	 * @return to index of all meal plans for said user
 	 */
 	@RequestMapping(value = "/deleteMealPlan/{mealPlanId}")
-	public String deleteMealPlan(@PathVariable(value = "mealPlanId") long mealPlanId, Authentication authentication)
+	public String deleteMealPlan(@PathVariable(value = "mealPlanId") long mealPlanId, Model model, Authentication authentication)
 	{
 		User user = userService.findUserByEmail(authentication.getName());
 		MealPlan mealPlan = mealPlanService.findMealPlan(mealPlanId);
@@ -206,6 +207,10 @@ public class MealPlanController
 		}
 
 		mealPlanService.deleteMealPlan(mealPlanId);
+		if(!model.containsAttribute("mealPlanForm"))
+			model.addAttribute("mealPlanForm", new NewMealPlanForm());
+		addMealPlanListToModel(model, userService.findUserByEmail(authentication.getName()));
+		
 		return "mealplan/index";
 	}
 

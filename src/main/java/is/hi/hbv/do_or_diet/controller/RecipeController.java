@@ -107,6 +107,30 @@ public class RecipeController
 		return "recipe/show";
 	}
 	
+	/**
+	 * Adds a recipe to users repository
+	 * 
+	 * @param recipeId is the id of the recipe
+	 * @param model the model that contains the info
+	 * @return
+	 */
+	@RequestMapping("/{recipeId}/own")
+	public ModelAndView ownRecipe(@PathVariable(value = "recipeId") long recipeId, ModelMap model, Authentication authentication)
+	{
+		User user = null;
+		if(authentication != null)
+		{
+			user = userService.findUserByEmail(authentication.getName());
+		}
+		
+		Recipe originalRecipe = recipeService.findRecipe(recipeId);
+		Recipe newRecipe = recipeService.ownRecipe(originalRecipe, user);
+				
+		newRecipe.setIngredients(ingredientQuantities.copyIngredients(originalRecipe, newRecipe));
+		
+		return new ModelAndView("redirect:/recipe");
+	}
+	
 	@RequestMapping("/changeRecipe/{recipeId}")
 	public String changeRecipe(@PathVariable(value = "recipeId") long recipeId, ModelMap model)
 	{
@@ -203,6 +227,7 @@ public class RecipeController
 		{
 			user = userService.findUserByEmail(authentication.getName());
 		}
+		
 		for (int i = 0; i < wrapArr.length; i++)
 		{
 			IngredientQuantity t = new IngredientQuantity();
@@ -227,8 +252,9 @@ public class RecipeController
 			t.setQuantity(Double.parseDouble(wrap.getQuantity()));
 			ingredientQuantities.addIngredientQuantity(t);
 		}
+		
 		return new ModelAndView("redirect:/index");
-	}	
+	}
 
 	// gets recipes from recipeRepository and adds to model
 	public void getRecipes(Model model, User user)

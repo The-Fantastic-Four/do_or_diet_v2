@@ -49,9 +49,22 @@
             <div class="control">
               <div class="select">
                 <select name="recipeId">
-                  <c:forEach items="${recipeList}" var="recipe">
-                    <option value="${recipe.id}">${recipe.name}</option>
-                  </c:forEach>
+                  <optgroup label="Almennar uppskriftir">
+                    <c:forEach items="${recipeList}" var="recipe">
+                      <option value="${recipe.id}">${recipe.name}</option>
+                    </c:forEach>
+                  </optgroup>
+                  <c:choose>
+                    <c:when test="${myRecipeList.isEmpty()}">
+                    </c:when>
+                    <c:otherwise>
+                      <optgroup label="Mínar uppskriftir">
+                        <c:forEach items="${myRecipeList}" var="recipe">
+                          <option value="${recipe.id}">${recipe.name}</option>
+                        </c:forEach>
+                      </optgroup>
+                    </c:otherwise>
+                  </c:choose>
                 </select>
               </div>
             </div>

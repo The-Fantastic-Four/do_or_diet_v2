@@ -52,4 +52,11 @@ public interface RecipeService
 	 * @return recipe with the appropriate ID
 	 */
 	public Recipe findRecipe(long id);
+	
+	/**
+	 * Creates a copy of a recipe and marks with a new owner
+	 * @param originalRecipe
+	 * @return
+	 */
+	public Recipe ownRecipe(Recipe originalRecipe, User newOwner);
 }
