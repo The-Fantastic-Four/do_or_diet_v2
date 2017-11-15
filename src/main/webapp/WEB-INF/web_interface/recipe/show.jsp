@@ -31,9 +31,9 @@
   	  		  </thead>
   	  		  <tbody>
   	  			<tr>
-				  <td contenteditable="True" id="recipeName"><c:out value="${recipe.name}" /></td>
-				  <td contenteditable="True" id="servings"><c:out value="${recipe.servings}" /></td>
-			   	  <td contenteditable="True" id="directions"><c:out value="${recipe.directions}" /></td>
+				  <td><c:out value="${recipe.name}" /></td>
+				  <td><c:out value="${recipe.servings}" /></td>
+			   	  <td><c:out value="${recipe.directions}" /></td>
 				</tr>
 			  </tbody>
 			</table>
@@ -50,18 +50,16 @@
 		   	    <tbody>
 					<c:forEach items="${recipe.ingredients}" var="IngrtQuantity">
 		   			  <tr>
-	 	   	   		 	 <td contenteditable="True" id="name"><c:out value="${IngrtQuantity.ingredient.name}" /></a></td>
-	  	   				 <td contenteditable="True" id="quantity"><c:out value="${IngrtQuantity.quantity}" /></td>
-	  	   		   	 	 <td contenteditable="True" id="measurement"><c:out value="${IngrtQuantity.measurement}" /></td>
+	 	   	   		 	 <td><c:out value="${IngrtQuantity.ingredient.name}" /></a></td>
+	  	   				 <td><c:out value="${IngrtQuantity.quantity}" /></td>
+	  	   		   	 	 <td><c:out value="${IngrtQuantity.measurement}" /></td>
 	  	  			  </tr>
 			    	 </c:forEach>
 				</tbody>
-				<foot>
-					<form action="#" th:action="@{/changeRecipe/recipeId}" th:object="${recipe}" method="POST">
-		  			<button name="changeRecipe" type="submit">Breyta uppskrift</button>
-	  				</form>
-				</foot>
-			</table>	
+			</table>
+			<foot>
+					<a href="/recipe/changeRecipe/${recipe.id}"><value="${recipe.name}">Breyta uppskrift<a/>
+				</foot>	
 	  	 </div>		 		  
     </div>
   </jsp:body>

@@ -106,7 +106,14 @@ public class RecipeController
 		model.addAttribute("recipe", recipeService.findRecipe(recipeId));
 		return "recipe/show";
 	}
-
+	
+	@RequestMapping("/changeRecipe/{recipeId}")
+	public String changeRecipe(@PathVariable(value = "recipeId") long recipeId, ModelMap model)
+	{
+		model.addAttribute("recipe", recipeService.findRecipe(recipeId));
+		return "recipe/changeRecipe";
+	}
+	
 	/**
 	 * Directs to the searchForRecipe page
 	 * 
@@ -136,14 +143,50 @@ public class RecipeController
 	}
 
 	
-	@RequestMapping(value = "/changeRecipe/{recipeId}#", method = RequestMethod.POST)
-	public String changeRecipe(Recipe recipe, ModelMap model)
+	@RequestMapping(value = "/changeRecipe", method = RequestMethod.POST)
+	public void changeRecipe(Recipe recipe, ModelMap model)
 	{
 		System.out.println("Bla");
-		model.addAttribute(recipe);
-		return "recipe/changeRecipe";
+		//model.addAttribute(recipe);
+		//return "recipe/changeRecipe";
 	}
 
+	@RequestMapping(value = "/changeRecipe/save", method = RequestMethod.POST)
+	public ModelAndView changeIngredientQuantity(@RequestBody IngredientQuantityWrap[] wrapArr, Model model, Authentication authentication)
+	{
+		ingredientQuantities.deleteIngredientQuantity(wrapArr[0].getRecipeId());
+		User user = null;
+		if(authentication != null)
+		{
+			user = userService.findUserByEmail(authentication.getName());
+		}		
+		Recipe chRecipe = new Recipe();
+		chRecipe.setId(wrapArr[0].getRecipeId());
+		chRecipe.setName(wrapArr[0].getRecipeName());
+		chRecipe.setCreatedBy(user);
+		chRecipe.setDirections(wrapArr[0].getDirections());
+		chRecipe.setServings(wrapArr[0].getServings());
+		chRecipe.setPrivate(false);
+		recipeService.addRecipe(chRecipe);
+		for (int i = 0; i < wrapArr.length; i++)
+		{
+			IngredientQuantity t = new IngredientQuantity();
+			t.setRecipe(chRecipe);
+			IngredientQuantityWrap wrap = wrapArr[i];
+			if (doesIngredientExist(wrap) == true)
+			{
+				t.setIngredient(findIngredient(wrap));
+			}
+			else
+			{
+				t.setIngredient(setNewIngredient(wrap));
+			}
+			t.setMeasurement(wrap.getMeasurement());
+			t.setQuantity(Double.parseDouble(wrap.getQuantity()));
+			ingredientQuantities.addIngredientQuantity(t);
+		}	
+		return new ModelAndView("redirect:/index");
+	}
 	/**
 	 * receives array of IngredientQuantityWrap objects from UI, w
 	 * 
@@ -160,7 +203,6 @@ public class RecipeController
 		{
 			user = userService.findUserByEmail(authentication.getName());
 		}
-		
 		for (int i = 0; i < wrapArr.length; i++)
 		{
 			IngredientQuantity t = new IngredientQuantity();
@@ -185,9 +227,8 @@ public class RecipeController
 			t.setQuantity(Double.parseDouble(wrap.getQuantity()));
 			ingredientQuantities.addIngredientQuantity(t);
 		}
-		
 		return new ModelAndView("redirect:/index");
-	}
+	}	
 
 	// gets recipes from recipeRepository and adds to model
 	public void getRecipes(Model model, User user)
@@ -231,6 +272,18 @@ public class RecipeController
 				s = ingredientType;
 		}
 		return s;
+	}
+	
+	public void deleteIngredientQuantity(int k)
+	{ 
+		List<IngredientQuantity> allIngredientQuantity;
+		allIngredientQuantity = ingredientQuantities.allIngredientQuantities();
+		for (IngredientQuantity ingredientQ : allIngredientQuantity)
+		{
+			if (ingredientQ.getRecipe().getId() == (k))
+				ingredientQuantities.deleteIngredientQuantity(ingredientQ.getId());
+		}
+		
 	}
 
 	// finds recipe in IngredientQuantityWrap from database.

@@ -1,4 +1,5 @@
      	var counter = 0;
+     	var chcounter = 1;
  		var limit = 40;
      	function addInput(divName){
      		if(counter < limit){
@@ -17,6 +18,11 @@
      		}
      	}
      	
+     	function test()
+     	{
+     		alert(chcounter);
+     	}
+     	
      	function removeInput(divName)
      	{
      		if(counter > 0)
@@ -26,6 +32,41 @@
      			counter--;
      		}
      	}
+     	
+     	function ingredientQuantity(recipeName, ingredientName, measurement, quantity, directions, servings, recipeId)
+     	{		
+        	this.recipeName = recipeName; 
+        	this.ingredientName = ingredientName;
+        	this.measurement = measurement;
+        	this.quantity = quantity;
+        	this.directions = directions;
+        	this.servings = servings;
+        	this.recipeId = recipeId;
+        } 
+         	
+        function saveChangedRecipe()
+        {	
+        	chcounter = number instanceof HTMLCollection ? number.length : 1;
+        	var arrayNew = [];
+     		for	(var i=0; i<chcounter; i++) 
+     		{    			
+     			var changedIngr = new ingredientQuantity(document.getElementById("recipeName").innerHTML, 
+     			document.getElementById('name'+i).innerHTML, 
+     			document.getElementById('measurement'+i).innerHTML, 
+     			parseFloat(document.getElementById('quantity'+i).innerHTML), 
+     			document.getElementById('directions').innerHTML, 
+     			parseInt(document.getElementById('servings').innerHTML),
+     			parseInt(document.getElementById('recipeId').innerHTML));
+     			arrayNew.push(changedIngr);
+      		
+      		}
+      		var xmlhttp = new XMLHttpRequest();       		   	
+     	   	xmlhttp.open("POST", "/recipe/changeRecipe/save");
+    		xmlhttp.setRequestHeader("Content-Type", "application/json");
+    	   	xmlhttp.send(JSON.stringify(arrayNew));
+    		window.location.href = "/";  
+         } 	
+         	
      	function saveRecipe()
      	{
      		
@@ -44,15 +85,6 @@
      			alert("Vinsamlegast fylltu inn leiðbeiningar");
      			return; 
      		}
-     		function ingredientQuantity(recipeName, ingredientName, measurement, quantity, directions, servings)
-     		{		
-         		this.recipeName = recipeName; 
-         		this.ingredientName = ingredientName;
-         		this.measurement = measurement;
-         		this.quantity = quantity;
-         		this.directions = directions;
-         		this.servings = servings;
-         	} 
 			var array = [];
 
      		for (var i=0;i<counter;i++) 

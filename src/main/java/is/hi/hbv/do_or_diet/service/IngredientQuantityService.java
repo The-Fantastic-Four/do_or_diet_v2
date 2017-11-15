@@ -20,6 +20,14 @@ public interface IngredientQuantityService
 	 */
 	public void addIngredientQuantity(IngredientQuantity ingrQuantity);
 
+	
+	
+	/**
+	 * Deletes Ingredient information from a recipe
+	 * 
+	 * @param id of the recipe containing ingredientQuantity to be deleted
+	 */
+	public void deleteIngredientQuantity(long id);
 	/**
 	 * Fetches all of the ingredient quantities from repository
 	 * 

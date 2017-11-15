@@ -6,7 +6,7 @@
 <%@attribute name="header" fragment="true" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
-<html lang="is">
+<html lang="is" xmlns:th="http://www.thymeleaf.org">
 
 	<head>
 		<meta charset="utf-8">	
