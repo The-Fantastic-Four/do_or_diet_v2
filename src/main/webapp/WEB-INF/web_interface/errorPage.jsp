@@ -11,7 +11,7 @@
 <t:genericpage>
   <jsp:attribute name="header">
      <h1 class="title is-1">Villa kom upp</h1>
-     <h2 class="subtitle">Eitthvað hefur farið úrskeðis</h2>
+     <h2 class="subtitle">Eitthvað hefur farið úrskeiðis</h2>
   </jsp:attribute>
   <jsp:body>
 	<h3 class="title is-3">Eftirfarandi villa kom upp:</h3>

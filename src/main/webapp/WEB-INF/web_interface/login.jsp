@@ -12,7 +12,7 @@
 <t:genericpage>
   <jsp:attribute name="header">
     <h1 class="title is-1">Do or diet</h1>
-    <h2 class="subtitle">Ætlar þú að grennast eða drepast?</h2>
+    <h2 class="subtitle">Eyddu minni tíma í búðum - skipuleggðu matarinnkaupin</h2>
   </jsp:attribute>
   <jsp:body>
     <div class="columns is-centered">
