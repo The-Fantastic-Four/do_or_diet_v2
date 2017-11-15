@@ -1,3 +1,9 @@
+/**
+ * Service that connects to the recipe repository
+ * 
+ * @author Eiður Örn Gunnarsson eog26@hi.is
+ * @date 29. okt. 2017
+ */
 package is.hi.hbv.do_or_diet.service;
 
 import java.util.List;
@@ -5,12 +11,6 @@ import java.util.List;
 import is.hi.hbv.do_or_diet.model.Recipe;
 import is.hi.hbv.do_or_diet.model.User;
 
-/**
- * Service that connects to the recipe repository
- * 
- * @author Eiður Örn Gunnarsson eog26@hi.is
- * @date 29. okt. 2017
- */
 public interface RecipeService
 {
 	/**
@@ -27,10 +27,12 @@ public interface RecipeService
 	 * @return list of all recipes
 	 */
 	public List<Recipe> allRecipes();
-	
+
 	/**
 	 * Fetches users recipes from repository
-	 * @param user whose recipes are fetched
+	 * 
+	 * @param user
+	 *            whose recipes are fetched
 	 * @return list of users recipes
 	 */
 	public List<Recipe> myRecipes(User user);
@@ -52,9 +54,10 @@ public interface RecipeService
 	 * @return recipe with the appropriate ID
 	 */
 	public Recipe findRecipe(long id);
-	
+
 	/**
 	 * Creates a copy of a recipe and marks with a new owner
+	 * 
 	 * @param originalRecipe
 	 * @return
 	 */

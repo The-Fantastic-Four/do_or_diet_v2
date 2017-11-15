@@ -2,7 +2,7 @@
  * IngredientTypeRepositroy keeps a list of Ingredients
  * 
  * @author Fannar Þeyr Guðmundsson fthg2@hi.is
- * @date október 2017
+ * @date October 2017
  */
 
 package is.hi.hbv.do_or_diet.repository;

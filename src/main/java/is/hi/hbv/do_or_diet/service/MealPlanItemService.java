@@ -1,7 +1,3 @@
-package is.hi.hbv.do_or_diet.service;
-
-import is.hi.hbv.do_or_diet.model.MealPlanItemWrapper;
-
 /**
  * Service that connects to the meal plan item repository and checks if meal
  * plan already exists within meal plan and handles that.
@@ -9,6 +5,10 @@ import is.hi.hbv.do_or_diet.model.MealPlanItemWrapper;
  * @author Eiður Örn Gunnarsson eog26@hi.is
  * @date 16. okt. 2017
  */
+package is.hi.hbv.do_or_diet.service;
+
+import is.hi.hbv.do_or_diet.model.MealPlanItemWrapper;
+
 public interface MealPlanItemService
 {
 	/**

@@ -3,7 +3,7 @@
  * 
  * @author Ragnheiður Ásta Karlsdóttir rak4@hi.is
  * @author Viktor Alex Brynjarsson vab18@hi.is
- * @date október 2017
+ * @date October 2017
  */
 package is.hi.hbv.do_or_diet.repository;
 
@@ -22,13 +22,12 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long>
 	Recipe findOne(Long id);
 
 	List<Recipe> findByNameContaining(String recipeName);
-	
+
 	List<Recipe> findByCreatedByOrderByNameAsc(User creator);
-	
+
 	List<Recipe> findByIsPrivateFalseOrderByNameAsc();
 
 	// Suppressed as teacher had same warning and had not fixed it
 	@SuppressWarnings("unchecked")
 	Recipe save(Recipe recipe);
-
 }

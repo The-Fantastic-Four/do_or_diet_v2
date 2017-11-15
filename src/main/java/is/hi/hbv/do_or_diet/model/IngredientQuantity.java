@@ -1,9 +1,9 @@
 /**
- * IngredientQuantity connects recipies and ingredients
+ * IngredientQuantity connects recipes and ingredients
  * 
  * @author Eiður Örn Gunnarsson eog26@hi.is
  * @author Viktor Alex Brynjarsson vab18@hi.is
- * @date október 2017
+ * @date October 2017
  */
 package is.hi.hbv.do_or_diet.model;
 
@@ -20,28 +20,56 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "ingredient_quantity")
 public class IngredientQuantity
 {
-
+	/**
+	 * Id of the Ingredient Quantity
+	 */
 	@Id
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")
 	private long id;
-
+	/**
+	 * The amount referenced ingredient
+	 */
 	private double quantity;
+	/**
+	 * What type of measurement is used for the ingredient
+	 */
 	private String measurement;
 
+	/**
+	 * Type of ingredient
+	 */
 	@ManyToOne
 	@JoinColumn(name = "ingredient_type_id")
 	private IngredientType ingredient;
 
+	/**
+	 * Recipe that ingredient quantity is for
+	 */
 	@ManyToOne
 	@JoinColumn(name = "recipe_id")
 	private Recipe recipe;
 
+	/**
+	 * Empty constructor
+	 */
 	public IngredientQuantity()
 	{
 
 	}
 
+	/**
+	 * IngredientQuantity constructor with fields
+	 * 
+	 * @param id
+	 *            of ingredient quantity
+	 * @param quantity
+	 *            the amount of ingredient type
+	 * @param measurement
+	 *            the measurement for the ingredient
+	 * @param ingredient
+	 * @param recipe
+	 */
 	public IngredientQuantity(long id, double quantity, String measurement, IngredientType ingredient, Recipe recipe)
 	{
 		this.id = id;

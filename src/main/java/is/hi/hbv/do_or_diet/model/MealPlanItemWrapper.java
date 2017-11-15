@@ -1,13 +1,13 @@
-package is.hi.hbv.do_or_diet.model;
-
-import java.util.Date;
-
 /**
  * Wrapper for MealPlanItems
  * 
  * @author Eiður Örn Gunnarsson eog26@hi.is
  * @date 16. okt. 2017
  */
+package is.hi.hbv.do_or_diet.model;
+
+import java.util.Date;
+
 public class MealPlanItemWrapper
 {
 	private MealPlan mealPlan;
@@ -45,5 +45,4 @@ public class MealPlanItemWrapper
 	{
 		return date;
 	}
-
 }

@@ -4,6 +4,7 @@
  * @author Eiður Örn Gunnarsson eog26@hi.is
  * @author Ragnheiður Ásta Karlsdóttir rak4@hi.is
  * @author Viktor Alex Brynjarsson vab18@hi.is
+ * @date October 2017
  */
 package is.hi.hbv.do_or_diet.model;
 
@@ -39,11 +40,6 @@ public class User
 	 * Username of this user
 	 */
 	private String username;
-
-	/**
-	 * List of this users' favourite recipes
-	 */
-	// private List<Recipe> favoriteRecipies;
 
 	@Transient
 	private String password;
@@ -164,12 +160,4 @@ public class User
 	{
 		this.roles = roles;
 	}
-
-	// To be applied later on in the process:
-	/*
-	 * public List<Recipe> getFavoriteRecipies() { return favoriteRecipies; }
-	 * 
-	 * public void setFavoriteRecipies(List<Recipe> favoriteRecipies) {
-	 * this.favoriteRecipies = favoriteRecipies; }
-	 */
 }

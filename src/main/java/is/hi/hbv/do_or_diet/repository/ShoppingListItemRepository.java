@@ -1,3 +1,9 @@
+/**
+ * ShoppingListItemRepository keeps a list of shopping list item
+ * 
+ * @author Viktor Alex Brynjarsson vab18@hi.is
+ * @date October 2017
+ */
 package is.hi.hbv.do_or_diet.repository;
 
 import java.util.List;

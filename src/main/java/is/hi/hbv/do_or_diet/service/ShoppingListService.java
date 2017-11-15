@@ -1,3 +1,9 @@
+/**
+ * ShoppingListService creates a new shopping list from mealplan
+ * 
+ * @author Viktor Alex Brynjarsson vab18@hi.is
+ * @date October 2017
+ */
 package is.hi.hbv.do_or_diet.service;
 
 import java.util.List;
@@ -36,6 +42,10 @@ public interface ShoppingListService
 	 * @return the shopping list
 	 */
 	public ShoppingList findShoppingList(long id);
-	
+
+	/**
+	 * Toggle is checked on the shopping list item
+	 * @param id the id of the shopping list item
+	 */
 	public void toggleShoppingListItem(long id);
 }

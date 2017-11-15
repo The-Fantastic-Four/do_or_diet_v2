@@ -3,7 +3,7 @@
  * 
  * @author Eiður Örn Gunnarsson eog26@hi.is
  * @author Viktor Alex Brynjarsson vab18@hi.is
- * @date október 2017
+ * @date October 2017
  */
 package is.hi.hbv.do_or_diet.model;
 
@@ -18,11 +18,17 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "ingredient_type")
 public class IngredientType
 {
+	/**
+	 * Database id for this ingredient
+	 */
 	@Id
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")
 	private long id;
 
+	/**
+	 * Name of the ingredient
+	 */
 	private String name;
 
 	public IngredientType()

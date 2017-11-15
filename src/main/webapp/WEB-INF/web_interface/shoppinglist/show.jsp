@@ -1,6 +1,7 @@
 <!--
 	Show an shopping list
 	@author Viktor Alex Brynjarsson vab18@hi.is
+	@date November 1
 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>

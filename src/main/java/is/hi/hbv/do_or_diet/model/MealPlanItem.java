@@ -3,6 +3,7 @@
  * meal plan
  * 
  * @author Eiður Örn Gunnarsson eog26@hi.is
+ * @date October 2017
  */
 package is.hi.hbv.do_or_diet.model;
 

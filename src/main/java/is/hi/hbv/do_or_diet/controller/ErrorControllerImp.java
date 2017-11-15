@@ -1,3 +1,10 @@
+/**
+ * Error controller that handles occurring HTTP errors
+ * 
+ * @author Ebba Þóra Hvannberg
+ * @author Modified by: Eiður Örn Gunnarsson eog26@hi.is
+ * @date 31. okt. 2017
+ */
 package is.hi.hbv.do_or_diet.controller;
 
 import java.util.Map;
@@ -13,13 +20,6 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-/**
- * Error controller that handles occurring HTTP errors
- * 
- * @author Ebba Þóra Hvannberg
- * @author Modified by: Eiður Örn Gunnarsson eog26@hi.is
- * @date 31. okt. 2017
- */
 @Controller
 public class ErrorControllerImp implements ErrorController
 {

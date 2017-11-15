@@ -2,6 +2,8 @@
  * ShoppingListController enables the user to interact with shopping lists
  * 
  * @author Eiður Örn Gunnarsson eog26@hi.is
+ * @author Viktor Alex Brynjarsson vab18@hi.is
+ * @date október 2017
  */
 package is.hi.hbv.do_or_diet.controller;
 
@@ -78,9 +80,8 @@ public class ShoppingListController
 	}
 
 	@RequestMapping(value = "/{shoppingListId}/{shoppingListItemId}/toggleItemChecked", method = RequestMethod.POST)
-	public String toggleIngredientItem(@PathVariable(value = "shoppingListId") long shoppingListId, 
-			@PathVariable(value = "shoppingListItemId") long shoppingListItemId,
-			ModelMap model,
+	public String toggleIngredientItem(@PathVariable(value = "shoppingListId") long shoppingListId,
+			@PathVariable(value = "shoppingListItemId") long shoppingListItemId, ModelMap model,
 			Authentication authentication)
 	{
 		User user = userService.findUserByEmail(authentication.getName());
@@ -90,7 +91,7 @@ public class ShoppingListController
 		{
 			throw new AccessDeniedException("Innskráður notandi hefur ekki aðgang að þessum innkaupalista!");
 		}
-		
+
 		shoppingListService.toggleShoppingListItem(shoppingListItemId);
 
 		model.addAttribute("shoppingList", shoppingListService.findShoppingList(shoppingListId));

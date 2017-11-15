@@ -1,3 +1,9 @@
+/**
+ * ShoppingListServiceImp implements interaction with shopping list from repository
+ * 
+ * @author Viktor Alex Brynjarsson vab18@hi.is
+ * @date October 2017
+ */
 package is.hi.hbv.do_or_diet.service;
 
 import java.util.HashMap;
@@ -24,6 +30,15 @@ public class ShoppingListServiceImp implements ShoppingListService
 	@Autowired
 	ShoppingListItemRepository shoppingListItemRepository;
 
+	/**
+	 * Create a new shopping list from a meal plan
+	 * 
+	 * @param mealPlan
+	 *            the meal plan to create the list from
+	 * @param owner
+	 *            the owner of the shopping list
+	 * @return the newly created shopping list
+	 */
 	@Override
 	public ShoppingList createFromMealPlan(MealPlan mealPlan, User owner)
 	{
@@ -67,18 +82,36 @@ public class ShoppingListServiceImp implements ShoppingListService
 		return sl;
 	}
 
+	/**
+	 * Find all shopping lists which the user owns
+	 * 
+	 * @param owner
+	 *            owner of the shopping lists
+	 * @return a list of shopping lists
+	 */
 	@Override
 	public List<ShoppingList> allShoppingLists(User owner)
 	{
 		return shoppingListRepository.findByOwner(owner);
 	}
 
+	/**
+	 * Find a specific shopping list
+	 * 
+	 * @param id
+	 *            the id of the shopping list
+	 * @return the shopping list
+	 */
 	@Override
 	public ShoppingList findShoppingList(long id)
 	{
 		return shoppingListRepository.findOne(id);
 	}
 
+	/**
+	 * Toggle is checked on the shopping list item
+	 * @param id the id of the shopping list item
+	 */
 	@Override
 	public void toggleShoppingListItem(long id)
 	{
