@@ -299,18 +299,6 @@ public class RecipeController
 		}
 		return s;
 	}
-	
-	public void deleteIngredientQuantity(int k)
-	{ 
-		List<IngredientQuantity> allIngredientQuantity;
-		allIngredientQuantity = ingredientQuantities.allIngredientQuantities();
-		for (IngredientQuantity ingredientQ : allIngredientQuantity)
-		{
-			if (ingredientQ.getRecipe().getId() == (k))
-				ingredientQuantities.deleteIngredientQuantity(ingredientQ.getId());
-		}
-		
-	}
 
 	// finds recipe in IngredientQuantityWrap from database.
 	public Recipe findRecipe(IngredientQuantityWrap k)

@@ -18,11 +18,6 @@
      		}
      	}
      	
-     	function test()
-     	{
-     		alert(chcounter);
-     	}
-     	
      	function removeInput(divName)
      	{
      		if(counter > 0)

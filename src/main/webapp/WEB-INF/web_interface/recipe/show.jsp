@@ -20,43 +20,12 @@
   </jsp:attribute>
   <jsp:body>
   	<div class="columns">
-  	  	<div class = "two-thirds column">
- 			<table class="table table is-fullwidth is-striped is-hoverable">
-  			  <thead>
-  	  			<tr>
-  	  			  <th>Uppskrift af</th>
-  	  		 	  <th>Fjöldi skammta</th>
-  	  			  <th>Leiðbeiningar</th>
-  	  			</tr>
-  	  		  </thead>
-  	  		  <tbody>
-  	  			<tr>
-				  <td><c:out value="${recipe.name}" /></td>
-				  <td><c:out value="${recipe.servings}" /></td>
-			   	  <td><c:out value="${recipe.directions}" /></td>
-				</tr>
-			  </tbody>
-			</table>
-		  </div>
-		  <div class = "one-third column">
-  	  	<div class = "is-half column content">
-			<h2 class="title" contenteditable="True" id="recipeName"><c:out value="${recipe.name}" /></h2>
-			<p class="has-text-weight-bold" contenteditable="True" id="servings">Fjöldi skammta: <c:out value="${recipe.servings}" /></p>
-			<div contenteditable="True" id="directions"><c:out value="${recipe.directions}" /></div>
-	  	</div>
-		  <div class = "is-half column">
-  	  	<div class = "is-half column content">
-			<h2 class="title" contenteditable="True" id="recipeName"><c:out value="${recipe.name}" /></h2>
-			<p class="has-text-weight-bold" contenteditable="True" id="servings">Fjöldi skammta: <c:out value="${recipe.servings}" /></p>
-			<div contenteditable="True" id="directions"><c:out value="${recipe.directions}" /></div>
-	  	</div>
-		  <div class = "is-half column">
-  	  	<div class = "is-half column content">
-			<h2 class="title" contenteditable="True" id="recipeName"><c:out value="${recipe.name}" /></h2>
-			<p class="has-text-weight-bold" contenteditable="True" id="servings">Fjöldi skammta: <c:out value="${recipe.servings}" /></p>
-			<div contenteditable="True" id="directions"><c:out value="${recipe.directions}" /></div>
-	  	</div>
-		  <div class = "is-half column">
+	  	  	<div class = "is-half column content">
+				<h2 class="title" id="recipeName"><c:out value="${recipe.name}" /></h2>
+				<p class="has-text-weight-bold" id="servings">Fjöldi skammta: <c:out value="${recipe.servings}" /></p>
+				<div id="directions"><c:out value="${recipe.directions}" /></div>
+		  	</div>
+		  	<div class = "is-half column">
 		  	<table class="table table is-fullwidth is-striped is-hoverable">
 		  		<thead>
 				  	<tr>
