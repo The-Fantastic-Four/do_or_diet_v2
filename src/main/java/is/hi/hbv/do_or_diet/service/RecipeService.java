@@ -1,3 +1,9 @@
+/**
+ * Service that connects to the recipe repository
+ * 
+ * @author Eiður Örn Gunnarsson eog26@hi.is
+ * @date 29. okt. 2017
+ */
 package is.hi.hbv.do_or_diet.service;
 
 import java.util.List;
@@ -5,12 +11,6 @@ import java.util.List;
 import is.hi.hbv.do_or_diet.model.Recipe;
 import is.hi.hbv.do_or_diet.model.User;
 
-/**
- * Service that connects to the recipe repository
- * 
- * @author Eiður Örn Gunnarsson eog26@hi.is
- * @date 29. okt. 2017
- */
 public interface RecipeService
 {
 	/**
