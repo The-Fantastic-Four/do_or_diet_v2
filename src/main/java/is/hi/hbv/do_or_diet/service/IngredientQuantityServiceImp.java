@@ -31,6 +31,7 @@ public class IngredientQuantityServiceImp implements IngredientQuantityService
 	{
 		ingredientQuantityRep.deleteByrecipe_id(id);
 	}
+
 	@Override
 	public List<IngredientQuantity> allIngredientQuantities()
 	{

@@ -80,9 +80,8 @@ public class ShoppingListController
 	}
 
 	@RequestMapping(value = "/{shoppingListId}/{shoppingListItemId}/toggleItemChecked", method = RequestMethod.POST)
-	public String toggleIngredientItem(@PathVariable(value = "shoppingListId") long shoppingListId, 
-			@PathVariable(value = "shoppingListItemId") long shoppingListItemId,
-			ModelMap model,
+	public String toggleIngredientItem(@PathVariable(value = "shoppingListId") long shoppingListId,
+			@PathVariable(value = "shoppingListItemId") long shoppingListItemId, ModelMap model,
 			Authentication authentication)
 	{
 		User user = userService.findUserByEmail(authentication.getName());
@@ -92,7 +91,7 @@ public class ShoppingListController
 		{
 			throw new AccessDeniedException("Innskráður notandi hefur ekki aðgang að þessum innkaupalista!");
 		}
-		
+
 		shoppingListService.toggleShoppingListItem(shoppingListItemId);
 
 		model.addAttribute("shoppingList", shoppingListService.findShoppingList(shoppingListId));

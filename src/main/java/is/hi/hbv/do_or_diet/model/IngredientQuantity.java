@@ -61,10 +61,13 @@ public class IngredientQuantity
 	/**
 	 * IngredientQuantity constructor with fields
 	 * 
-	 * @param id of ingredient quantity
-	 * @param quantity the amount of ingredient type
-	 * @param measurement the measurement for the ingredient
-	 * @param ingredient 
+	 * @param id
+	 *            of ingredient quantity
+	 * @param quantity
+	 *            the amount of ingredient type
+	 * @param measurement
+	 *            the measurement for the ingredient
+	 * @param ingredient
 	 * @param recipe
 	 */
 	public IngredientQuantity(long id, double quantity, String measurement, IngredientType ingredient, Recipe recipe)

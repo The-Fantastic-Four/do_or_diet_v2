@@ -21,7 +21,7 @@ public interface IngredientQuantityRepository extends JpaRepository<IngredientQu
 
 	@SuppressWarnings("unchecked")
 	IngredientQuantity save(IngredientQuantity ingredientQ);
-	
+
 	@Transactional
 	Long deleteByrecipe_id(Long id);
 }

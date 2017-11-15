@@ -22,9 +22,9 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long>
 	Recipe findOne(Long id);
 
 	List<Recipe> findByNameContaining(String recipeName);
-	
+
 	List<Recipe> findByCreatedByOrderByNameAsc(User creator);
-	
+
 	List<Recipe> findByIsPrivateFalseOrderByNameAsc();
 
 	// Suppressed as teacher had same warning and had not fixed it

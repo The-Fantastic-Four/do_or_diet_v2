@@ -36,6 +36,6 @@ public interface ShoppingListService
 	 * @return the shopping list
 	 */
 	public ShoppingList findShoppingList(long id);
-	
+
 	public void toggleShoppingListItem(long id);
 }
