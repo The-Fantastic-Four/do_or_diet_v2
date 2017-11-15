@@ -79,4 +79,11 @@ public class ShoppingListServiceImp implements ShoppingListService
 		return shoppingListRepository.findOne(id);
 	}
 
+	@Override
+	public void toggleShoppingListItem(long id)
+	{
+		ShoppingListItem item = shoppingListItemRepository.findOne(id);
+		item.setChecked(!item.isChecked());
+		shoppingListItemRepository.save(item);
+	}
 }
