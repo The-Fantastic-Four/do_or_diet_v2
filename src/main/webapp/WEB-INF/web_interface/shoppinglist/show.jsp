@@ -36,10 +36,10 @@
                 	<form action="/shoppinglist/${shoppingList.getId()}/${item.getId()}/toggleItemChecked" method="POST">
                 		<c:choose>
 						    <c:when test="${item.isChecked()}">
-                				<button type="submit" class="button">&#9745;</button>
+                				<button type="submit" class="button"><i class="ion-android-checkbox-outline"></i></button>
 						    </c:when>    
 						    <c:otherwise>
-                				<button type="submit" class="button">&#9744;</button>
+                				<button type="submit" class="button"><i class="ion-android-checkbox-outline-blank"></i></button>
 						    </c:otherwise>
 						</c:choose>
                 	</form>
@@ -53,12 +53,5 @@
         </table>
       </div>
     </div>
-    <script>
-	    document.getElementsByClassName(".item-check-box").addEventListener("click", function () {
-	    	console.log(this);
-	    	console.log(this.form);
-	      	this.form.submit();
-	    });
-    </script>
   </jsp:body>
 </t:genericpage>
