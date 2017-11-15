@@ -11,6 +11,7 @@
 	<head>
 		<meta charset="utf-8">	
 	    <title>Do or Diet!</title>
+	    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" type="text/css">
 	    <link rel="stylesheet" href="/resources/css/bulma_custom.css" type="text/css">
 	    <link rel="stylesheet" href="/resources/css/styles.css" type="text/css" />
 	</head>
