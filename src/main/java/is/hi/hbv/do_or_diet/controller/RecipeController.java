@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import is.hi.hbv.do_or_diet.model.IngredientQuantity;
 import is.hi.hbv.do_or_diet.model.IngredientQuantityWrap;
@@ -40,7 +41,7 @@ public class RecipeController
 	// Instance of the recipe service, used to get and create recipes
 	@Autowired
 	RecipeService recipeService;
-	
+
 	// Instance of the user service, used to manage user accounts
 	@Autowired
 	UserService userService;
@@ -59,7 +60,7 @@ public class RecipeController
 	public String index(Model model, Authentication authentication)
 	{
 		User user = null;
-		if(authentication != null)
+		if (authentication != null)
 		{
 			user = userService.findUserByEmail(authentication.getName());
 		}
@@ -106,38 +107,49 @@ public class RecipeController
 		model.addAttribute("recipe", recipeService.findRecipe(recipeId));
 		return "recipe/show";
 	}
-	
+
 	/**
 	 * Adds a recipe to users repository
 	 * 
-	 * @param recipeId is the id of the recipe
-	 * @param model the model that contains the info
+	 * @param recipeId
+	 *            is the id of the recipe
+	 * @param model
+	 *            the model that contains the info
 	 * @return
+	 * @throws SQLException
 	 */
 	@RequestMapping("/{recipeId}/own")
-	public ModelAndView ownRecipe(@PathVariable(value = "recipeId") long recipeId, ModelMap model, Authentication authentication)
+	public ModelAndView ownRecipe(@PathVariable(value = "recipeId") long recipeId, ModelMap model,
+			Authentication authentication) throws SQLException
 	{
 		User user = null;
-		if(authentication != null)
+		if (authentication != null)
 		{
 			user = userService.findUserByEmail(authentication.getName());
 		}
-		
-		Recipe originalRecipe = recipeService.findRecipe(recipeId);
-		Recipe newRecipe = recipeService.ownRecipe(originalRecipe, user);
-				
-		newRecipe.setIngredients(ingredientQuantities.copyIngredients(originalRecipe, newRecipe));
-		
+
+		try
+		{
+			Recipe originalRecipe = recipeService.findRecipe(recipeId);
+			Recipe newRecipe = recipeService.ownRecipe(originalRecipe, user);
+
+			newRecipe.setIngredients(ingredientQuantities.copyIngredients(originalRecipe, newRecipe));
+		}
+		catch (Exception e)
+		{
+			throw new SQLException("Ekki tókst að finna uppskrift og búa til afrit af henni.");
+		}
+
 		return new ModelAndView("redirect:/recipe");
 	}
-	
+
 	@RequestMapping("/changeRecipe/{recipeId}")
 	public String changeRecipe(@PathVariable(value = "recipeId") long recipeId, ModelMap model)
 	{
 		model.addAttribute("recipe", recipeService.findRecipe(recipeId));
 		return "recipe/changeRecipe";
 	}
-	
+
 	/**
 	 * Directs to the searchForRecipe page
 	 * 
@@ -166,24 +178,24 @@ public class RecipeController
 		return "recipe/index";
 	}
 
-	
 	@RequestMapping(value = "/changeRecipe", method = RequestMethod.POST)
 	public void changeRecipe(Recipe recipe, ModelMap model)
 	{
 		System.out.println("Bla");
-		//model.addAttribute(recipe);
-		//return "recipe/changeRecipe";
+		// model.addAttribute(recipe);
+		// return "recipe/changeRecipe";
 	}
 
 	@RequestMapping(value = "/changeRecipe/save", method = RequestMethod.POST)
-	public ModelAndView changeIngredientQuantity(@RequestBody IngredientQuantityWrap[] wrapArr, Model model, Authentication authentication)
+	public ModelAndView changeIngredientQuantity(@RequestBody IngredientQuantityWrap[] wrapArr, Model model,
+			Authentication authentication)
 	{
 		ingredientQuantities.deleteIngredientQuantity(wrapArr[0].getRecipeId());
 		User user = null;
-		if(authentication != null)
+		if (authentication != null)
 		{
 			user = userService.findUserByEmail(authentication.getName());
-		}		
+		}
 		Recipe chRecipe = new Recipe();
 		chRecipe.setId(wrapArr[0].getRecipeId());
 		chRecipe.setName(wrapArr[0].getRecipeName());
@@ -208,9 +220,10 @@ public class RecipeController
 			t.setMeasurement(wrap.getMeasurement());
 			t.setQuantity(Double.parseDouble(wrap.getQuantity()));
 			ingredientQuantities.addIngredientQuantity(t);
-		}	
+		}
 		return new ModelAndView("redirect:/index");
 	}
+
 	/**
 	 * receives array of IngredientQuantityWrap objects from UI, w
 	 * 
@@ -220,14 +233,15 @@ public class RecipeController
 	 *              IngredientQuantity relies on id of recipe and ingredient.
 	 */
 	@RequestMapping(value = "/ingredientQuantity", method = RequestMethod.POST)
-	public ModelAndView addIngredientQuantity(@RequestBody IngredientQuantityWrap[] wrapArr, Model model, Authentication authentication)
+	public ModelAndView addIngredientQuantity(@RequestBody IngredientQuantityWrap[] wrapArr, Model model,
+			Authentication authentication)
 	{
 		User user = null;
-		if(authentication != null)
+		if (authentication != null)
 		{
 			user = userService.findUserByEmail(authentication.getName());
 		}
-		
+
 		for (int i = 0; i < wrapArr.length; i++)
 		{
 			IngredientQuantity t = new IngredientQuantity();
@@ -252,7 +266,7 @@ public class RecipeController
 			t.setQuantity(Double.parseDouble(wrap.getQuantity()));
 			ingredientQuantities.addIngredientQuantity(t);
 		}
-		
+
 		return new ModelAndView("redirect:/index");
 	}
 
@@ -261,7 +275,7 @@ public class RecipeController
 	{
 		List<Recipe> recipeList = recipeService.allRecipes();
 		model.addAttribute("recipeList", recipeList);
-		
+
 		if (user != null)
 		{
 			List<Recipe> myRecipeList = recipeService.myRecipes(user);
