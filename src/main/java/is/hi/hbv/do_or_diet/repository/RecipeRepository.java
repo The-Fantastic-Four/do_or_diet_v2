@@ -21,7 +21,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long>
 
 	Recipe findOne(Long id);
 
-	List<Recipe> findByNameContaining(String recipeName);
+	List<Recipe> findByNameContainingIgnoreCaseAndIsPrivateFalse(String recipeName);
 
 	List<Recipe> findByCreatedByOrderByNameAsc(User creator);
 

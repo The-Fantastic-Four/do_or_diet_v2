@@ -44,7 +44,7 @@ public class RecipeServiceImp implements RecipeService
 	@Override
 	public List<Recipe> findRecipeContaining(String recipeName)
 	{
-		return recipeRep.findByNameContaining(recipeName);
+		return recipeRep.findByNameContainingIgnoreCaseAndIsPrivateFalse(recipeName);
 	}
 
 	@Override
