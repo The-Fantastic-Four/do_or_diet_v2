@@ -2,6 +2,7 @@
 	Shows a list of meal plans and allows the user to add a new meal plan 
 	@author Eiður Örn Gunnarsson eog26@hi.is
 	@author Viktor Alex Brynjarsson vab18@hi.is
+	@date September 2017
 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>

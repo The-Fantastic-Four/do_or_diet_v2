@@ -1,3 +1,9 @@
+/*
+ * Custom styles for the whole site
+ * @author Ragnheiður Ásta Karldóttir (rak4@hi.is)
+ * @author Viktor Alex Brynjarsson (vab18@hi.is)
+ * @date Oktober 2017
+ */
 .hero .navbar {
 	background-color: rgba(0, 0, 0, 0.3);
 }

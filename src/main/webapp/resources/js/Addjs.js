@@ -1,4 +1,9 @@
-     	var counter = 0;
+/*
+ * Used to edit and create recipes
+ * @author Fannar Þeyr Guðmundsson (fthg2@hi.is)
+ * @date September 2017
+ */
+		var counter = 0;
      	var chcounter = 1;
  		var limit = 40;
      	function addInput(divName){

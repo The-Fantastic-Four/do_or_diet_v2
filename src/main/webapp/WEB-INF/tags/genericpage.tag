@@ -1,6 +1,7 @@
 <!--
 	Base for all pages
 	@author Viktor Alex Brynjarsson vab18@hi.is
+	@date November 2017
 -->
 <%@tag description="Generic template" pageEncoding="UTF-8"%>
 <%@attribute name="header" fragment="true" %>
