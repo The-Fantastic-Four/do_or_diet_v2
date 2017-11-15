@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -45,6 +46,7 @@ public class MealPlan
 	 * List of meals on this plan
 	 */
 	@OneToMany(mappedBy = "mealPlan")
+	@OrderBy("date ASC")
 	private List<MealPlanItem> items;
 
 	/**

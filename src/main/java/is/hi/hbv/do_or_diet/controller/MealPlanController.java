@@ -147,6 +147,7 @@ public class MealPlanController
 
 		model.addAttribute("mealPlan", mealPlan);
 		model.addAttribute("recipeList", recipeService.allRecipes());
+		model.addAttribute("myRecipeList", recipeService.myRecipes(user));
 		return "mealplan/show";
 	}
 
