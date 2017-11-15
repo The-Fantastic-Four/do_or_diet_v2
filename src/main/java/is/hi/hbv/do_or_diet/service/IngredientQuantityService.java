@@ -3,6 +3,7 @@ package is.hi.hbv.do_or_diet.service;
 import java.util.List;
 
 import is.hi.hbv.do_or_diet.model.IngredientQuantity;
+import is.hi.hbv.do_or_diet.model.Recipe;
 
 /**
  * Service that connects to the ingredient quantity repository
@@ -35,4 +36,13 @@ public interface IngredientQuantityService
 	 * @return ingredient quantity with appropriate ID
 	 */
 	public IngredientQuantity findIngredientQuantity(long id);
+	
+	/**
+	 * Copies a recipes ingredients to a new recipe
+	 * 
+	 * @param originalRecipe the recipe to be copied
+	 * @param newRecipe the recipe that is the copy
+	 * @return
+	 */
+	public List<IngredientQuantity> copyIngredients(Recipe originalRecipe, Recipe newRecipe);
 }

@@ -20,48 +20,35 @@
   </jsp:attribute>
   <jsp:body>
   	<div class="columns">
-  	  	<div class = "two-thirds column">
- 			<table class="table table is-fullwidth is-striped is-hoverable">
-  			  <thead>
-  	  			<tr>
-  	  			  <th>Uppskrift af</th>
-  	  		 	  <th>Fjöldi skammta</th>
-  	  			  <th>Leiðbeiningar</th>
-  	  			</tr>
-  	  		  </thead>
-  	  		  <tbody>
-  	  			<tr>
-				  <td contenteditable="True" id="recipeName"><c:out value="${recipe.name}" /></td>
-				  <td contenteditable="True" id="servings"><c:out value="${recipe.servings}" /></td>
-			   	  <td contenteditable="True" id="directions"><c:out value="${recipe.directions}" /></td>
-				</tr>
-			  </tbody>
-			</table>
-		  </div>
-		  <div class = "one-third column">
+  	  	<div class = "is-half column content">
+			<h2 class="title" contenteditable="True" id="recipeName"><c:out value="${recipe.name}" /></h2>
+			<p class="has-text-weight-bold" contenteditable="True" id="servings">Fjöldi skammta: <c:out value="${recipe.servings}" /></p>
+			<div contenteditable="True" id="directions"><c:out value="${recipe.directions}" /></div>
+	  	</div>
+		  <div class = "is-half column">
 		  	<table class="table table is-fullwidth is-striped is-hoverable">
 		  		<thead>
 				  	<tr>
-					  	<th>Hráefni</th>
-				  		<th>Fjöldi</th>
+				  		<th class="has-text-right">Fjöldi</th>
 				  		<th>Mælieining</th>
+					  	<th>Hráefni</th>
 					</tr>
 				</thead>
 		   	    <tbody>
 					<c:forEach items="${recipe.ingredients}" var="IngrtQuantity">
 		   			  <tr>
-	 	   	   		 	 <td contenteditable="True" id="name"><c:out value="${IngrtQuantity.ingredient.name}" /></a></td>
-	  	   				 <td contenteditable="True" id="quantity"><c:out value="${IngrtQuantity.quantity}" /></td>
-	  	   		   	 	 <td contenteditable="True" id="measurement"><c:out value="${IngrtQuantity.measurement}" /></td>
+		   			  	<td class="has-text-right" contenteditable="True" id="quantity"><c:out value="${IngrtQuantity.quantity}" /></td>
+	  	   		   	 	<td contenteditable="True" id="measurement"><c:out value="${IngrtQuantity.measurement}" /></td>
+	 	   	   		 	<td contenteditable="True" id="name"><c:out value="${IngrtQuantity.ingredient.name}" /></a></td>
 	  	  			  </tr>
-			    	 </c:forEach>
+			    	</c:forEach>
 				</tbody>
-				<foot>
-					<form action="" th:action="@{/changeRecipe}" th:object="${recipe}" method="post">
-		  			<button name="changeRecipe" type="submit">Breyta uppskrift</button>
-	  				</form>
-				</foot>
-			</table>	
+			</table>
+			<a class="button is-primary" href="/recipe/${recipe.id}/own">Bæta í mínar uppskriftir</a>
+			<form class="is-inline-block" action="" th:action="@{/changeRecipe}" th:object="${recipe}" method="post">
+  				<button class="button is-primary is-outlined" name="changeRecipe" type="submit">Breyta uppskrift</button>
+ 			</form>	
+			
 	  	 </div>		 		  
     </div>
   </jsp:body>

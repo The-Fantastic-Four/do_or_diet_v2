@@ -1,5 +1,6 @@
 package is.hi.hbv.do_or_diet.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -31,7 +32,7 @@ public class RecipeServiceImp implements RecipeService
 	@Override
 	public List<Recipe> allRecipes()
 	{
-		return recipeRep.findAll();
+		return recipeRep.findByIsPrivateFalse();
 	}
 
 	@Override
@@ -50,5 +51,23 @@ public class RecipeServiceImp implements RecipeService
 	public Recipe findRecipe(long id)
 	{
 		return recipeRep.findOne(id);
+	}
+
+	@Override
+	public Recipe ownRecipe(Recipe originalRecipe, User newOwner)
+	{
+		Recipe newRecipe = new Recipe();
+		
+		newRecipe.setCategories(new ArrayList<String>(originalRecipe.getCategories()));
+		newRecipe.setDirections(originalRecipe.getDirections());
+		newRecipe.setName(originalRecipe.getName());
+		newRecipe.setServings(originalRecipe.getServings());
+		
+		newRecipe.setPrivate(true);
+		newRecipe.setCreatedBy(newOwner);
+		
+		this.addRecipe(newRecipe);
+		
+		return newRecipe;
 	}
 }

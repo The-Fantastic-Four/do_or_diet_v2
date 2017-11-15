@@ -4,13 +4,14 @@
 
 // 2. Set your own initial variables
 // Update blue
-$green: #ef333b;
+$lgrey: #ffffff;
+$dgrey: #686868;
 
 // 3. Set the derived variables
 // Use the new pink as the primary color
-$primary: $green;
-$link: $green;
-//$primary-invert: $pink-invert
+$primary: $dgrey;
+$link: $dgrey;
+$primary-invert: $lgrey;
 // Use the existing orange as the danger color
 //$danger: $orange
 // Use the new serif family

@@ -106,6 +106,30 @@ public class RecipeController
 		model.addAttribute("recipe", recipeService.findRecipe(recipeId));
 		return "recipe/show";
 	}
+	
+	/**
+	 * Adds a recipe to users repository
+	 * 
+	 * @param recipeId is the id of the recipe
+	 * @param model the model that contains the info
+	 * @return
+	 */
+	@RequestMapping("/{recipeId}/own")
+	public ModelAndView ownRecipe(@PathVariable(value = "recipeId") long recipeId, ModelMap model, Authentication authentication)
+	{
+		User user = null;
+		if(authentication != null)
+		{
+			user = userService.findUserByEmail(authentication.getName());
+		}
+		
+		Recipe originalRecipe = recipeService.findRecipe(recipeId);
+		Recipe newRecipe = recipeService.ownRecipe(originalRecipe, user);
+				
+		newRecipe.setIngredients(ingredientQuantities.copyIngredients(originalRecipe, newRecipe));
+		
+		return new ModelAndView("redirect:/recipe");
+	}
 
 	/**
 	 * Directs to the searchForRecipe page
