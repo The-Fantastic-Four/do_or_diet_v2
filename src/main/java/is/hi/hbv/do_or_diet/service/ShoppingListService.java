@@ -43,5 +43,9 @@ public interface ShoppingListService
 	 */
 	public ShoppingList findShoppingList(long id);
 
+	/**
+	 * Toggle is checked on the shopping list item
+	 * @param id the id of the shopping list item
+	 */
 	public void toggleShoppingListItem(long id);
 }
