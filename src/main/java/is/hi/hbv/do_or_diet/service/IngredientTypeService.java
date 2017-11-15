@@ -1,15 +1,15 @@
-package is.hi.hbv.do_or_diet.service;
-
-import java.util.List;
-
-import is.hi.hbv.do_or_diet.model.IngredientType;
-
 /**
  * Service that connects to the ingredient type repository
  * 
  * @author Eiður Örn Gunnarsson eog26@hi.is
  * @date 16. okt. 2017
  */
+package is.hi.hbv.do_or_diet.service;
+
+import java.util.List;
+
+import is.hi.hbv.do_or_diet.model.IngredientType;
+
 public interface IngredientTypeService
 {
 	/**

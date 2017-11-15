@@ -1,4 +1,5 @@
 /**
+ * RecipeServiceImp implements interactions with the recipe repository
  * @author Eiður Örn Gunnarsson eog26@hi.is
  * @date 29. okt. 2017
  */

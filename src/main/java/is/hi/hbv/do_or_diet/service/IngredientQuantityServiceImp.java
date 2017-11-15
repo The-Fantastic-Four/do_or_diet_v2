@@ -1,3 +1,10 @@
+/**
+ * IngredientQuantityServiceImp implements interactions with the IQrepository
+ * 
+ * @author Eiður Örn Gunnarsson eog26@hi.is
+ * @author Fannar Þeyr Guðmundsson fthg2@hi.is
+ * @date 16. okt. 2017
+ */
 package is.hi.hbv.do_or_diet.service;
 
 import java.util.ArrayList;
@@ -10,10 +17,6 @@ import is.hi.hbv.do_or_diet.model.IngredientQuantity;
 import is.hi.hbv.do_or_diet.model.Recipe;
 import is.hi.hbv.do_or_diet.repository.IngredientQuantityRepository;
 
-/**
- * @author Eiður Örn Gunnarsson eog26@hi.is
- * @date 16. okt. 2017
- */
 @Service
 public class IngredientQuantityServiceImp implements IngredientQuantityService
 {
