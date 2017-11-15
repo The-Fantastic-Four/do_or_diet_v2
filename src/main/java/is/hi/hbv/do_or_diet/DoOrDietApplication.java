@@ -2,7 +2,7 @@
  * Class which contains the main function
  * 
  * @author Eiður Örn Gunnarsson eog26@hi.is
- *
+ * @date september 2017
  */
 package is.hi.hbv.do_or_diet;
 

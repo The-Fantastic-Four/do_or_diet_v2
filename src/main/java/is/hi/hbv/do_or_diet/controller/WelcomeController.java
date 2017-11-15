@@ -2,6 +2,7 @@
  * WelcomeController displays the first page the user sees
  * 
  * @author Viktor Alex Brynjarsson vab18@hi.is
+ * @date október 2017
  */
 package is.hi.hbv.do_or_diet.controller;
 

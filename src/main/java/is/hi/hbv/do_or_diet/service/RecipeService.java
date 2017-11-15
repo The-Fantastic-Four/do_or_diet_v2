@@ -27,10 +27,12 @@ public interface RecipeService
 	 * @return list of all recipes
 	 */
 	public List<Recipe> allRecipes();
-	
+
 	/**
 	 * Fetches users recipes from repository
-	 * @param user whose recipes are fetched
+	 * 
+	 * @param user
+	 *            whose recipes are fetched
 	 * @return list of users recipes
 	 */
 	public List<Recipe> myRecipes(User user);
@@ -52,9 +54,10 @@ public interface RecipeService
 	 * @return recipe with the appropriate ID
 	 */
 	public Recipe findRecipe(long id);
-	
+
 	/**
 	 * Creates a copy of a recipe and marks with a new owner
+	 * 
 	 * @param originalRecipe
 	 * @return
 	 */

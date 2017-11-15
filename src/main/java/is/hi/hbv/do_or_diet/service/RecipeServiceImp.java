@@ -1,3 +1,7 @@
+/**
+ * @author Eiður Örn Gunnarsson eog26@hi.is
+ * @date 29. okt. 2017
+ */
 package is.hi.hbv.do_or_diet.service;
 
 import java.util.ArrayList;
@@ -12,10 +16,6 @@ import is.hi.hbv.do_or_diet.model.Recipe;
 import is.hi.hbv.do_or_diet.model.User;
 import is.hi.hbv.do_or_diet.repository.RecipeRepository;
 
-/**
- * @author Eiður Örn Gunnarsson eog26@hi.is
- * @date 29. okt. 2017
- */
 @Service
 public class RecipeServiceImp implements RecipeService
 {
@@ -57,17 +57,17 @@ public class RecipeServiceImp implements RecipeService
 	public Recipe ownRecipe(Recipe originalRecipe, User newOwner)
 	{
 		Recipe newRecipe = new Recipe();
-		
+
 		newRecipe.setCategories(new ArrayList<String>(originalRecipe.getCategories()));
 		newRecipe.setDirections(originalRecipe.getDirections());
 		newRecipe.setName(originalRecipe.getName());
 		newRecipe.setServings(originalRecipe.getServings());
-		
+
 		newRecipe.setPrivate(true);
 		newRecipe.setCreatedBy(newOwner);
-		
+
 		this.addRecipe(newRecipe);
-		
+
 		return newRecipe;
 	}
 }

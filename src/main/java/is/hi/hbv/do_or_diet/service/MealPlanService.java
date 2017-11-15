@@ -33,10 +33,11 @@ public interface MealPlanService
 	/**
 	 * Deletes a meal plan from repository
 	 * 
-	 * @param id of the meal plan to be deleted
+	 * @param id
+	 *            of the meal plan to be deleted
 	 */
 	public void deleteMealPlan(long id);
-	
+
 	/**
 	 * Finds a meal plan in repository from meal plan ID
 	 * 

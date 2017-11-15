@@ -49,11 +49,11 @@ public class IngredientQuantityServiceImp implements IngredientQuantityService
 			newIngredient.setMeasurement(ingredient.getMeasurement());
 			newIngredient.setQuantity(ingredient.getQuantity());
 			newIngredient.setRecipe(newRecipe);
-			
+
 			this.addIngredientQuantity(newIngredient);
 			newIngredients.add(newIngredient);
 		}
-		
+
 		return newIngredients;
 	}
 

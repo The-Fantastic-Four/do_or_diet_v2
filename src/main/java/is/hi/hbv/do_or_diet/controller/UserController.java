@@ -49,7 +49,6 @@ public class UserController
 	public ModelAndView createNewUser(@RequestParam String username, String password, String email, ModelMap model)
 	{
 		User user = new User(username, password, email);
-		System.out.println("Numero uno");
 		ModelAndView modelAndView = new ModelAndView();
 		User userExists = userService.findUserByEmail(user.getEmail());
 		if (userExists == null)
@@ -58,7 +57,6 @@ public class UserController
 			modelAndView.addObject("successMessage", "Skráning tókst");
 			modelAndView.addObject("user", new User());
 			modelAndView.setViewName("registration");
-			System.out.println("Numero dos");
 		}
 		return modelAndView;
 	}

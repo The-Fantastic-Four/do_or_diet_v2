@@ -3,6 +3,7 @@
  * 
  * @author Ragnheiður Ásta Karlsdóttir rak4@hi.is
  * @author Viktor Alex Brynjarsson vab18@hi.is
+ * @date október 2017
  */
 package is.hi.hbv.do_or_diet.configuration;
 

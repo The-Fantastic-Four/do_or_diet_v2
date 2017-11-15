@@ -36,12 +36,14 @@ public interface IngredientQuantityService
 	 * @return ingredient quantity with appropriate ID
 	 */
 	public IngredientQuantity findIngredientQuantity(long id);
-	
+
 	/**
 	 * Copies a recipes ingredients to a new recipe
 	 * 
-	 * @param originalRecipe the recipe to be copied
-	 * @param newRecipe the recipe that is the copy
+	 * @param originalRecipe
+	 *            the recipe to be copied
+	 * @param newRecipe
+	 *            the recipe that is the copy
 	 * @return
 	 */
 	public List<IngredientQuantity> copyIngredients(Recipe originalRecipe, Recipe newRecipe);

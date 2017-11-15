@@ -1,9 +1,9 @@
 /**
- * IngredientQuantity connects recipies and ingredients
+ * IngredientQuantity connects recipes and ingredients
  * 
  * @author Eiður Örn Gunnarsson eog26@hi.is
  * @author Viktor Alex Brynjarsson vab18@hi.is
- * @date október 2017
+ * @date October 2017
  */
 package is.hi.hbv.do_or_diet.model;
 

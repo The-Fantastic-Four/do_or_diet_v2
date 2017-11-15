@@ -2,7 +2,7 @@
  * Recipe describes a recipe
  * 
  * @author Eiður Örn Gunnarsson eog26@hi.is
- * @date október 2017
+ * @date October 2017
  */
 package is.hi.hbv.do_or_diet.model;
 
@@ -23,7 +23,6 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "recipe")
 public class Recipe
 {
-
 	/**
 	 * Unique identifier for the recipe
 	 */
@@ -63,7 +62,7 @@ public class Recipe
 	 * Says if recipe is private or not
 	 */
 	private boolean isPrivate;
-	
+
 	/*
 	 * Identifies who made the recipe
 	 */
@@ -102,7 +101,7 @@ public class Recipe
 		this.servings = servings;
 		this.ingredients = ingredients;
 	}
-	
+
 	public long getId()
 	{
 		return id;

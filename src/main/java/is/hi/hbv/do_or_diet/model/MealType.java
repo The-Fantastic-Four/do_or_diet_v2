@@ -2,6 +2,7 @@
  * MealType the different types of meals (breakfast, lunch and dinner)
  * 
  * @author Viktor Alex Brynjarsson vab18@hi.is
+ * @date October 2017
  */
 package is.hi.hbv.do_or_diet.model;
 

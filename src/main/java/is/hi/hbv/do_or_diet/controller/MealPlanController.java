@@ -3,7 +3,7 @@
  * 
  * @author Eiður Örn Gunnarsson eog26@hi.is
  * @author Viktor Alex Brynjarsson vab18@hi.is
- * @date 13. nov. 2017
+ * @date 13. nóv. 2017
  */
 package is.hi.hbv.do_or_diet.controller;
 
@@ -38,7 +38,6 @@ import is.hi.hbv.do_or_diet.model.MealPlanItemWrapper;
 import is.hi.hbv.do_or_diet.model.NewMealPlanForm;
 import is.hi.hbv.do_or_diet.model.Recipe;
 import is.hi.hbv.do_or_diet.model.User;
-import is.hi.hbv.do_or_diet.repository.MealPlanRepository;
 import is.hi.hbv.do_or_diet.service.MealPlanItemService;
 import is.hi.hbv.do_or_diet.service.MealPlanService;
 import is.hi.hbv.do_or_diet.service.RecipeService;
@@ -195,7 +194,8 @@ public class MealPlanController
 	 * @return to index of all meal plans for said user
 	 */
 	@RequestMapping(value = "/deleteMealPlan/{mealPlanId}")
-	public String deleteMealPlan(@PathVariable(value = "mealPlanId") long mealPlanId, Model model, Authentication authentication)
+	public String deleteMealPlan(@PathVariable(value = "mealPlanId") long mealPlanId, Model model,
+			Authentication authentication)
 	{
 		User user = userService.findUserByEmail(authentication.getName());
 		MealPlan mealPlan = mealPlanService.findMealPlan(mealPlanId);
@@ -206,10 +206,10 @@ public class MealPlanController
 		}
 
 		mealPlanService.deleteMealPlan(mealPlanId);
-		if(!model.containsAttribute("mealPlanForm"))
+		if (!model.containsAttribute("mealPlanForm"))
 			model.addAttribute("mealPlanForm", new NewMealPlanForm());
 		addMealPlanListToModel(model, userService.findUserByEmail(authentication.getName()));
-		
+
 		return "mealplan/index";
 	}
 

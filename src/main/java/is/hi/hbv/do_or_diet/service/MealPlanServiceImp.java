@@ -31,7 +31,7 @@ public class MealPlanServiceImp implements MealPlanService
 	{
 		return mealPlanRep.findByCreatedBy(user);
 	}
-	
+
 	@Override
 	public void deleteMealPlan(long id)
 	{
