@@ -9,21 +9,22 @@ package is.hi.hbv.do_or_diet.model;
 public class IngredientQuantityWrap
 {
 
-	private int quantity;
+	private String quantity;
 	private String measurement;
 	private String recipeName;
 	private String ingredientName;
 	private String categories;
 	private String directions;
 	private int servings;
+	private int recipeId;
 
 	public IngredientQuantityWrap()
 	{
 
 	}
 
-	public IngredientQuantityWrap(String recipeName, String ingredientName, String measurement, int quantity,
-			String categories, String directions, int servings)
+	public IngredientQuantityWrap(String recipeName, String ingredientName, String measurement, String quantity,
+			String categories, String directions, int servings, int recipeId)
 	{
 		this.recipeName = recipeName;
 		this.quantity = quantity;
@@ -32,7 +33,9 @@ public class IngredientQuantityWrap
 		this.categories = categories;
 		this.directions = directions;
 		this.servings = servings;
+		this.recipeId = recipeId;
 	}
+
 
 	public String getMeasurement()
 	{
@@ -44,12 +47,12 @@ public class IngredientQuantityWrap
 		this.measurement = measurement;
 	}
 
-	public int getQuantity()
+	public String getQuantity()
 	{
 		return quantity;
 	}
 
-	public void setQuantity(int quantity)
+	public void setQuantity(String quantity)
 	{
 		this.quantity = quantity;
 	}
@@ -103,4 +106,15 @@ public class IngredientQuantityWrap
 	{
 		this.servings = servings;
 	}
+	
+	public int getRecipeId()
+	{
+		return recipeId;
+	}
+	
+	public void setRecipeId(int recipeId)
+	{
+		this.recipeId = recipeId;
+	}
+	
 }
