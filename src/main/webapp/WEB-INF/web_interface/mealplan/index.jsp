@@ -35,14 +35,14 @@
           <tbody>
             <c:forEach items="${mealPlanList}" var="mPlan">
               <tr>
-                <td><a href="/mealplan/${mPlan.id}"><c:out
-											value="${mPlan.getName()}" /></a></td>
-                <td><c:out
-										value="${mPlan.getDateFrom().toString().substring(0,10)}" /></td>
-                <td><c:out
-										value="${mPlan.getDateTo().toString().substring(0,10)}" /></td>
-                <td><a href="/mealplan/deleteMealPlan/${mPlan.id}"><span
-										class="button is-danger">x</span></a></td>
+                <td><a href="/mealplan/${mPlan.id}"><c:out value="${mPlan.getName()}" /></a></td>
+                <td><c:out value="${mPlan.getDateFrom().toString().substring(0,10)}" /></td>
+                <td><c:out value="${mPlan.getDateTo().toString().substring(0,10)}" /></td>
+                <td>
+                  <a href="/mealplan/deleteMealPlan/${mPlan.id}">
+                    <span class="button is-danger">x</span>
+                  </a>
+                </td>
               </tr>
             </c:forEach>
           </tbody>
