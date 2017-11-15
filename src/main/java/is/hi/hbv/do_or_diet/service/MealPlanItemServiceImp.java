@@ -1,3 +1,7 @@
+/**
+ * @author Eiður Örn Gunnarsson eog26@hi.is
+ * @date 16. okt. 2017
+ */
 package is.hi.hbv.do_or_diet.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +15,6 @@ import is.hi.hbv.do_or_diet.model.MealType;
 import is.hi.hbv.do_or_diet.model.Recipe;
 import is.hi.hbv.do_or_diet.repository.MealPlanItemRepository;
 
-/**
- * @author Eiður Örn Gunnarsson eog26@hi.is
- * @date 16. okt. 2017
- */
 @Service
 public class MealPlanItemServiceImp implements MealPlanItemService
 {
