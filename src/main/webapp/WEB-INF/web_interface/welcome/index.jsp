@@ -11,7 +11,7 @@
 <t:genericpage>
   <jsp:attribute name="header">
     <h1 class="title is-1">Do or diet</h1>
-    <h2 class="subtitle">Ætlar þú að grennast eða drepast?</h2>
+    <h2 class="subtitle">Skipulegðu máltíðir framtíðarinnar</h2>
   </jsp:attribute>
   <jsp:body>
     <h3 class="title is-3">Um okkur</h3>

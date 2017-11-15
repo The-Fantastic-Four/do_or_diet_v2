@@ -179,6 +179,7 @@ public class RecipeController
 		return "recipe/index";
 	}
 
+<<<<<<< HEAD
 	
 
 	/**
@@ -192,6 +193,16 @@ public class RecipeController
 	 *            @param authentication
 	 *             
 	 */
+=======
+	@RequestMapping(value = "/changeRecipe", method = RequestMethod.POST)
+	public void changeRecipe(Recipe recipe, ModelMap model)
+	{
+		System.out.println("Bla");
+		// model.addAttribute(recipe);
+		// return "recipe/changeRecipe";
+	}
+
+>>>>>>> branch 'master' of https://github.com/The-Fantastic-Four/do_or_diet_v2.git
 	@RequestMapping(value = "/changeRecipe/save", method = RequestMethod.POST)
 	public ModelAndView changeIngredientQuantity(@RequestBody IngredientQuantityWrap[] wrapArr, Model model, Authentication authentication)
 	{
