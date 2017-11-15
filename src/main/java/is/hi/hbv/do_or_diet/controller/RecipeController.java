@@ -42,7 +42,7 @@ public class RecipeController
 	// Instance of the recipe service, used to get and create recipes
 	@Autowired
 	RecipeService recipeService;
-
+	
 	// Instance of the user service, used to manage user accounts
 	@Autowired
 	UserService userService;
@@ -61,7 +61,7 @@ public class RecipeController
 	public String index(Model model, Authentication authentication)
 	{
 		User user = null;
-		if (authentication != null)
+		if(authentication != null)
 		{
 			user = userService.findUserByEmail(authentication.getName());
 		}
@@ -108,7 +108,7 @@ public class RecipeController
 		model.addAttribute("recipe", recipeService.findRecipe(recipeId));
 		return "recipe/show";
 	}
-
+	
 	/**
 	 * Adds a recipe to users repository
 	 * 
@@ -124,7 +124,7 @@ public class RecipeController
 			Authentication authentication) throws SQLException
 	{
 		User user = null;
-		if (authentication != null)
+		if(authentication != null)
 		{
 			user = userService.findUserByEmail(authentication.getName());
 		}
@@ -179,6 +179,8 @@ public class RecipeController
 		return "recipe/index";
 	}
 
+	
+
 	/**
 	 * receives array of IngredientQuantityWrap objects from UI, w
 	 * 
@@ -191,8 +193,7 @@ public class RecipeController
 	 *             
 	 */
 	@RequestMapping(value = "/changeRecipe/save", method = RequestMethod.POST)
-	public ModelAndView changeIngredientQuantity(@RequestBody IngredientQuantityWrap[] wrapArr, Model model,
-			Authentication authentication)
+	public ModelAndView changeIngredientQuantity(@RequestBody IngredientQuantityWrap[] wrapArr, Model model, Authentication authentication)
 	{
 		User user = userService.findUserByEmail(authentication.getName());
 		Recipe th = recipeService.findRecipe(wrapArr[0].getRecipeId());
@@ -201,7 +202,8 @@ public class RecipeController
 		{
 			throw new AccessDeniedException("Innskráður notandi hefur ekki aðgang að þessari uppskrift, bættu henni í þínar uppskriftir og reyndu aftur");
 		}
-		ingredientQuantities.deleteIngredientQuantity(wrapArr[0].getRecipeId());		
+		ingredientQuantities.deleteIngredientQuantity(wrapArr[0].getRecipeId());
+				
 		Recipe chRecipe = new Recipe();
 		chRecipe.setId(wrapArr[0].getRecipeId());
 		chRecipe.setName(wrapArr[0].getRecipeName());
@@ -231,18 +233,13 @@ public class RecipeController
 	}
 
 	/**
-	 * receives array of IngredientQuantityWrap objects from UI, w
+	 * @RequestBody wrap receives the wrap object which contains name of recipe,
+	 *              ingredient, measurements and quantities
 	 * 
-	 * @RequestBody wrap receives the wrap object which contains name of recipe and adds,
-	 * it´s attributes to database
-	 * @param model    the model that contains all the necessary information.
-	 *              
-	 *            @param authentication
-	 *
+	 *              IngredientQuantity relies on id of recipe and ingredient.
 	 */
 	@RequestMapping(value = "/ingredientQuantity", method = RequestMethod.POST)
-	public ModelAndView addIngredientQuantity(@RequestBody IngredientQuantityWrap[] wrapArr, Model model,
-			Authentication authentication)
+	public ModelAndView addIngredientQuantity(@RequestBody IngredientQuantityWrap[] wrapArr, Model model, Authentication authentication)
 	{
 		User user = null;
 		if (authentication != null)
@@ -253,7 +250,7 @@ public class RecipeController
 		for (int i = 0; i < wrapArr.length; i++)
 		{
 			IngredientQuantity t = new IngredientQuantity();
-			if (doesRecipeExist(wrapArr[i]) == true)
+			if (doesrecipeExist(wrapArr[i]) == true)
 			{
 				t.setRecipe(findRecipe(wrapArr[0]));
 			}
@@ -274,6 +271,7 @@ public class RecipeController
 			t.setQuantity(Double.parseDouble(wrap.getQuantity()));
 			ingredientQuantities.addIngredientQuantity(t);
 		}
+
 		return new ModelAndView("redirect:/recipe");
 	}
 
@@ -290,8 +288,8 @@ public class RecipeController
 		}
 	}
 
-	// Finds existing recipes and checks if this recipe is already in database.
-	public boolean doesRecipeExist(IngredientQuantityWrap k)
+	// finds existing recipies and checks if this recipe is already in database.
+	public boolean doesrecipeExist(IngredientQuantityWrap k)
 	{
 		boolean exist = false;
 		ArrayList<Recipe> listRecipe;
