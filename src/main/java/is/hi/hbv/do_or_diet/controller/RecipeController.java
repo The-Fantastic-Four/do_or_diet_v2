@@ -209,7 +209,7 @@ public class RecipeController
 		chRecipe.setCreatedBy(user);
 		chRecipe.setDirections(wrapArr[0].getDirections());
 		chRecipe.setServings(wrapArr[0].getServings());
-		chRecipe.setPrivate(false);
+		chRecipe.setPrivate(true);
 		recipeService.addRecipe(chRecipe);
 		for (int i = 0; i < wrapArr.length; i++)
 		{
